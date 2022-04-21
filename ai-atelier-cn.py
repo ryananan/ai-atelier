@@ -76,8 +76,8 @@ custom_css = """
 
 /*Modify buttons for prompt enhancers*/
 /*OMG update div:nth-child(4) to 11*/
-.appview-container > section > div > div > div > div:nth-child(10) .streamlit-expanderContent div[data-testid="stVerticalBlock"] div:nth-child(2) > div {flex-direction: row !important;flex-wrap: wrap}
-.appview-container > section > div > div > div > div:nth-child(10) .streamlit-expanderContent div[data-testid="stVerticalBlock"] div:nth-child(2) > div div{width: auto !important}
+.appview-container > section > div > div > div > div:nth-child(11) .streamlit-expanderContent div[data-testid="stVerticalBlock"] div:nth-child(2) > div {flex-direction: row !important;flex-wrap: wrap}
+.appview-container > section > div > div > div > div:nth-child(11) .streamlit-expanderContent div[data-testid="stVerticalBlock"] div:nth-child(2) > div div{width: auto !important}
 
 /*Horizontal Radio - Image generation model*/
 div.row-widget.stRadio > div{flex-direction:row} div.row-widget.stRadio > div label {margin-right: .75em;} div.row-widget.stRadio > div label:last-child{margin-right: 0}
@@ -304,7 +304,7 @@ if "user_input_ch" not in st.session_state:
     
 
 user_input_ch = st.text_input(
-    "总结AI的回复，输入你喜欢的具有特征性的<词组>来生成图像",
+    "总结AI的回复，输入你喜欢的具有特征性的[词组]来生成图像",
     st.session_state.user_input_ch,
     help=" AI会根据你输入的描述词组（prompt）将文本信息变成图像信息，把你用文字描述的画面`画`出来。如果你想要组合不同的词组，可以通过使用`｜`将他们分开。比如说`太阳｜月亮`它将尝试利用这两个词组来生成图像。如果你希望它们的权重不同，你可以使用`:`，语法如下`太阳:1|月亮:2`，这里`月亮`的权重是`太阳`的2倍。", max_chars=200
 )
