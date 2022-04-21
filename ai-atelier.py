@@ -793,8 +793,9 @@ with st.form(key="image_generation"):
                 files_path = os.path.join(output_folder, "*.png")
                 files = sorted(glob.iglob(files_path),
                             key=os.path.getctime, reverse=True)
-                gallery_text_area.write("Welcome back! Your last creation:")
-                gallery_image_area.image(Image.open(files[0]))
+                if os.path.exists(files[0]):
+                    gallery_text_area.write("Welcome back! Your last creation:")
+                    gallery_image_area.image(Image.open(files[0]))       
                 url='https://drive.google.com/drive/folders/'+fid
                 from bokeh.models.widgets import Div
                 if st.form_submit_button('View your gallery on Google Drive'):
