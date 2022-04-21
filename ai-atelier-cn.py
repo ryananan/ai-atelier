@@ -830,11 +830,9 @@ with st.form(key="image_generation"):
                 files_path = os.path.join(output_folder, "*.png")
                 files = sorted(glob.iglob(files_path),
                             key=os.path.getctime, reverse=True)
-                try:
+                if os.path.exists(files[0]):
                     gallery_text_area.write("又见面啦！你上一次的创作：")
                     gallery_image_area.image(Image.open(files[0]))       
-                except:
-                    gallery_text_area.write("开始创作吧！")
                 url='https://drive.google.com/drive/folders/'+fid         
                 from bokeh.models.widgets import Div
                 if st.form_submit_button('在Google Drive上查看你的生成作品'):
@@ -857,7 +855,7 @@ with st.form(key="image_generation"):
             )
         st.write("可直接在Google Drive中，右键下载你的生成图像与视频")
         if os.path.exists("progress.png"):
-            gallery_text_area.write("Your last creation:")
+            gallery_text_area.write("又见面啦！你上一次的创作：")
             gallery_image_area.image(Image.open("progress.png"))
 
     def intermediary_frame_setup(seed):
