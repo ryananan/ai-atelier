@@ -116,7 +116,7 @@ class DefaultPaths:
         output_path = f"{root_path}/outputs"
     else:
         is_drive = True
-        drive_path = f"/content/drive/MyDrive/AI_Atelier"
+        drive_path = f"/content/drive/MyDrive/ai-atelier"
         model_path = f"{drive_path}/models"
         output_path = f"{drive_path}/outputs"
 
