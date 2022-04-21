@@ -227,6 +227,7 @@ def video_generation(args, DefaultPaths,status,filename):
     except:
         print("‼️ Video generation FAIL ‼️")
         status.write("‼️ Video generation FAIL ‼️")
+        sys.error()
 
 
 def run_model(args2, status, stoutput, DefaultPaths):
