@@ -290,9 +290,9 @@ st.subheader('🎨 让AI画画 &nbsp; [文本生成图像]')
 page_names = ["[完成度更高] CLIP Guided Diffusion", "[更有创造力] VQGAN+CLIP"]
 
 if "width" not in st.session_state:
-    st.session_state["width"] = 448
+    st.session_state["width"] = 576
 if "height" not in st.session_state:
-    st.session_state["height"] = 256
+    st.session_state["height"] = 320
 if "seed" not in st.session_state:
     init_seed = int(random.randint(0, 2147483647))
     st.session_state.seed = init_seed
@@ -588,7 +588,7 @@ with settings:
         num_steps = int(
             col1.number_input(
                 "迭代次数",
-                value=500,
+                value=640,
                 min_value=0,
                 max_value=None,
                 step=10,
@@ -598,7 +598,7 @@ with settings:
         width = int(
             col2.number_input(
                 "图像宽度",
-                value=426,
+                value=360,
                 max_value=None,
                 step=1,
                 help="生成图像的宽度。默认为16:9。如果你有订阅Colab Pro，你可以尝试更高的数值。",
@@ -607,7 +607,7 @@ with settings:
         height = int(
             col3.number_input(
                 "图像高度",
-                value=240,
+                value=360,
                 max_value=None,
                 step=1,
                 help="生成图像的高度。默认为16:9。如果你有订阅Colab Pro，你可以尝试更高的数值",
