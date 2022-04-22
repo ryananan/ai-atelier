@@ -291,7 +291,7 @@ else:
     init_seed = st.session_state.seed
 
 if "user_input" not in st.session_state:
-    st.session_state.user_input = "Spaceship about to landing on a city, steampunk, clouds in the sky, by Greg Rutkowski, concept art."
+    st.session_state.user_input = "A beautiful painting of a bizarre lighthouse by greg rutkowski and thomas kinkade shines its light on a sea of turbulent blood｜Trends on artstation｜Cyberpunk colour schemes"
 user_input = st.text_input(
     "A text prompt summarized by AI's answer to generate your image",
     st.session_state.user_input,
