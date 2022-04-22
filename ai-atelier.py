@@ -281,9 +281,9 @@ st.subheader('🎨 Let AI draw &nbsp; [text-to-image]')
 page_names = ["[Coherent] CLIP Guided Diffusion", "[Artistic] VQGAN+CLIP"]
 
 if "width" not in st.session_state:
-    st.session_state["width"] = 576
+    st.session_state["width"] = 448
 if "height" not in st.session_state:
-    st.session_state["height"] = 320
+    st.session_state["height"] = 256
 if "seed" not in st.session_state:
     init_seed = int(random.randint(0, 2147483647))
     st.session_state.seed = init_seed
@@ -581,7 +581,7 @@ with settings:
         width = int(
             col2.number_input(
                 "width",
-                value=640,
+                value=426,
                 max_value=None,
                 step=1,
                 help="Width of the generated image. If you don't have Colab Pro probably don't go higher than 512px",
@@ -590,7 +590,7 @@ with settings:
         height = int(
             col3.number_input(
                 "height",
-                value=360,
+                value=240,
                 max_value=None,
                 step=1,
                 help="Height of the generated image. If you don't have Colab Pro probably don't go higher than 512px",

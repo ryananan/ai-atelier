@@ -290,9 +290,9 @@ st.subheader('🎨 让AI画画 &nbsp; [文本生成图像]')
 page_names = ["[完成度更高] CLIP Guided Diffusion", "[更有创造力] VQGAN+CLIP"]
 
 if "width" not in st.session_state:
-    st.session_state["width"] = 576
+    st.session_state["width"] = 448
 if "height" not in st.session_state:
-    st.session_state["height"] = 320
+    st.session_state["height"] = 256
 if "seed" not in st.session_state:
     init_seed = int(random.randint(0, 2147483647))
     st.session_state.seed = init_seed
@@ -588,7 +588,7 @@ with settings:
         num_steps = int(
             col1.number_input(
                 "迭代次数",
-                value=640,
+                value=500,
                 min_value=0,
                 max_value=None,
                 step=10,
@@ -598,7 +598,7 @@ with settings:
         width = int(
             col2.number_input(
                 "图像宽度",
-                value=360,
+                value=426,
                 max_value=None,
                 step=1,
                 help="生成图像的宽度。默认为16:9。如果你有订阅Colab Pro，你可以尝试更高的数值。",
@@ -607,7 +607,7 @@ with settings:
         height = int(
             col3.number_input(
                 "图像高度",
-                value=360,
+                value=240,
                 max_value=None,
                 step=1,
                 help="生成图像的高度。默认为16:9。如果你有订阅Colab Pro，你可以尝试更高的数值",
@@ -1040,7 +1040,7 @@ footer = """
 <div class="footer">
 <p>AI 聊天画室 beta by Muhan Xu <b><a href='http://www.aiiiii.com/' target='_blank'>Aiiiii</a></b><br>
 <small><p>感谢<a href='https://twitter.com/multimodalart' target='_blank'>@multimodalart</a>的MindsEye beta 与 <a href='https://github.com/vicgalle' target='_blank'>Víctor Gallego</a>的gpt-j-api的开创性作品，本软件才能得以实现。<br>
-<a href="https://colab.research.google.com/github/alembics/disco-diffusion/blob/main/Disco_Diffusion.ipynb" target="_blank">Disco Diffusion v5</a>模型由<a href="https://twitter.com/somnai_dreams" target="_blank">@somnai_dreams</a>与<a href="https://twitter.com/gandamu" target="_blank">@gandamu</a>所开发。基于<a href="https://twitter.com/RiversHaveWings">@RiversHaveWings</a>开创性的基础工作，以及<a href="https://twitter.com/danielrussruss" target="_blank">@danielrussruss</a>，<a href="https://github.com/Dango233" target="_blank">Dango233</a>，<a href="https://twitter.com/chigozienri">Chigozie Nri</a>，<a href="https://twitter.com/softologyComAu" target="_blank">@softologyComAu</a>等其他人对其进一步的优化。参数的中文翻译基于<a href="https://twitter.com/chigozienri">Vultur</a>。<br>
+<a href="https://colab.research.google.com/github/alembics/disco-diffusion/blob/main/Disco_Diffusion.ipynb" target="_blank">Disco Diffusion v5</a>模型由<a href="https://twitter.com/somnai_dreams" target="_blank">@somnai_dreams</a>与<a href="https://twitter.com/gandamu" target="_blank">@gandamu</a>所开发。基于<a href="https://twitter.com/RiversHaveWings">@RiversHaveWings</a>开创性的基础工作，以及<a href="https://twitter.com/danielrussruss" target="_blank">@danielrussruss</a>，<a href="https://github.com/Dango233" target="_blank">Dango233</a>，<a href="https://twitter.com/chigozienri">Chigozie Nri</a>，<a href="https://twitter.com/softologyComAu" target="_blank">@softologyComAu</a>等其他人对其进一步的优化。参数的中文翻译基于<a href="https://github.com/Vultur">Vultur</a>。<br>
 <a href="https://colab.research.google.com/drive/1N4UNSbtNMd31N_gAT9rAm8ZzPh62Y5ud" target="_blank">Hypertron v2</a>VQGAN 模型由<a href="https://github.com/Philipuss1" target="_blank">Philipuss</a>改编自<a href="https://twitter.com/RiversHaveWings">@RiversHaveWings</a>， 并由<a href="https://twitter.com/jbusted1">@jbusted1</a>和<a href="https://twitter.com/softologyComAu" target="_blank">@softologyComAu</a>等其他人进一步修改。 原始GAN+CLIP由<a href="https://twitter.com/advadnoun">@advadnoun</a>所提供。<a href="https://github.com/openai/CLIP" target="_blank">CLIP</a>和<a href="https://github.com/openai/guided-diffusion" target="_blank">Guided Diffusion</a>最初由<a href="https://openai.com" target="_blank">OpenAI</a>发布。<a href="https://github.com/CompVis/taming-transformers" target="_blank">VQGAN</a>则是由<a href="https://github.com/CompVis" target="_blank">CompVis Heidelberg</a>发布的。<br>
 对大型语言模型的API访问由<a href="https://textsynth.com/" target="_blank">TextSynth</a>提供。翻译技术来自<a href="https://www.deepl.com" target="_blank">DeepL</a>。</small><br>
 
