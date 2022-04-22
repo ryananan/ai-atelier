@@ -261,7 +261,7 @@ A: A beautiful and ethereal alien life form that resembles a cross between a but
                     f.write(file_content)
                     print(dt_string + " log save")
 
-                    col1, col2 = st.columns([.065,1])
+                    col1, col2 = st.columns([.075,1])
                     with col1:
                         heart_button = st.form_submit_button(label="💗 喜欢", on_click=add_heart_item)
                     with col2:
