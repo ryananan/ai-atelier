@@ -1,6 +1,5 @@
 # 🔮🎯 AI Atelier AI聊天画室  V0.0.4
-### 👉 Access it [running on Google Colab here](https://colab.research.google.com/drive/1Uhv0oKkHcMeQcGaNm2SNUs6--hn4f9PQ?usp=sharing)👈. 
-### 👉 请点此链接 [在Colab上运行](https://colab.research.google.com/drive/1Uhv0oKkHcMeQcGaNm2SNUs6--hn4f9PQ?usp=sharing)👈. 
+### 👉 Access it [running on Google Colab here](https://colab.research.google.com/drive/1Uhv0oKkHcMeQcGaNm2SNUs6--hn4f9PQ?usp=sharing)👈. 👉 请点此链接 [在Colab上运行](https://colab.research.google.com/drive/1Uhv0oKkHcMeQcGaNm2SNUs6--hn4f9PQ?usp=sharing)👈. 
 <!-- And learn more about it, including how to use it [here](https://multimodal.art/mindseye) -->
 
 #### 🍻 What's New 新增功能 🍻 
