@@ -16,7 +16,7 @@
 · Save generated process video to google drive 可将生成过程的视频保存至谷歌云盘 <br/>
 · More prompt enhancers 新增风格类形容词 <br/>
 · Improve GUI of colab notebook 优化界面排版 <br/>
-· Default image size set to 16:9 in 240p 默认图像尺寸设置为240p的16:9 <br/>
+· Default image size set to 16:9 默认图像尺寸设置为16:9 <br/>
 · Fix 'seed' value error  修复 "种子"值不同步的错误<br/>
 
 #### 💭  To-do 待开发 💭
