@@ -300,7 +300,7 @@ else:
     init_seed = st.session_state.seed
 
 if "user_input_ch" not in st.session_state:
-    st.session_state.user_input_ch = "欧米茄点，在时间的尽头自我组装的超越性物体。"
+    st.session_state.user_input_ch = "飞船即将降落在一个城市，蒸汽朋克，天空中的云，由Greg Rutkowski设计，概念艺术。"
     
 
 user_input_ch = st.text_input(
@@ -830,9 +830,11 @@ with st.form(key="image_generation"):
                 files_path = os.path.join(output_folder, "*.png")
                 files = sorted(glob.iglob(files_path),
                             key=os.path.getctime, reverse=True)
-                if os.path.exists(files[0]):
-                    gallery_text_area.write("又见面啦！你上一次的创作：")
-                    gallery_image_area.image(Image.open(files[0]))       
+                try:
+                  gallery_text_area.write("又见面啦！你上一次的创作：")
+                  gallery_image_area.image(Image.open(files[0]))       
+                except:
+                  print("welcome")
                 url='https://drive.google.com/drive/folders/'+fid         
                 from bokeh.models.widgets import Div
                 if st.form_submit_button('在Google Drive上查看你的生成作品'):

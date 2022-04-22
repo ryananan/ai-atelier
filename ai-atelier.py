@@ -291,7 +291,7 @@ else:
     init_seed = st.session_state.seed
 
 if "user_input" not in st.session_state:
-    st.session_state.user_input = "the omega point, self-assembling transcendent object at the end of time."
+    st.session_state.user_input = "Spaceship about to landing on a city, steampunk, clouds in the sky, by Greg Rutkowski, concept art."
 user_input = st.text_input(
     "A text prompt summarized by AI's answer to generate your image",
     st.session_state.user_input,
@@ -793,9 +793,12 @@ with st.form(key="image_generation"):
                 files_path = os.path.join(output_folder, "*.png")
                 files = sorted(glob.iglob(files_path),
                             key=os.path.getctime, reverse=True)
-                if os.path.exists(files[0]):
-                    gallery_text_area.write("Welcome back! Your last creation:")
-                    gallery_image_area.image(Image.open(files[0]))       
+                # try:
+                #     gallery_text_area.write("Your last creation:")
+                #     gallery_image_area.image(Image.open(files[0]))       
+                # except:
+                #     gallery_text_area = st.empty()
+                #     gallery_image_area = st.empty()     
                 url='https://drive.google.com/drive/folders/'+fid
                 from bokeh.models.widgets import Div
                 if st.form_submit_button('View your gallery on Google Drive'):
