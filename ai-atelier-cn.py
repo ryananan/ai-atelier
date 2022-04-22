@@ -300,7 +300,7 @@ else:
     init_seed = st.session_state.seed
 
 if "user_input_ch" not in st.session_state:
-    st.session_state.user_input_ch = "飞船即将降落在一个城市，蒸汽朋克，天空中的云，由Greg Rutkowski设计，概念艺术。"
+    st.session_state.user_input_ch = "一幅由greg rutkowski和thomas kinkade创作的奇异灯塔的美丽画作，将其光芒照耀在一片动荡的血海中｜artstation上的趋势｜赛博朋克色彩方案"
     
 
 user_input_ch = st.text_input(
