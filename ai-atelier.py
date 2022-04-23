@@ -125,7 +125,7 @@ initial_load = st.empty()
 initial_load.empty()
 
 st.write(
-    "<h2> AI Atelier 🔮&nbsp;🎯 <small> &nbsp; ai animation toolkit by Muhan Xu &nbsp;<a href='http://www.aiiiii.com/' target='_blank'>Aiiiii</a></small> </h2>",
+    "<h2> AI Atelier 🔮🎯 <small> &nbsp; ai animation toolkit by Muhan Xu &nbsp;<a href='http://www.aiiiii.com/' target='_blank'>Aiiiii</a></small> </h2>",
     unsafe_allow_html=True,
 )
 st.subheader('💬 Ask AI &nbsp; [text-to-text]')
