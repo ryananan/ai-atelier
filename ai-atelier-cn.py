@@ -23,7 +23,7 @@ import deepl
 
 from setup import textsynth_completion
 from setup import deeplSetup
-# # # For debug in mac
+# # For debug in mac
 # from setup_mac import textsynth_completion
 # from setup_mac import deeplSetup
 
@@ -47,11 +47,11 @@ custom_css = """
 /*Generate your answers button*/
 .appview-container > section > div > div > div > div.css-1p05t8e.epcbefy1 > div:nth-child(1) > div > div > div > div > button{color: #B6A4FC}
 
-/*like button*/
-.appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div:nth-child(6){position: relative; left: 95px; top: -51.5px; margin: 0;}
-/*like button text*/
+/*history button*/
+.appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div:nth-child(5) > div > div{position: relative; left: 95px; top: 51.5px; margin: 0;}
+
+/*like and history button text colour*/
 .appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div:nth-child(6) > div > div > button{color: rgb(209 209 209 / 100%)}
-/*history button text*/
 .appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div:nth-child(5) > div > div > button{color: rgb(209 209 209 / 100%)}
 
 # .css-ffhzg2 div[data-testid="stExpander"]{background-color: rgb(14, 17, 23)}
@@ -233,13 +233,13 @@ A: A beautiful and ethereal alien life form that resembles a cross between a but
 
             with st.spinner('生成回答中...'):
 
-                res = textsynth_completion( prompt, api_engine, max_tokens, top_k, top_p, stop, temperature)
+                res = "a"#textsynth_completion( prompt, api_engine, max_tokens, top_k, top_p, stop, temperature)
                 #"a"# print("\nQ: " + user_input + '\nA: ' + res)
 
                 # st.balloons()
                 st.write("🙂 Q: " + user_input + '  \n🤖 A: ' + res)
 
-                answer_result_ch = str(translator.translate_text(res, target_lang="ZH"))
+                answer_result_ch = "a"# str(translator.translate_text(res, target_lang="ZH"))
                 st.write("🙂 Q: " + user_input_ch +
                          '  \n🤖 A: ' + answer_result_ch)
 
@@ -269,12 +269,6 @@ A: A beautiful and ethereal alien life form that resembles a cross between a but
                     f.write(file_content)
                     print(dt_string + " log save")
 
-
-                    heart_button = st.form_submit_button(
-                        label="💗 喜欢", on_click=add_heart_item)
-                    url = 'https://drive.google.com/drive/folders/'+fid
-                    print("url: "+url)
-
                     from bokeh.models.widgets import Div
                     if st.form_submit_button('📜 历史记录'):
                         # New tab or window
@@ -287,6 +281,11 @@ A: A beautiful and ethereal alien life form that resembles a cross between a but
                         #     f'<div class="bottom-line"><div class="row-widget stButton"><a kind="primary" class="css-1q8dd3e edgvbvh1" href="https://drive.google.com/drive/folders/{fid}" target="_blank">历史记录</a></div>',
                         #     unsafe_allow_html=True,
                         # )
+                    
+                    heart_button = st.form_submit_button(
+                        label="💗 喜欢", on_click=add_heart_item)
+                    url = 'https://drive.google.com/drive/folders/'+fid
+                    print("url: "+url)
 
 
 text_main()
