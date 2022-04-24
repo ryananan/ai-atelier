@@ -336,7 +336,13 @@ def dimensions_compatibility(type, after):
 enhancers = st.expander("试试添加这些风格类的形容词 Prompt enhancers (可选)")
 with enhancers:
     st.write(
-        "在你的文本中增加一些风格类词组，可以产生更多样的结果。下面是一些可以产生有趣的结果的例子。你可以在 <a href='https://matthewmcateer.me/blog/clip-prompt-engineering/'>这里</a> 了解更多关于Prompt Engineering提示词改造的信息。",
+        '''在你的文本中增加一些风格类词组，可以产生更多样的结果。下面是一些可以产生有趣的结果的例子，你可以点选以添加到你的文本中。  </br>
+        可以看看这些链接
+        <a href='https://matthewmcateer.me/blog/clip-prompt-engineering/'>1</a> /
+        <a href='https://peakd.com/@kaliyuga/model-comparison-study-for-disco-diffusion-v-5-ai-resources-by-kaliyuga'>2</a> /
+        <a href='https://docs.google.com/spreadsheets/d/1P9fM68jKeA1IH45i_qXINu2QhIcmCJXQSdLTxRI23oE/edit#gid=0'>3</a> /
+        <a href='https://weirdwonderfulai.art/resources/disco-diffusion-70-plus-artist-studies/'>4</a> /
+        <a href='https://weirdwonderfulai.art/resources/disco-diffusion-modifiers/'>5</a> ，了解更多关于提示词改造(Prompt Engineering)的信息。''',
         unsafe_allow_html=True,
     )
     with st.container():

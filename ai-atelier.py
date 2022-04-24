@@ -323,7 +323,13 @@ def dimensions_compatibility(type, after):
 enhancers = st.expander("Prompt enhancers (optional)")
 with enhancers:
     st.write(
-        "Adding enhancers to your prompts can produce very different results to the generated images, the few below are some examples that can produce interesting results. <a href='https://matthewmcateer.me/blog/clip-prompt-engineering/'>Here</a> you can learn more about Prompt Engineering",
+        '''Adding enhancers to your prompts can produce very different results to the generated images, the few below are some examples that can produce interesting results. </br>
+        You can learn more about Prompt Engineering from the following links.
+        <a href='https://matthewmcateer.me/blog/clip-prompt-engineering/'>1</a> /
+        <a href='https://peakd.com/@kaliyuga/model-comparison-study-for-disco-diffusion-v-5-ai-resources-by-kaliyuga'>2</a> /
+        <a href='https://docs.google.com/spreadsheets/d/1P9fM68jKeA1IH45i_qXINu2QhIcmCJXQSdLTxRI23oE/edit#gid=0'>3</a> /
+        <a href='https://weirdwonderfulai.art/resources/disco-diffusion-70-plus-artist-studies/'>4</a> /
+        <a href='https://weirdwonderfulai.art/resources/disco-diffusion-modifiers/'>5</a> ''',
         unsafe_allow_html=True,
     )
     with st.container():
