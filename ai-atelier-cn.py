@@ -21,11 +21,11 @@ import webbrowser
 from kora.xattr import get_id
 import deepl
 
-from setup import textsynth_completion
-from setup import deeplSetup
+# from setup import textsynth_completion
+# from setup import deeplSetup
 # For debug in mac
-# from setup_mac import textsynth_completion
-# from setup_mac import deeplSetup
+from setup_mac import textsynth_completion
+from setup_mac import deeplSetup
 
 translator = deeplSetup()
 
@@ -48,7 +48,7 @@ custom_css = """
 .appview-container > section > div > div > div > div.css-1p05t8e.epcbefy1 > div:nth-child(1) > div > div > div > div > button{color: #B6A4FC}
 
 /*history button*/
-.appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div.css-ocqkz7.e1tzin5v0 > div:nth-child(2){right:260px}
+.appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div.css-ocqkz7.e1tzin5v0 > div:nth-child(2){position:absolute;left:-90px}
 
 # .css-ffhzg2 div[data-testid="stExpander"]{background-color: rgb(14, 17, 23)}
 # .css-fg4pbf div[data-testid="stExpander"]{background-color: white}
