@@ -20,8 +20,9 @@ import requests
 import webbrowser
 from kora.xattr import get_id
 
-# For debug in mac
 from setup import textsynth_completion
+
+# For debug in mac
 # from setup_mac import textsynth_completion
 
 torch.cuda.empty_cache()
@@ -43,11 +44,11 @@ custom_css = """
 .appview-container > section > div > div > div > div.css-1p05t8e.epcbefy1 > div:nth-child(1) > div > div > div > div > button{color: #B6A4FC}
 
 /*history button*/
-.appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div:nth-child(5) > div > div{position: relative; left: 95px; top: 51.5px; margin: 0;}
+.appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div:nth-child(4) > div > div{position: relative; left: 95px; top: 51.5px; margin: 0;}
 
 /*like and history button text colour*/
-.appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div:nth-child(6) > div > div > button{color: rgb(209 209 209 / 100%)}
 .appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div:nth-child(5) > div > div > button{color: rgb(209 209 209 / 100%)}
+.appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div:nth-child(4) > div > div > button{color: rgb(209 209 209 / 100%)}
 
 # .css-ffhzg2 div[data-testid="stExpander"]{background-color: rgb(14, 17, 23)}
 # .css-fg4pbf div[data-testid="stExpander"]{background-color: white}
@@ -226,8 +227,7 @@ A: A beautiful and ethereal alien life form that resembles a cross between a but
 
             with st.spinner('Generating...'):
 
-                res = textsynth_completion(
-                    prompt, api_engine, max_tokens, top_k, top_p, stop, temperature)
+                res = "a"#textsynth_completion(prompt, api_engine, max_tokens, top_k, top_p, stop, temperature)
                 # print("\nQ: " + user_input + '\nA: ' + res)
 
                 # st.balloons()
@@ -273,7 +273,7 @@ A: A beautiful and ethereal alien life form that resembles a cross between a but
                         # )
                     
                     heart_button = st.form_submit_button(
-                        label="💗 喜欢", on_click=add_heart_item)
+                        label="💗 Like", on_click=add_heart_item)
                     url = 'https://drive.google.com/drive/folders/'+fid
                     print("url: "+url)
 
