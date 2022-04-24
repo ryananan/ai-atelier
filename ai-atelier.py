@@ -42,8 +42,12 @@ custom_css = """
 /*Generate your answers button*/
 .appview-container > section > div > div > div > div.css-1p05t8e.epcbefy1 > div:nth-child(1) > div > div > div > div > button{color: #B6A4FC}
 
-/*history button*/
-.appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div.css-ocqkz7.e1tzin5v0 > div:nth-child(2){right:260px}
+/*like button*/
+.appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div:nth-child(6){position: relative; left: 95px; top: -51.5px; margin: 0;}
+/*like button text*/
+.appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div:nth-child(6) > div > div > button{color: rgb(209 209 209 / 100%)}
+/*history button text*/
+.appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div:nth-child(5) > div > div > button{color: rgb(209 209 209 / 100%)}
 
 # .css-ffhzg2 div[data-testid="stExpander"]{background-color: rgb(14, 17, 23)}
 # .css-fg4pbf div[data-testid="stExpander"]{background-color: white}
@@ -253,22 +257,19 @@ A: A beautiful and ethereal alien life form that resembles a cross between a but
                     f.write(file_content)
                     print(dt_string + " log save")
 
-                    col1, col2 = st.columns(2)
-                    with col1:
-                        heart_button = st.form_submit_button(
-                            label="💗 Like", on_click=add_heart_item)
-                    with col2:
-                        url = 'https://drive.google.com/drive/folders/'+fid
-                        print("url: "+url)
+                    heart_button = st.form_submit_button(
+                        label="💗 Like", on_click=add_heart_item)
+                    url = 'https://drive.google.com/drive/folders/'+fid
+                    print("url: "+url)
 
-                        from bokeh.models.widgets import Div
-                        if st.form_submit_button('📜 History'):
-                            # New tab or window
-                            js = "window.open('" + url + "')"
-                            print(js)
-                            html = '<img src onerror="{}">'.format(js)
-                            div = Div(text=html)
-                            st.bokeh_chart(div)
+                    from bokeh.models.widgets import Div
+                    if st.form_submit_button('📜 History'):
+                        # New tab or window
+                        js = "window.open('" + url + "')"
+                        print(js)
+                        html = '<img src onerror="{}">'.format(js)
+                        div = Div(text=html)
+                        st.bokeh_chart(div)
 
                         # st.write(
                         #     f'<div class="bottom-line"><div class="row-widget stButton"><a kind="primary" class="css-1q8dd3e edgvbvh1" href="https://drive.google.com/drive/folders/{fid}" target="_blank">History</a></div>',
