@@ -227,7 +227,7 @@ A: A beautiful and ethereal alien life form that resembles a cross between a but
 
             with st.spinner('Generating...'):
 
-                res = "a"#textsynth_completion(prompt, api_engine, max_tokens, top_k, top_p, stop, temperature)
+                res = textsynth_completion(prompt, api_engine, max_tokens, top_k, top_p, stop, temperature)
                 # print("\nQ: " + user_input + '\nA: ' + res)
 
                 # st.balloons()
@@ -257,10 +257,12 @@ A: A beautiful and ethereal alien life form that resembles a cross between a but
                     f.write(file_content)
                     print(dt_string + " log save")
 
+                    url = 'https://drive.google.com/drive/folders/'+fid
+                    print("url: "+url)
 
                     from bokeh.models.widgets import Div
                     if st.form_submit_button('📜 History'):
-                        # New tab or window
+                        # New tab
                         js = "window.open('" + url + "')"
                         print(js)
                         html = '<img src onerror="{}">'.format(js)
@@ -274,8 +276,7 @@ A: A beautiful and ethereal alien life form that resembles a cross between a but
                     
                     heart_button = st.form_submit_button(
                         label="💗 Like", on_click=add_heart_item)
-                    url = 'https://drive.google.com/drive/folders/'+fid
-                    print("url: "+url)
+
 
 
 text_main()

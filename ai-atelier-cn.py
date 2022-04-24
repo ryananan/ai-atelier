@@ -268,6 +268,9 @@ A: A beautiful and ethereal alien life form that resembles a cross between a but
                     f.truncate()
                     f.write(file_content)
                     print(dt_string + " log save")
+                    
+                    url = 'https://drive.google.com/drive/folders/'+fid
+                    print("url: "+url)
 
                     from bokeh.models.widgets import Div
                     if st.form_submit_button('📜 历史记录'):
@@ -284,8 +287,6 @@ A: A beautiful and ethereal alien life form that resembles a cross between a but
                     
                     heart_button = st.form_submit_button(
                         label="💗 喜欢", on_click=add_heart_item)
-                    url = 'https://drive.google.com/drive/folders/'+fid
-                    print("url: "+url)
 
 
 text_main()
