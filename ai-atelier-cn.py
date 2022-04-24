@@ -21,11 +21,11 @@ import webbrowser
 from kora.xattr import get_id
 import deepl
 
-# from setup import textsynth_completion
-# from setup import deeplSetup
-# For debug in mac
-from setup_mac import textsynth_completion
-from setup_mac import deeplSetup
+from setup import textsynth_completion
+from setup import deeplSetup
+# # For debug in mac
+# from setup_mac import textsynth_completion
+# from setup_mac import deeplSetup
 
 translator = deeplSetup()
 
@@ -47,8 +47,8 @@ custom_css = """
 /*Generate your answers button*/
 .appview-container > section > div > div > div > div.css-1p05t8e.epcbefy1 > div:nth-child(1) > div > div > div > div > button{color: #B6A4FC}
 
-/*history button*/
-.appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div.css-ocqkz7.e1tzin5v0 > div:nth-child(2){position:absolute;left:-90px}
+/*history button
+.appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div.css-ocqkz7.e1tzin5v0 > div:nth-child(2){position:absolute;right:-90px}*/
 
 # .css-ffhzg2 div[data-testid="stExpander"]{background-color: rgb(14, 17, 23)}
 # .css-fg4pbf div[data-testid="stExpander"]{background-color: white}
@@ -229,15 +229,13 @@ A: A beautiful and ethereal alien life form that resembles a cross between a but
 
             with st.spinner('生成回答中...'):
 
-                res = textsynth_completion(
-                    prompt, api_engine, max_tokens, top_k, top_p, stop, temperature)
-                # print("\nQ: " + user_input + '\nA: ' + res)
+                res = "a"#textsynth_completion( prompt, api_engine, max_tokens, top_k, top_p, stop, temperature)
+                #"a"# print("\nQ: " + user_input + '\nA: ' + res)
 
                 # st.balloons()
                 st.write("🙂 Q: " + user_input + '  \n🤖 A: ' + res)
 
-                answer_result_ch = str(
-                    translator.translate_text(res, target_lang="ZH"))
+                answer_result_ch = "a"# str(translator.translate_text(res, target_lang="ZH"))
                 st.write("🙂 Q: " + user_input_ch +
                          '  \n🤖 A: ' + answer_result_ch)
 
@@ -267,7 +265,7 @@ A: A beautiful and ethereal alien life form that resembles a cross between a but
                     f.write(file_content)
                     print(dt_string + " log save")
 
-                    col1, col2 = st.columns(2)
+                    col1, col2, col3  = st.columns([1,2,8])
                     with col1:
                         heart_button = st.form_submit_button(
                             label="💗 喜欢", on_click=add_heart_item)
