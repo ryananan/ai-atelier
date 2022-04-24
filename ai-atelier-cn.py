@@ -23,6 +23,7 @@ import deepl
 
 from setup import textsynth_completion
 from setup import deeplSetup
+# For debug in mac
 # from setup_mac import textsynth_completion
 # from setup_mac import deeplSetup
 
@@ -46,8 +47,8 @@ custom_css = """
 /*Generate your answers button*/
 .appview-container > section > div > div > div > div.css-1p05t8e.epcbefy1 > div:nth-child(1) > div > div > div > div > button{color: #B6A4FC}
 
-/*history link
-.appview-container > section > div > div > div > div:nth-child(6) > div:nth-child(1) > div > div.css-ocqkz7.e1tzin5v0 > div.css-q8vomm.e1tzin5v2{color: rgb(209 209 209 / 35%); padding:0px; position:relative; top:6px; left:-4px}*/
+/*history button*/
+.appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div.css-ocqkz7.e1tzin5v0 > div:nth-child(2){right:260px}
 
 # .css-ffhzg2 div[data-testid="stExpander"]{background-color: rgb(14, 17, 23)}
 # .css-fg4pbf div[data-testid="stExpander"]{background-color: white}
@@ -261,7 +262,7 @@ A: A beautiful and ethereal alien life form that resembles a cross between a but
                     f.write(file_content)
                     print(dt_string + " log save")
 
-                    col1, col2 = st.columns([.075,1])
+                    col1, col2 = st.columns(2)
                     with col1:
                         heart_button = st.form_submit_button(label="💗 喜欢", on_click=add_heart_item)
                     with col2:
