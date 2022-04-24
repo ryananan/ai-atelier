@@ -233,13 +233,13 @@ A: A beautiful and ethereal alien life form that resembles a cross between a but
 
             with st.spinner('生成回答中...'):
 
-                res = "a"#textsynth_completion( prompt, api_engine, max_tokens, top_k, top_p, stop, temperature)
+                res = textsynth_completion( prompt, api_engine, max_tokens, top_k, top_p, stop, temperature)
                 #"a"# print("\nQ: " + user_input + '\nA: ' + res)
 
                 # st.balloons()
                 st.write("🙂 Q: " + user_input + '  \n🤖 A: ' + res)
 
-                answer_result_ch = "a"# str(translator.translate_text(res, target_lang="ZH"))
+                answer_result_ch = str(translator.translate_text(res, target_lang="ZH"))
                 st.write("🙂 Q: " + user_input_ch +
                          '  \n🤖 A: ' + answer_result_ch)
 
