@@ -20,10 +20,9 @@ import requests
 import webbrowser
 from kora.xattr import get_id
 
-from setup import textsynth_completion
-
+# from setup import textsynth_completion
 # For debug in mac
-# from setup_mac import textsynth_completion
+from setup_mac import textsynth_completion
 
 torch.cuda.empty_cache()
 
@@ -43,8 +42,11 @@ custom_css = """
 /*Generate your answers button*/
 .appview-container > section > div > div > div > div.css-1p05t8e.epcbefy1 > div:nth-child(1) > div > div > div > div > button{color: #B6A4FC}
 
-/*history button*/
-.appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div:nth-child(4) > div > div{position: relative; left: 95px; top: 51.5px; margin: 0;}
+/*like button*/
+.appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div:nth-child(4){position: relative; left: 0px; top: 51.5px; margin: 0;}
+/*history button - the widget( > div > div > button ) is not moves along cause overlap bug*/
+.appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div:nth-child(5){position: relative; left: 90px;}
+
 
 /*like and history button text colour*/
 .appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div:nth-child(5) > div > div > button{color: rgb(209 209 209 / 100%)}
@@ -257,6 +259,9 @@ A: A beautiful and ethereal alien life form that resembles a cross between a but
                     f.write(file_content)
                     print(dt_string + " log save")
 
+                    heart_button = st.form_submit_button(
+                        label="💗 Like", on_click=add_heart_item)
+
                     url = 'https://drive.google.com/drive/folders/'+fid
                     print("url: "+url)
 
@@ -274,8 +279,7 @@ A: A beautiful and ethereal alien life form that resembles a cross between a but
                         #     unsafe_allow_html=True,
                         # )
                     
-                    heart_button = st.form_submit_button(
-                        label="💗 Like", on_click=add_heart_item)
+
 
 
 
