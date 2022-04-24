@@ -19,8 +19,9 @@ import time
 import requests
 import webbrowser
 from kora.xattr import get_id
-from setup import textsynth_completion
-# from setup_mac import textsynth_completion
+
+# from setup import textsynth_completion
+from setup_mac import textsynth_completion
 
 torch.cuda.empty_cache()
 
@@ -108,6 +109,7 @@ div[data-testid="stToolbar"] button{pointer-events: auto !important;filter: gray
 
 st.set_page_config(page_title=" AI Atelier", page_icon="🔮", layout="wide",)
 
+
 class DefaultPaths:
     root_path = f"."
     if not (path_exists(f"/content/drive/MyDrive/")):
@@ -146,7 +148,7 @@ def add_heart_item():
 
 def open_history_log():
     from kora.xattr import get_id
-    
+
     if DefaultPaths.is_drive:
         output_folder = f"{DefaultPaths.drive_path}/text_history"
         if not path_exists(output_folder):
@@ -219,7 +221,8 @@ A: A beautiful and ethereal alien life form that resembles a cross between a but
 
             with st.spinner('Generating...'):
 
-                res = textsynth_completion(prompt, api_engine, max_tokens, top_k, top_p, stop, temperature)
+                res = textsynth_completion(
+                    prompt, api_engine, max_tokens, top_k, top_p, stop, temperature)
                 # print("\nQ: " + user_input + '\nA: ' + res)
 
                 # st.balloons()
@@ -249,16 +252,18 @@ A: A beautiful and ethereal alien life form that resembles a cross between a but
                     f.write(file_content)
                     print(dt_string + " log save")
 
-                    col1, col2 = st.columns([.072,1])
+                    col1, col2 = st.columns([.072, 1])
                     with col1:
-                        heart_button = st.form_submit_button(label="💗 Like", on_click=add_heart_item)
+                        heart_button = st.form_submit_button(
+                            label="💗 Like", on_click=add_heart_item)
                     with col2:
                         url = 'https://drive.google.com/drive/folders/'+fid
                         print("url: "+url)
 
                         from bokeh.models.widgets import Div
                         if st.form_submit_button('📜 History'):
-                            js = "window.open('" + url + "')"  # New tab or window
+                            # New tab or window
+                            js = "window.open('" + url + "')"
                             print(js)
                             html = '<img src onerror="{}">'.format(js)
                             div = Div(text=html)
@@ -275,7 +280,7 @@ text_main()
 
 placeholder = st.empty()
 with placeholder.container():
-     st.write(" ")
+    st.write(" ")
 
 st.subheader('🎨 Let AI draw &nbsp; [text-to-image]')
 page_names = ["[Coherent] CLIP Guided Diffusion", "[Artistic] VQGAN+CLIP"]
@@ -321,7 +326,13 @@ def dimensions_compatibility(type, after):
 enhancers = st.expander("Prompt enhancers (optional)")
 with enhancers:
     st.write(
-        "Adding enhancers to your prompts can produce very different results to the generated images, the few below are some examples that can produce interesting results. <a href='https://matthewmcateer.me/blog/clip-prompt-engineering/'>Here</a> you can learn more about Prompt Engineering",
+        '''Adding enhancers to your prompts can produce very different results to the generated images, the few below are some examples that can produce interesting results. </br>
+        You can learn more about Prompt Engineering from the following links.
+        <a href='https://matthewmcateer.me/blog/clip-prompt-engineering/'>1</a> /
+        <a href='https://peakd.com/@kaliyuga/model-comparison-study-for-disco-diffusion-v-5-ai-resources-by-kaliyuga'>2</a> /
+        <a href='https://docs.google.com/spreadsheets/d/1P9fM68jKeA1IH45i_qXINu2QhIcmCJXQSdLTxRI23oE/edit#gid=0'>3</a> /
+        <a href='https://weirdwonderfulai.art/resources/disco-diffusion-70-plus-artist-studies/'>4</a> /
+        <a href='https://weirdwonderfulai.art/resources/disco-diffusion-modifiers/'>5</a> ''',
         unsafe_allow_html=True,
     )
     with st.container():
@@ -708,7 +719,6 @@ with settings:
             )
 
 
-
 with gensettings:
     intermediary_frames = st.checkbox("Save intermediary frames", value=False)
     if intermediary_frames:
@@ -792,14 +802,14 @@ with st.form(key="image_generation"):
             if os.listdir(output_folder):
                 files_path = os.path.join(output_folder, "*.png")
                 files = sorted(glob.iglob(files_path),
-                            key=os.path.getctime, reverse=True)
+                               key=os.path.getctime, reverse=True)
                 try:
                     gallery_text_area.write("Your last creation:")
-                    gallery_image_area.image(Image.open(files[0]))       
+                    gallery_image_area.image(Image.open(files[0]))
                 except:
                     gallery_text_area = st.empty()
-                    gallery_image_area = st.empty()     
-                url='https://drive.google.com/drive/folders/'+fid
+                    gallery_image_area = st.empty()
+                url = 'https://drive.google.com/drive/folders/'+fid
                 from bokeh.models.widgets import Div
                 if st.form_submit_button('View your gallery on Google Drive'):
                     js = "window.open('" + url + "')"  # New tab or window
@@ -818,7 +828,8 @@ with st.form(key="image_generation"):
                 # <small>We <b>do not collect prompts or results</b>. Your creations don\'t belong to MindsEye. Read our <a href="https://multimodal.art/mindseye#f-a-q" target="_blank">FAQ</a>.<br>Feel free to reference #MindsEye and tag <a href="https://multimodal.art/multimodalart" target="_blank">@multimodalart</a> when sharing your creations if you wish</small></div>',
                 unsafe_allow_html=True,
             )
-        st.write("Right-click to download your generated images and videos directly from Google Drive")
+        st.write(
+            "Right-click to download your generated images and videos directly from Google Drive")
         if os.path.exists("progress.png"):
             gallery_text_area.write("Your last creation:")
             gallery_image_area.image(Image.open("progress.png"))
@@ -862,7 +873,8 @@ with st.form(key="image_generation"):
             image_path = uploaded_file.name
         else:
             image_path = None
-        intermediary_folder,video_frame_folder, update_every = intermediary_frame_setup(seed)
+        intermediary_folder, video_frame_folder, update_every = intermediary_frame_setup(
+            seed)
 
         if page == "[Artistic] VQGAN+CLIP":
             args = argparse.Namespace(
@@ -892,8 +904,8 @@ with st.form(key="image_generation"):
                 how_many_frames=how_many_frames,
                 generate_video=generate_video,
                 video_frame_folder=video_frame_folder,
-                CH_version = False,
-                CH_prompt = ""
+                CH_version=False,
+                CH_prompt=""
             )
         elif page == "[Coherent] CLIP Guided Diffusion":
             args = argparse.Namespace(
@@ -961,14 +973,14 @@ with st.form(key="image_generation"):
                 how_many_frames=how_many_frames,
                 generate_video=generate_video,
                 video_frame_folder=video_frame_folder,
-                CH_version = False,
-                CH_prompt = ""
+                CH_version=False,
+                CH_prompt=""
             )
         try:
             if (how_many_runs) > 1:
                 if batch_folder:
                     DefaultPaths.output_path = f"{DefaultPaths.output_path}/{batch_folder}"
-                    intermediary_folder,video_frame_folder, update_every = intermediary_frame_setup(
+                    intermediary_folder, video_frame_folder, update_every = intermediary_frame_setup(
                         args.seed)
             for i in range(how_many_runs):
                 if how_many_runs > 1:
@@ -977,7 +989,7 @@ with st.form(key="image_generation"):
                 if i > 0:
                     if randomize_seed:
                         args.seed = random.randint(0, 2147483647)
-                    intermediary_folder,video_frame_folder, update_every = intermediary_frame_setup(
+                    intermediary_folder, video_frame_folder, update_every = intermediary_frame_setup(
                         args.seed)
                     args.frame_dir = intermediary_folder
                 run_internal(args, status, col_output2, gray_during_execution)
@@ -996,7 +1008,7 @@ with st.form(key="image_generation"):
         st.session_state.seed = init_seed
         meta_status.empty()
         st.experimental_rerun()
-        
+
 footer = """
 <div class="footer">
 <p>AI Atelier beta by Muhan Xu <b><a href='http://www.aiiiii.com/' target='_blank'>Aiiiii</a></b><br>
