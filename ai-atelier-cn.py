@@ -545,7 +545,7 @@ with settings:
             tv_scale = col1.number_input(
                 "图像平滑度	TV scale",
                 value=0,
-                help="控制最终输出的`平滑度`设置为0即可关闭。如果你的图像`颗粒度`过高了，可以尝试增加tv_scale。如果使用，tv_scale将试图使你的最终图像变得平滑，tv_scale能很好地保留边缘，同时减少整体的噪声。",
+                help="控制最终输出的`平滑度`设置为0即可关闭。如果你的图像`颗粒度`过高了，可以尝试增加tv_scale。如果使用，tv_scale将试图使你的最终图像变得平滑，tv_scale能很好地保留边缘，同时减少整体的噪点。",
             )
             range_scale = col1.number_input(
                 "RGB 值范围	Range scale",
