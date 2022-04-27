@@ -2344,7 +2344,7 @@ def run_model(args2, status, stoutput, DefaultPaths):
 
     cut_overview = "[12]*400+[4]*600"  # @param {type: 'string'}
     cut_innercut = "[4]*400+[12]*600"  # @param {type: 'string'}
-    cut_ic_pow = 1  # @param {type: 'number'}
+    cut_ic_pow = args2.cut_ic_pow  # @param {type: 'number'}
     cut_icgray_p = "[0.2]*400+[0]*600"  # @param {type: 'string'}
 
     """###Prompts
