@@ -215,7 +215,7 @@ def video_generation(args, DefaultPaths,status,filename):
             my_progress_bar.progress(percentage + 1)
             if CN_version:
                 my_iteration_counter.write(
-                    f"{percentage}% {j}/{total_frames+1} [🎬 生成视频中 {time.strftime('%M:%S', time.gmtime(time_past_seconds))}<{time.strftime('%M:%S', time.gmtime(time_left))}, {round(second_per_iterations,2)} 秒/迭代次数]" # Originally batchBar
+                    f"{percentage}% {j}/{total_frames+1} [🎬 生成视频中 {time.strftime('%M:%S', time.gmtime(time_past_seconds))}<{time.strftime('%M:%S', time.gmtime(time_left))}, {round(second_per_iterations,2)} 秒/迭代]" # Originally batchBar
                     )
             else:
                 my_iteration_counter.write(
@@ -1294,7 +1294,7 @@ def run_model(args2, status, stoutput, DefaultPaths):
                         percentage = round((j / (total_steps + 1)) * 100)
                         if CN_version:
                             iteration_counter.write(
-                                f"{percentage}% {j}/{total_steps+1} [{time.strftime('%M:%S', time.gmtime(time_past_seconds))}<{time.strftime('%M:%S', time.gmtime(time_left))}, {round(second_per_iterations,2)} 秒/迭代次数]" # Originally batchBar
+                                f"{percentage}% {j}/{total_steps+1} [{time.strftime('%M:%S', time.gmtime(time_past_seconds))}<{time.strftime('%M:%S', time.gmtime(time_left))}, {round(second_per_iterations,2)} 秒/迭代]" # Originally batchBar
                             )
                         else:
                             iteration_counter.write(
