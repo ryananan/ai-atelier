@@ -495,12 +495,12 @@ with settings:
                 value=1000,
             )
             skipseedtimesteps = col2.number_input(
-                "Skip timesteps - 允许图像与guided-diffusio的样本混合的timesteps",
+                "Skip timesteps - 允许图像与guided-diffusio的样本混合的时间步数timesteps",
                 value=150,
             )
             if num_steps <= skipseedtimesteps:
                 col2.error(
-                    "The number of steps has to be higher than the timesteps skipped"
+                    "总生成的时间步数不能少于上传图像与模型混合的时间步数"
                 )
         else:
             initscale = 1000
