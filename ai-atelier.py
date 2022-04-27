@@ -166,7 +166,6 @@ def open_history_log():
         print("Url: "+url)
         webbrowser.open_new_tab(url)
 
-
 def text_main():
     user_input = st.text_input(
         "Chat with AI for inspiration!", value="What is the most beautiful scene you recall?", max_chars=1024
@@ -912,8 +911,8 @@ with st.form(key="image_generation"):
                 how_many_frames=how_many_frames,
                 generate_video=generate_video,
                 video_frame_folder=video_frame_folder,
-                CH_version=False,
-                CH_prompt=""
+                CN_version=False,
+                CN_prompt=""
             )
         elif page == "[Coherent] CLIP Guided Diffusion":
             args = argparse.Namespace(
@@ -981,8 +980,8 @@ with st.form(key="image_generation"):
                 how_many_frames=how_many_frames,
                 generate_video=generate_video,
                 video_frame_folder=video_frame_folder,
-                CH_version=False,
-                CH_prompt=""
+                CN_version=False,
+                CN_prompt=""
             )
         try:
             if (how_many_runs) > 1:

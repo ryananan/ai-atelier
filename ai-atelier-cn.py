@@ -950,8 +950,8 @@ with st.form(key="image_generation"):
                 how_many_frames=how_many_frames,
                 generate_video=generate_video,
                 video_frame_folder=video_frame_folder,
-                CH_version=True,
-                CH_prompt=user_input_ch
+                CN_version=True,
+                CN_prompt=user_input_ch
             )
         elif page == "[完成度更高] CLIP Guided Diffusion":
             args = argparse.Namespace(
@@ -1019,8 +1019,8 @@ with st.form(key="image_generation"):
                 how_many_frames=how_many_frames,
                 generate_video=generate_video,
                 video_frame_folder=video_frame_folder,
-                CH_version=True,
-                CH_prompt=user_input_ch
+                CN_version=True,
+                CN_prompt=user_input_ch
             )
         try:
             if (how_many_runs) > 1:
