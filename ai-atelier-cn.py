@@ -21,11 +21,11 @@ import webbrowser
 from kora.xattr import get_id
 import deepl
 
-from setup import textsynth_completion
-from setup import deeplSetup
+# from setup import textsynth_completion
+# from setup import deeplSetup
 # # For debug in mac
-# from setup_mac import textsynth_completion
-# from setup_mac import deeplSetup
+from setup_mac import textsynth_completion
+from setup_mac import deeplSetup
 
 translator = deeplSetup()
 
@@ -582,11 +582,15 @@ with settings:
             )
 
             cut_ic_pow = col2.number_input(
-                "特征提取量内部边界大小 Cut ic pow", value=1.0, help="用于调整CLIP的内部切割的边界大小。越高的`cut_ic_pow`值将使得切割变得更小，变得能生成更多的细节。要注意过高的`cut_ic_pow`值有可能失去整体图像的连贯性，可能出现马赛克的效果。(默认值 1.0|范围 0.5-100) ")
+                "特征提取量内部边界大小 Cut ic pow", 
+                value=1.0, 
+                step=0.1, 
+                help="用于调整CLIP的内部切割的边界大小。越高的`cut_ic_pow`值将使得切割变得更小，变得能生成更多的细节。要注意过高的`cut_ic_pow`值有可能失去整体图像的连贯性，可能出现马赛克的效果。(默认值 1.0|范围 0.5-100) ")
 
             eta = col2.number_input(
                 "DDIM 超参数 ETA",
                 value=0.8,
+                step=0.1,
                 help="eta（希腊字母η）是一个diffusion模型的变量，它在每个时间步长(timestep)中混入随机量的比例噪声。0是没有噪音，1.0是更多的噪音。(默认值 0.5|范围 0-1.0)",
             )
 
