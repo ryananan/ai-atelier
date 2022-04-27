@@ -578,7 +578,7 @@ with settings:
             cutout_batches = col2.number_input(
                 "梯度积累值	Cutout Batches",
                 value=1,
-                help="调整CLIP如何用评估图像特征提取量（cutout）的批(batches)数量。数值越高，批数量越高，但你的生成时间也将更长。(默认值 4|范围 1-8) ",
+                help="调整CLIP如何用评估图像特征提取量（cutout）的批(batches)数量。数值越高，细节往往越丰富，但你的生成时间也将更长。(默认值 4|范围 1-8) ",
             )
 
             cut_ic_pow = col2.number_input(
