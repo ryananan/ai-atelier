@@ -153,6 +153,7 @@ sys.stdout.flush()
 
 def video_generation(args, DefaultPaths,status,filename):
 
+    CN_version = args.CN_version
     how_many_frames=args.iterations
     intermediary_folder=args.frame_dir
     how_many_fps=args.how_many_fps
@@ -204,7 +205,12 @@ def video_generation(args, DefaultPaths,status,filename):
             time_left = (total_frames - j) / iterations_per_second
             percentage = round((j / (total_frames + 1)) * 100-1)
             my_progress_bar.progress(percentage + 1)
-            my_iteration_counter.write(
+            if CN_version:
+                my_iteration_counter.write(
+                    f"{percentage}% {j}/{total_frames+1} [🎬 生成视频中 {time.strftime('%M:%S', time.gmtime(time_past_seconds))}<{time.strftime('%M:%S', time.gmtime(time_left))}, {round(second_per_iterations,2)} 秒/迭代次数]" # Originally batchBar
+                    )
+            else:
+                my_iteration_counter.write(
                 f"{percentage}% {j}/{total_frames+1} [🎬 Generating Video {time.strftime('%M:%S', time.gmtime(time_past_seconds))}<{time.strftime('%M:%S', time.gmtime(time_left))}, {round(second_per_iterations,2)} seconds/iterations]" # Originally batchBar
                 )
         p.stdin.close()
@@ -1830,9 +1836,14 @@ def run_model(args2, status, stoutput, DefaultPaths):
                     second_per_iterations = time_past_seconds / j
                     time_left = (total_steps - j) / iterations_per_second
                     percentage = round((j / (total_steps + 1)) * 100)
-
-                    iteration_counter.write(
-                        f"{percentage}% {j}/{total_steps+1} [{time.strftime('%M:%S', time.gmtime(time_past_seconds))}<{time.strftime('%M:%S', time.gmtime(time_left))}, {round(second_per_iterations,2)} seconds/iterations]" # Originally batchBar
+                    CN_version = args2.CN_version
+                    if CN_version:
+                        iteration_counter.write(
+                            f"{percentage}% {j}/{total_steps+1} [{time.strftime('%M:%S', time.gmtime(time_past_seconds))}<{time.strftime('%M:%S', time.gmtime(time_left))}, {round(second_per_iterations,2)} 秒/迭代次数]" # Originally batchBar
+                        )
+                    else:
+                        iteration_counter.write(
+                            f"{percentage}% {j}/{total_steps+1} [{time.strftime('%M:%S', time.gmtime(time_past_seconds))}<{time.strftime('%M:%S', time.gmtime(time_left))}, {round(second_per_iterations,2)} seconds/iterations]" # Originally batchBar
                     )
                     progress_bar.progress(int(percentage))
                 import shutil
