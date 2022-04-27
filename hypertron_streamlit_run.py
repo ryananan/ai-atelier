@@ -2735,10 +2735,10 @@ def run_model(args2, status, stoutput, DefaultPaths):
             "cut_pow": cut_pow,
             "cutn": cutn,
         }
-        CH_version = args2.CH_version
-        if CH_version:
-            CH_prompt = args2.CH_prompt
-            setting_list.update({"中文关键词":CH_prompt})
+        CN_version = args2.CN_version
+        if CN_version:
+            CN_prompt = args2.CN_prompt
+            setting_list.update({"中文关键词":CN_prompt})
         print('Settings:', setting_list)
         with open(
             f"{DefaultPaths.output_path}/{filename}_settings.txt", "w+"

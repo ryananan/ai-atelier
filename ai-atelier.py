@@ -20,13 +20,9 @@ import requests
 import webbrowser
 from kora.xattr import get_id
 
-# from setup import textsynth_completion
-<<<<<<< Updated upstream
-=======
-
+from setup import textsynth_completion
 # For debug in mac
->>>>>>> Stashed changes
-from setup_mac import textsynth_completion
+# from setup_mac import textsynth_completion
 
 torch.cuda.empty_cache()
 
@@ -46,12 +42,15 @@ custom_css = """
 /*Generate your answers button*/
 .appview-container > section > div > div > div > div.css-1p05t8e.epcbefy1 > div:nth-child(1) > div > div > div > div > button{color: #B6A4FC}
 
-/*history link*/
-.appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div:nth-child(4){position: relative; left: 100px; top: 2px}
+/*like button*/
+.appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div:nth-child(4){position: relative; left: 0px; top: 51.5px; margin: 0;}
+/*history button - the widget( > div > div > button ) is not moves along cause overlap bug*/
+.appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div:nth-child(5){position: relative; left: 90px;}
+
 
 /*like and history button text colour*/
 .appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div:nth-child(5) > div > div > button{color: rgb(209 209 209 / 100%)}
-.appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div:nth-child(4){color: rgb(209 209 209 / 100%)}
+.appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div:nth-child(4) > div > div > button{color: rgb(209 209 209 / 100%)}
 
 # .css-ffhzg2 div[data-testid="stExpander"]{background-color: rgb(14, 17, 23)}
 # .css-fg4pbf div[data-testid="stExpander"]{background-color: white}
@@ -141,14 +140,6 @@ st.write(
 )
 st.subheader('💬 Ask AI &nbsp; [text-to-text]')
 
-def open_history(url):
-    from bokeh.models.widgets import Div
-    # New tab
-    js = "window.open('" + url + "')"
-    print(js)
-    html = '<img src onerror="{}">'.format(js)
-    div = Div(text=html)
-    st.bokeh_chart(div)
 
 def add_heart_item():
     if DefaultPaths.is_drive:
@@ -174,7 +165,6 @@ def open_history_log():
         url = 'https://drive.google.com/drive/folders/'+fid
         print("Url: "+url)
         webbrowser.open_new_tab(url)
-
 
 def text_main():
     user_input = st.text_input(
@@ -238,8 +228,7 @@ A: A beautiful and ethereal alien life form that resembles a cross between a but
 
             with st.spinner('Generating...'):
 
-                res = textsynth_completion(
-                    prompt, api_engine, max_tokens, top_k, top_p, stop, temperature)
+                res = textsynth_completion(prompt, api_engine, max_tokens, top_k, top_p, stop, temperature)
                 # print("\nQ: " + user_input + '\nA: ' + res)
 
                 # st.balloons()
@@ -269,26 +258,27 @@ A: A beautiful and ethereal alien life form that resembles a cross between a but
                     f.write(file_content)
                     print(dt_string + " log save")
 
-                    # from bokeh.models.widgets import Div
-                    # if st.form_submit_button('📜 History'):
-                    #     # New tab
-                    #     js = "window.open('" + url + "')"
-                    #     print(js)
-                    #     html = '<img src onerror="{}">'.format(js)
-                    #     div = Div(text=html)
-                    #     st.bokeh_chart(div)
-
+                    heart_button = st.form_submit_button(
+                        label="💗 Like", on_click=add_heart_item)
 
                     url = 'https://drive.google.com/drive/folders/'+fid
                     print("url: "+url)
 
-                    st.write(
-                            f'<div class="bottom-line"><div class="row-widget stButton"><a kind="primary" class="css-1q8dd3e edgvbvh1" href="https://drive.google.com/drive/folders/{url}" target="_blank">History</a></div>',
-                            unsafe_allow_html=True,
-                        )
-                                        
-                    heart_button = st.form_submit_button(
-                        label="💗 Like", on_click=add_heart_item)
+                    from bokeh.models.widgets import Div
+                    if st.form_submit_button('📜 History'):
+                        # New tab
+                        js = "window.open('" + url + "')"
+                        print(js)
+                        html = '<img src onerror="{}">'.format(js)
+                        div = Div(text=html)
+                        st.bokeh_chart(div)
+
+                        # st.write(
+                        #     f'<div class="bottom-line"><div class="row-widget stButton"><a kind="primary" class="css-1q8dd3e edgvbvh1" href="https://drive.google.com/drive/folders/{fid}" target="_blank">History</a></div>',
+                        #     unsafe_allow_html=True,
+                        # )
+                    
+
 
 
 
@@ -921,8 +911,8 @@ with st.form(key="image_generation"):
                 how_many_frames=how_many_frames,
                 generate_video=generate_video,
                 video_frame_folder=video_frame_folder,
-                CH_version=False,
-                CH_prompt=""
+                CN_version=False,
+                CN_prompt=""
             )
         elif page == "[Coherent] CLIP Guided Diffusion":
             args = argparse.Namespace(
@@ -990,8 +980,8 @@ with st.form(key="image_generation"):
                 how_many_frames=how_many_frames,
                 generate_video=generate_video,
                 video_frame_folder=video_frame_folder,
-                CH_version=False,
-                CH_prompt=""
+                CN_version=False,
+                CN_prompt=""
             )
         try:
             if (how_many_runs) > 1:

@@ -21,10 +21,11 @@ import webbrowser
 from kora.xattr import get_id
 import deepl
 
-# from setup import textsynth_completion
-# from setup import deeplSetup
-from setup_mac import textsynth_completion
-from setup_mac import deeplSetup
+from setup import textsynth_completion
+from setup import deeplSetup
+# # For debug in mac
+# from setup_mac import textsynth_completion
+# from setup_mac import deeplSetup
 
 translator = deeplSetup()
 
@@ -47,7 +48,18 @@ custom_css = """
 .appview-container > section > div > div > div > div.css-1p05t8e.epcbefy1 > div:nth-child(1) > div > div > div > div > button{color: #B6A4FC}
 
 /*like button*/
-.appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div:nth-child(6){position: relative; right: -134px; top: -51.5px; margin: 0; color: #B6A4FC}
+.appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div:nth-child(4){position: relative; left: 0px; top: 51.5px; margin: 0;}
+/*history button - the widget( > div > div > button ) is not moves along cause overlap bug*/
+.appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div:nth-child(5){position: relative; left: 92px;}
+
+
+/*like and history button text colour*/
+.appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div:nth-child(5) > div > div > button{color: rgb(209 209 209 / 100%)}
+.appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div:nth-child(4) > div > div > button{color: rgb(209 209 209 / 100%)}
+
+/*like and history button text colour*/
+.appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div:nth-child(6) > div > div > button{color: rgb(209 209 209 / 100%)}
+.appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div:nth-child(5) > div > div > button{color: rgb(209 209 209 / 100%)}
 
 # .css-ffhzg2 div[data-testid="stExpander"]{background-color: rgb(14, 17, 23)}
 # .css-fg4pbf div[data-testid="stExpander"]{background-color: white}
@@ -78,7 +90,6 @@ custom_css = """
 /*OMG update div:nth-child(4) to 11*/
 .appview-container > section > div > div > div > div:nth-child(11) .streamlit-expanderContent div[data-testid="stVerticalBlock"] div:nth-child(2) > div {flex-direction: row !important;flex-wrap: wrap}
 .appview-container > section > div > div > div > div:nth-child(11) .streamlit-expanderContent div[data-testid="stVerticalBlock"] div:nth-child(2) > div div{width: auto !important}
-
 
 /*Horizontal Radio - Image generation model*/
 div.row-widget.stRadio > div{flex-direction:row} div.row-widget.stRadio > div label {margin-right: .75em;} div.row-widget.stRadio > div label:last-child{margin-right: 0}
@@ -229,15 +240,13 @@ A: A beautiful and ethereal alien life form that resembles a cross between a but
 
             with st.spinner('生成回答中...'):
 
-                res = textsynth_completion(prompt, api_engine, max_tokens, top_k, top_p, stop, temperature)
-                # print("\nQ: " + user_input + '\nA: ' + res)
+                res = textsynth_completion( prompt, api_engine, max_tokens, top_k, top_p, stop, temperature)
+                #"a"# print("\nQ: " + user_input + '\nA: ' + res)
 
                 # st.balloons()
-                st.write("🙂 Q: " + user_input + '  \n🤖 A: ' + res)
-
                 answer_result_ch = str(translator.translate_text(res, target_lang="ZH"))
-                st.write("🙂 Q: " + user_input_ch +
-                         '  \n🤖 A: ' + answer_result_ch)
+                st.write("🙂 Q: " + user_input + '  \n🤖 A: ' + res + "  \n" 
+                        + "  \n🙂 Q: " + user_input_ch + '  \n🤖 A: ' + answer_result_ch)
 
                 if DefaultPaths.is_drive:
                     text_output_folder = f"{DefaultPaths.drive_path}/text_history"
@@ -264,11 +273,12 @@ A: A beautiful and ethereal alien life form that resembles a cross between a but
                     f.truncate()
                     f.write(file_content)
                     print(dt_string + " log save")
-
+        
+                    heart_button = st.form_submit_button(
+                    label="💗 喜欢", on_click=add_heart_item)
 
                     url = 'https://drive.google.com/drive/folders/'+fid
                     print("url: "+url)
-
                     from bokeh.models.widgets import Div
                     if st.form_submit_button('📜 历史记录'):
                         # New tab or window
@@ -281,9 +291,6 @@ A: A beautiful and ethereal alien life form that resembles a cross between a but
                         #     f'<div class="bottom-line"><div class="row-widget stButton"><a kind="primary" class="css-1q8dd3e edgvbvh1" href="https://drive.google.com/drive/folders/{fid}" target="_blank">历史记录</a></div>',
                         #     unsafe_allow_html=True,
                         # )
-
-                    heart_button = st.form_submit_button(
-                        label="💗 喜欢", on_click=add_heart_item)
 
 
 text_main()
@@ -538,7 +545,7 @@ with settings:
             tv_scale = col1.number_input(
                 "图像平滑度	TV scale",
                 value=0,
-                help="控制最终输出的`平滑度`设置为0即可关闭。如果你的图像`颗粒度`过高了，可以尝试增加tv_scale。如果使用，tv_scale将试图使你的最终图像变得平滑，tv_scale能很好地保留边缘，同时减少整体的噪声。",
+                help="控制最终输出的`平滑度`设置为0即可关闭。如果你的图像`颗粒度`过高了，可以尝试增加tv_scale。如果使用，tv_scale将试图使你的最终图像变得平滑，tv_scale能很好地保留边缘，同时减少整体的噪点。",
             )
             range_scale = col1.number_input(
                 "RGB 值范围	Range scale",
@@ -943,8 +950,8 @@ with st.form(key="image_generation"):
                 how_many_frames=how_many_frames,
                 generate_video=generate_video,
                 video_frame_folder=video_frame_folder,
-                CH_version=True,
-                CH_prompt=user_input_ch
+                CN_version=True,
+                CN_prompt=user_input_ch
             )
         elif page == "[完成度更高] CLIP Guided Diffusion":
             args = argparse.Namespace(
@@ -1012,8 +1019,8 @@ with st.form(key="image_generation"):
                 how_many_frames=how_many_frames,
                 generate_video=generate_video,
                 video_frame_folder=video_frame_folder,
-                CH_version=True,
-                CH_prompt=user_input_ch
+                CN_version=True,
+                CN_prompt=user_input_ch
             )
         try:
             if (how_many_runs) > 1:
