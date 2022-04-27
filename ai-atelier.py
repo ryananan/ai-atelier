@@ -566,7 +566,7 @@ with settings:
                 help="How batches of cuts will be made to the image for CLIP to evaluate. The higher the value, the more batches, but your generation will take more time.",
             )
             cut_ic_pow = col2.number_input(
-                "Cut ic pow", value=1, help="This sets the size of the border used for inner cuts. High cut_ic_pow values have larger borders, and therefore the cuts themselves will be smaller and provide finer details. If you have too many or too-small inner cuts, you may lose overall image coherency and/or it may cause an undesirable ‘mosaic’ effect. Low cut_ic_pow values will allow the inner cuts to be larger, helping image coherency while still helping with some details. (Default 1.0|Range 0.5-100)")
+                "Cut ic pow", value=1.0, help="This sets the size of the border used for inner cuts. High cut_ic_pow values have larger borders, and therefore the cuts themselves will be smaller and provide finer details. If you have too many or too-small inner cuts, you may lose overall image coherency and/or it may cause an undesirable ‘mosaic’ effect. Low cut_ic_pow values will allow the inner cuts to be larger, helping image coherency while still helping with some details. (Default 1.0|Range 0.5-100)")
             eta = col2.number_input(
                 "ETA",
                 value=0.8,

@@ -582,7 +582,7 @@ with settings:
             )
 
             cut_ic_pow = col2.number_input(
-                "特征提取量内部边界大小 Cut ic pow", value=1, help="用于调整CLIP的内部切割的边界大小。越高的`cut_ic_pow`值将使得切割变得更小，变得能生成更多的细节。要注意过高的`cut_ic_pow`值有可能失去整体图像的连贯性，可能出现马赛克的效果。(默认值 1.0|范围 0.5-100) ")
+                "特征提取量内部边界大小 Cut ic pow", value=1.0, help="用于调整CLIP的内部切割的边界大小。越高的`cut_ic_pow`值将使得切割变得更小，变得能生成更多的细节。要注意过高的`cut_ic_pow`值有可能失去整体图像的连贯性，可能出现马赛克的效果。(默认值 1.0|范围 0.5-100) ")
 
             eta = col2.number_input(
                 "DDIM 超参数 ETA",
