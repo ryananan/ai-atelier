@@ -535,22 +535,22 @@ with settings:
             cutouts = col1.number_input(
                 "特征提取量 Cutouts",
                 value=16,
-                help="决定CLIP对图像做多少次切割。随机将若干个矩形区域删除（像素值改成0）。理论上越多越好，不过除非你有Colab Pro，否则可能会报错。",
+                help="决定CLIP对图像做多少次切割(CLIP在生成过程中如何评估你的图像)。随机将若干个矩形区域删除（像素值改成0）。理论上越多越好，不过除非你有Colab Pro，否则可能会报错。(默认值 4|范围 1-8)",
             )
             guidance_scale = col1.number_input(
                 "图像相似图	CLIP Guidance Scale",
                 value=5000,
-                help="决定CLIP有多被你的关键词所引导。（默认值1000）",
+                help="决定CLIP有多被你的关键词所引导。(默认值 5000|范围 1500-100000)",
             )
             tv_scale = col1.number_input(
                 "图像平滑度	TV scale",
                 value=0,
-                help="控制最终输出的`平滑度`设置为0即可关闭。如果你的图像`颗粒度`过高了，可以尝试增加tv_scale。如果使用，tv_scale将试图使你的最终图像变得平滑，tv_scale能很好地保留边缘，同时减少整体的噪点。",
+                help="控制最终输出的`平滑度`设置为0即可关闭。如果你的图像`颗粒度`过高了，可以尝试增加tv_scale。如果使用，tv_scale将试图使你的最终图像变得平滑，tv_scale能很好地保留边缘，同时减少整体的噪点。(默认值 0|范围 0-1000)",
             )
             range_scale = col1.number_input(
                 "RGB 值范围	Range scale",
                 value=180,
-                help="用于调整色彩对比度。设置为零即可关闭。较低的range_scale会增加对比度。非常低的数字会产生一个缩小的调色板，从而产生更鲜艳或类似海报的图像。较高的range_scale会降低对比度，使图像更加柔和。",
+                help="用于调整色彩对比度。设置为零即可关闭。较低的range_scale会增加对比度。非常低的数字会产生一个缩小的调色板，从而产生更鲜艳或类似海报的图像。较高的range_scale会降低对比度，使图像更加柔和。(默认值 150|范围0-1000)",
             )
             sampling_mode = col2.selectbox(
                 "采样模式 Sampling mode",
@@ -573,20 +573,26 @@ with settings:
             sat_scale = col2.number_input(
                 "图像饱和度	Sat scale",
                 value=0,
-                help="调整饱和度的范围。可选的，设置为零即可关闭。 如果使用，`sat_scale`将有助于减轻过饱和度。如果你的图像过于饱和，**增加** `sat_scale`来降低饱和度。",
+                help="调整饱和度的范围。可选的，设置为零即可关闭。 如果使用，`sat_scale`将有助于减轻过饱和度。如果你的图像过于饱和，**增加** `sat_scale`来降低饱和度。(默认值 0|范围 0-20000) ",
             )
             cutout_batches = col2.number_input(
                 "梯度积累值	Cutout Batches",
                 value=1,
-                help="调整CLIP如何用评估图像特征提取量（cutout）的批(batches)数量。数值越高，批数量越高，但你的生成时间也将更长。",
+                help="调整CLIP如何用评估图像特征提取量（cutout）的批(batches)数量。数值越高，细节往往越丰富，但你的生成时间也将更长。(默认值 4|范围 1-8) ",
             )
+
+            cut_ic_pow = col2.number_input(
+                "特征提取量内部边界大小 Cut ic pow", 
+                value=1.0, 
+                step=0.1, 
+                help="用于调整CLIP的内部切割的边界大小。越高的`cut_ic_pow`值将使得切割变得更小，变得能生成更多的细节。要注意过高的`cut_ic_pow`值有可能失去整体图像的连贯性，可能出现马赛克的效果。(默认值 1.0|范围 0.5-100) ")
+
             eta = col2.number_input(
                 "DDIM 超参数 ETA",
                 value=0.8,
-                help="eta（希腊字母η）是一个diffusion模型的变量，它在每个时间步长(timestep)中混入随机量的比例噪声。0是没有噪音，1.0是更多的噪音。",
+                step=0.1,
+                help="eta（希腊字母η）是一个diffusion模型的变量，它在每个时间步长(timestep)中混入随机量的比例噪声。0是没有噪音，1.0是更多的噪音。(默认值 0.5|范围 0-1.0)",
             )
-            clamp_max = col2.number_input(
-                "梯度裁剪最大值 Clamp max", value=0.05, help="")
 
             use_augs = col2.checkbox(
                 "使用args",
@@ -963,6 +969,7 @@ with st.form(key="image_generation"):
                 sizey=height,
                 cutn=cutouts,
                 cutnbatches=cutout_batches,
+                cut_ic_pow=cut_ic_pow,
                 tvscale=tv_scale,
                 rangescale=range_scale,
                 guidancescale=guidance_scale,
@@ -982,7 +989,7 @@ with st.form(key="image_generation"):
                 denoised=False,
                 useaugs=use_augs,
                 secondarymodel=secondary_model,
-                clampmax=clamp_max,
+                clampmax=0.05,
                 dango=True,
                 # ddim=False,
                 sampling_mode=sampling_mode,

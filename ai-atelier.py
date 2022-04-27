@@ -528,7 +528,7 @@ with settings:
             cutouts = col1.number_input(
                 "Cutouts",
                 value=16,
-                help="How many cuts CLIP does to the image. More is good but except if you have Colab Pro, you'll probably get an error",
+                help="How many cuts CLIP, or snapshots that CLIP uses to evaluate your image while processing, does to the image. More is good but except if you have Colab Pro, you'll probably get an error.",
             )
             guidance_scale = col1.number_input(
                 "CLIP Guidance Scale",
@@ -565,12 +565,17 @@ with settings:
                 value=1,
                 help="How batches of cuts will be made to the image for CLIP to evaluate. The higher the value, the more batches, but your generation will take more time.",
             )
+            cut_ic_pow = col2.number_input(
+                "Cut ic pow", 
+                value=1.0, 
+                step=0.1, 
+                help="This sets the size of the border used for inner cuts. High cut_ic_pow values have larger borders, and therefore the cuts themselves will be smaller and provide finer details. If you have too many or too-small inner cuts, you may lose overall image coherency and/or it may cause an undesirable ‘mosaic’ effect. Low cut_ic_pow values will allow the inner cuts to be larger, helping image coherency while still helping with some details. (Default 1.0|Range 0.5-100)")
             eta = col2.number_input(
                 "ETA",
                 value=0.8,
+                step=0.1, 
                 help="eta (greek letter η) is a diffusion model variable that mixes in a random amount of scaled noise into each timestep. 0 is no noise, 1.0 is more noise.",
             )
-            clamp_max = col2.number_input("Clamp max", value=0.05, help="")
             use_augs = col2.checkbox(
                 "Use augs",
                 value=False,
@@ -924,6 +929,7 @@ with st.form(key="image_generation"):
                 sizey=height,
                 cutn=cutouts,
                 cutnbatches=cutout_batches,
+                cut_ic_pow=cut_ic_pow,
                 tvscale=tv_scale,
                 rangescale=range_scale,
                 guidancescale=guidance_scale,
@@ -943,7 +949,7 @@ with st.form(key="image_generation"):
                 denoised=False,
                 useaugs=use_augs,
                 secondarymodel=secondary_model,
-                clampmax=clamp_max,
+                clampmax=0.05,
                 dango=True,
                 # ddim=False,
                 sampling_mode=sampling_mode,
