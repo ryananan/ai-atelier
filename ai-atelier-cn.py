@@ -484,7 +484,7 @@ with settings:
             )
         )
         uploaded_file = st.file_uploader(
-            "上传你的图片并作为初始图像 (可选)",
+            "上传你的图片并作为初始参考图像 (可选)",
             type=["png", "jpg"],
             help="除了默认的随机图像，还可以选择上传一张你喜欢的图像开始你的创作。"
         )
