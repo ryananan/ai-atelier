@@ -484,7 +484,7 @@ with settings:
             )
         )
         uploaded_file = st.file_uploader(
-            "上传你的图片并作为初始图像 (可选)",
+            "上传你的图片并作为初始参考图像 (可选)",
             type=["png", "jpg"],
             help="除了默认的随机图像，还可以选择上传一张你喜欢的图像开始你的创作。"
         )
@@ -495,12 +495,12 @@ with settings:
                 value=1000,
             )
             skipseedtimesteps = col2.number_input(
-                "Skip timesteps - 允许图像与guided-diffusio的样本混合的timesteps",
+                "Skip timesteps - 允许图像与guided-diffusio的样本混合的时间步数timesteps",
                 value=150,
             )
             if num_steps <= skipseedtimesteps:
                 col2.error(
-                    "The number of steps has to be higher than the timesteps skipped"
+                    "总生成的时间步数不能少于上传图像与模型混合的时间步数"
                 )
         else:
             initscale = 1000
