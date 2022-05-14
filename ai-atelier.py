@@ -222,7 +222,7 @@ Q: Describe the most beautiful alien life in your mind
 A: A beautiful and ethereal alien life form that resembles a cross between a butterfly and a fairy. This being is delicate, graceful, and luminous, and seems to embody the beauty and mystery of the universe.
 '''
             stop = "Q: ", "A: "
-            temperature = 10
+            temperature = 1.0
 
             prompt = demonstrations + "\nQ: " + user_input+'\nA: '
 
