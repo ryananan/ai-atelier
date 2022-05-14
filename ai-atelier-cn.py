@@ -21,11 +21,11 @@ import webbrowser
 from kora.xattr import get_id
 import deepl
 
-from setup import textsynth_completion
-from setup import deeplSetup
+# from setup import textsynth_completion
+# from setup import deeplSetup
 # # For debug in mac
-# from setup_mac import textsynth_completion
-# from setup_mac import deeplSetup
+from setup_mac import textsynth_completion
+from setup_mac import deeplSetup
 
 translator = deeplSetup()
 
@@ -298,6 +298,31 @@ text_main()
 placeholder = st.empty()
 with placeholder.container():
     st.write(" ")
+
+
+
+def add_scene(scene_num):
+    with st.expander("场景"+scene_num+"参数设置"):
+        col1, col2 = st.columns([3,1])
+        steps_num_1 = col1.number_input(
+                    "场景一迭代次数",
+                    value=1,
+                    help="调整CLIP如何用评估图像特征提取量（cutout）的批(batches)数量。数值越高，细节往往越丰富，但你的生成时间也将更长。(默认值 4|范围 1-8) ",
+                )
+    if col1.button('🗑️ 删除'):
+            st.write(" ")
+    scene_num += 1
+    
+    return scene_num
+
+scene_dict = {"scene1":[],"scene2":[],"scene3":[]}
+if st.button("添加场景1"):
+    scene_dict['scene1']='ok'
+    if st.button('🗑️ 删除'):
+        st.write(" ")
+
+st.write(scene_dict)
+
 
 st.subheader('🎨 让AI画画 &nbsp; [文本生成图像]')
 page_names = ["[完成度更高] CLIP Guided Diffusion", "[更有创造力] VQGAN+CLIP"]
