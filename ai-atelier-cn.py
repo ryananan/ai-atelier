@@ -221,7 +221,7 @@ A: A beautiful and ethereal alien life form that resembles a cross between a but
 
             with st.spinner('生成回答中...'):
 
-                res = textsynth_completion( prompt, api_engine, max_tokens, top_k, top_p, stop, temperature)
+                res = textsynth_completion(prompt, api_engine, max_tokens, top_k, top_p, stop, temperature)
                 # st.write( prompt, api_engine, max_tokens, top_k, top_p, stop, temperature)
                 #"a"# print("\nQ: " + user_input + '\nA: ' + res)
 
@@ -322,7 +322,7 @@ else:
     init_seed = st.session_state.seed
 
 if "user_input_ch" not in st.session_state:
-    st.session_state.user_input_ch = "｜artstation上的趋势｜一个美丽而空灵的外星生命体，类似于蝴蝶和仙女之间的结合。这个生命体精致、优雅、光亮，似乎体现了宇宙的美丽和神秘。"
+    st.session_state.user_input_ch = "artstation｜一个美丽而空灵的外星生命体，类似于蝴蝶和仙女之间的结合。这个生命体精致、优雅、光亮，似乎体现了宇宙的美丽和神秘。"
 
 
 user_input_ch = st.text_input(
@@ -413,9 +413,9 @@ with enhancers:
 
         st.write("- 图像风格")
         Reference_Website = [
-            "artstation上的趋势",
-            "Flickr上的趋势",
-            "cgsociety上的趋势",
+            "artstation",
+            "Flickr",
+            "cgsociety",
             "8k分辨率",
             "虚幻引擎",
             "体积化照明",
