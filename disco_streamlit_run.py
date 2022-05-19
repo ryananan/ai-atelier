@@ -162,6 +162,7 @@ sys.stdout.flush()
 
 def video_generation(args, DefaultPaths,status,filename):
 
+    CN_version = args.CN_version
     how_many_frames=args.iterations
     intermediary_folder=args.frame_dir
     how_many_fps=args.how_many_fps
@@ -208,12 +209,18 @@ def video_generation(args, DefaultPaths,status,filename):
             j += 1
             time_past_seconds = time.perf_counter() - before_start_time
             iterations_per_second = j / time_past_seconds
+            second_per_iterations = time_past_seconds / j
             time_left = (total_frames - j) / iterations_per_second
             percentage = round((j / (total_frames + 1)) * 100-1)
             my_progress_bar.progress(percentage + 1)
-            my_iteration_counter.write(
-                f"{percentage}% {j}/{total_frames+1} [⚙️ Generating Video {time.strftime('%M:%S', time.gmtime(time_past_seconds))}<{time.strftime('%M:%S', time.gmtime(time_left))}, {round(iterations_per_second,2)} it/s]"
-                )
+            if CN_version:
+                my_iteration_counter.write(
+                    f"{percentage}% {j}/{total_frames+1} [🎬 生成视频中 {time.strftime('%M:%S', time.gmtime(time_past_seconds))}<{time.strftime('%M:%S', time.gmtime(time_left))}, {round(second_per_iterations,2)} 秒/迭代]" # Originally batchBar
+                    )
+            else:
+                my_iteration_counter.write(
+                    f"{percentage}% {j}/{total_frames+1} [🎬 Generating Video {time.strftime('%M:%S', time.gmtime(time_past_seconds))}<{time.strftime('%M:%S', time.gmtime(time_left))}, {round(second_per_iterations,2)} seconds/iterations]" # Originally batchBar
+                    )
         p.stdin.close()
         p.wait()
         print("🥳 Video generated 🥳")
@@ -225,11 +232,14 @@ def video_generation(args, DefaultPaths,status,filename):
         new_path = DefaultPaths.output_path+'/'+filename+'.mp4'
         shutil.move(old_path, new_path)
     except:
-        print("‼️ Video generation FAIL ‼️")
-        status.write("‼️ Video generation FAIL ‼️")
+        print("❌ Video generation FAIL ❌")
+        status.write("❌ Video generation FAIL ❌")
+        sys.error()
 
 
 def run_model(args2, status, stoutput, DefaultPaths):
+
+    CN_version = args2.CN_version
     
     generate_video = args2.generate_video
     how_many_fps = args2.how_many_fps
@@ -1278,13 +1288,18 @@ def run_model(args2, status, stoutput, DefaultPaths):
                         intermediateStep = False
                         j += 1
                         time_past_seconds = time.perf_counter() - before_start_time
-                        iterations_per_second = j / time_past_seconds
+                        iterations_per_second = j / time_past_seconds            
+                        second_per_iterations = time_past_seconds / j
                         time_left = (total_steps - j) / iterations_per_second
                         percentage = round((j / (total_steps + 1)) * 100)
-
-                        iteration_counter.write(
-                            f"{percentage}% {j}/{total_steps+1} [{time.strftime('%M:%S', time.gmtime(time_past_seconds))}<{time.strftime('%M:%S', time.gmtime(time_left))}, {round(iterations_per_second,2)} it/s]"
-                        )
+                        if CN_version:
+                            iteration_counter.write(
+                                f"{percentage}% {j}/{total_steps+1} [{time.strftime('%M:%S', time.gmtime(time_past_seconds))}<{time.strftime('%M:%S', time.gmtime(time_left))}, {round(second_per_iterations,2)} 秒/迭代]" # Originally batchBar
+                            )
+                        else:
+                            iteration_counter.write(
+                                f"{percentage}% {j}/{total_steps+1} [{time.strftime('%M:%S', time.gmtime(time_past_seconds))}<{time.strftime('%M:%S', time.gmtime(time_left))}, {round(second_per_iterations,2)} seconds/iterations]" # Originally batchBar
+                            )
                         progress_bar.progress(int(percentage))
 
                         if args.steps_per_checkpoint is not None:
@@ -2343,7 +2358,7 @@ def run_model(args2, status, stoutput, DefaultPaths):
 
     cut_overview = "[12]*400+[4]*600"  # @param {type: 'string'}
     cut_innercut = "[4]*400+[12]*600"  # @param {type: 'string'}
-    cut_ic_pow = 1  # @param {type: 'number'}
+    cut_ic_pow = args2.cut_ic_pow  # @param {type: 'number'}
     cut_icgray_p = "[0.2]*400+[0]*600"  # @param {type: 'string'}
 
     """###Prompts
@@ -2576,10 +2591,9 @@ def run_model(args2, status, stoutput, DefaultPaths):
             "turbo_mode": turbo_mode,
             "turbo_steps": turbo_steps,
         }
-        CH_version = args2.CH_version
-        if CH_version:
-            CH_prompt = args2.CH_prompt
-            setting_list.update({"中文关键词":CH_prompt})
+        if CN_version:
+            CN_prompt = args2.CN_prompt
+            setting_list.update({"中文关键词":CN_prompt})
         print('Settings:', setting_list)
         with open(
             f"{DefaultPaths.output_path}/{filename}_settings.txt", "w+"

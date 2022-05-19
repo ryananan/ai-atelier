@@ -19,7 +19,9 @@ import time
 import requests
 import webbrowser
 from kora.xattr import get_id
+
 from setup import textsynth_completion
+# For debug in mac
 # from setup_mac import textsynth_completion
 
 torch.cuda.empty_cache()
@@ -40,8 +42,15 @@ custom_css = """
 /*Generate your answers button*/
 .appview-container > section > div > div > div > div.css-1p05t8e.epcbefy1 > div:nth-child(1) > div > div > div > div > button{color: #B6A4FC}
 
-/*history link
-.appview-container > section > div > div > div > div.css-1p05t8e.epcbefy1 > div:nth-child(1) > div > div.css-ocqkz7.e1tzin5v0 > div.css-y5mkj7.e1tzin5v2 {color: rgb(209 209 209 / 75%); padding:0px; position:relative; top:4px}*/
+/*like button*/
+.appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div:nth-child(4){position: relative; left: 0px; top: 51.5px; margin: 0;}
+/*history button - the widget( > div > div > button ) is not moves along cause overlap bug*/
+.appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div:nth-child(5){position: relative; left: 90px;}
+
+
+/*like and history button text colour*/
+.appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div:nth-child(5) > div > div > button{color: rgb(209 209 209 / 100%)}
+.appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div:nth-child(4) > div > div > button{color: rgb(209 209 209 / 100%)}
 
 # .css-ffhzg2 div[data-testid="stExpander"]{background-color: rgb(14, 17, 23)}
 # .css-fg4pbf div[data-testid="stExpander"]{background-color: white}
@@ -70,8 +79,8 @@ custom_css = """
 
 /*Modify buttons for prompt enhancers*/
 /*OMG update div:nth-child(4) to 11*/
-.appview-container > section > div > div > div > div:nth-child(10) .streamlit-expanderContent div[data-testid="stVerticalBlock"] div:nth-child(2) > div {flex-direction: row !important;flex-wrap: wrap}
-.appview-container > section > div > div > div > div:nth-child(10) .streamlit-expanderContent div[data-testid="stVerticalBlock"] div:nth-child(2) > div div{width: auto !important}
+.appview-container > section > div > div > div > div:nth-child(11) .streamlit-expanderContent div[data-testid="stVerticalBlock"] div:nth-child(2) > div {flex-direction: row !important;flex-wrap: wrap}
+.appview-container > section > div > div > div > div:nth-child(11) .streamlit-expanderContent div[data-testid="stVerticalBlock"] div:nth-child(2) > div div{width: auto !important}
 
 /*Horizontal Radio - Image generation model*/
 div.row-widget.stRadio > div{flex-direction:row} div.row-widget.stRadio > div label {margin-right: .75em;} div.row-widget.stRadio > div label:last-child{margin-right: 0}
@@ -108,6 +117,7 @@ div[data-testid="stToolbar"] button{pointer-events: auto !important;filter: gray
 
 st.set_page_config(page_title=" AI Atelier", page_icon="🔮", layout="wide",)
 
+
 class DefaultPaths:
     root_path = f"."
     if not (path_exists(f"/content/drive/MyDrive/")):
@@ -116,7 +126,7 @@ class DefaultPaths:
         output_path = f"{root_path}/outputs"
     else:
         is_drive = True
-        drive_path = f"/content/drive/MyDrive/AI_Atelier"
+        drive_path = f"/content/drive/MyDrive/ai-atelier"
         model_path = f"{drive_path}/models"
         output_path = f"{drive_path}/outputs"
 
@@ -125,7 +135,7 @@ initial_load = st.empty()
 initial_load.empty()
 
 st.write(
-    "<h2> AI Atelier 🔮&nbsp;🎯 <small> &nbsp; ai animation toolkit by Muhan Xu &nbsp;<a href='http://www.aiiiii.com/' target='_blank'>Aiiiii</a></small> </h2>",
+    "<h2> AI Atelier 🔮🎯 <small> &nbsp; ai animation toolkit by Muhan Xu &nbsp;<a href='http://www.aiiiii.com/' target='_blank'>Aiiiii</a></small> </h2>",
     unsafe_allow_html=True,
 )
 st.subheader('💬 Ask AI &nbsp; [text-to-text]')
@@ -146,7 +156,7 @@ def add_heart_item():
 
 def open_history_log():
     from kora.xattr import get_id
-    
+
     if DefaultPaths.is_drive:
         output_folder = f"{DefaultPaths.drive_path}/text_history"
         if not path_exists(output_folder):
@@ -155,7 +165,6 @@ def open_history_log():
         url = 'https://drive.google.com/drive/folders/'+fid
         print("Url: "+url)
         webbrowser.open_new_tab(url)
-
 
 def text_main():
     user_input = st.text_input(
@@ -213,7 +222,7 @@ Q: Describe the most beautiful alien life in your mind
 A: A beautiful and ethereal alien life form that resembles a cross between a butterfly and a fairy. This being is delicate, graceful, and luminous, and seems to embody the beauty and mystery of the universe.
 '''
             stop = "Q: ", "A: "
-            temperature = 10
+            temperature = 1.0
 
             prompt = demonstrations + "\nQ: " + user_input+'\nA: '
 
@@ -249,25 +258,28 @@ A: A beautiful and ethereal alien life form that resembles a cross between a but
                     f.write(file_content)
                     print(dt_string + " log save")
 
-                    col1, col2 = st.columns([.072,1])
-                    with col1:
-                        heart_button = st.form_submit_button(label="💗 Like", on_click=add_heart_item)
-                    with col2:
-                        url = 'https://drive.google.com/drive/folders/'+fid
-                        print("url: "+url)
+                    heart_button = st.form_submit_button(
+                        label="💗 Like", on_click=add_heart_item)
 
-                        from bokeh.models.widgets import Div
-                        if st.form_submit_button('📜 History'):
-                            js = "window.open('" + url + "')"  # New tab or window
-                            print(js)
-                            html = '<img src onerror="{}">'.format(js)
-                            div = Div(text=html)
-                            st.bokeh_chart(div)
+                    url = 'https://drive.google.com/drive/folders/'+fid
+                    print("url: "+url)
+
+                    from bokeh.models.widgets import Div
+                    if st.form_submit_button('📜 History'):
+                        # New tab
+                        js = "window.open('" + url + "')"
+                        print(js)
+                        html = '<img src onerror="{}">'.format(js)
+                        div = Div(text=html)
+                        st.bokeh_chart(div)
 
                         # st.write(
                         #     f'<div class="bottom-line"><div class="row-widget stButton"><a kind="primary" class="css-1q8dd3e edgvbvh1" href="https://drive.google.com/drive/folders/{fid}" target="_blank">History</a></div>',
                         #     unsafe_allow_html=True,
                         # )
+                    
+
+
 
 
 text_main()
@@ -275,15 +287,15 @@ text_main()
 
 placeholder = st.empty()
 with placeholder.container():
-     st.write(" ")
+    st.write(" ")
 
 st.subheader('🎨 Let AI draw &nbsp; [text-to-image]')
 page_names = ["[Coherent] CLIP Guided Diffusion", "[Artistic] VQGAN+CLIP"]
 
 if "width" not in st.session_state:
-    st.session_state["width"] = 448
+    st.session_state["width"] = 576
 if "height" not in st.session_state:
-    st.session_state["height"] = 256
+    st.session_state["height"] = 320
 if "seed" not in st.session_state:
     init_seed = int(random.randint(0, 2147483647))
     st.session_state.seed = init_seed
@@ -291,7 +303,7 @@ else:
     init_seed = st.session_state.seed
 
 if "user_input" not in st.session_state:
-    st.session_state.user_input = "the omega point, self-assembling transcendent object at the end of time."
+    st.session_state.user_input = "A beautiful painting of a bizarre lighthouse by greg rutkowski and thomas kinkade shines its light on a sea of turbulent blood｜Trends on artstation｜Cyberpunk colour schemes"
 user_input = st.text_input(
     "A text prompt summarized by AI's answer to generate your image",
     st.session_state.user_input,
@@ -321,7 +333,13 @@ def dimensions_compatibility(type, after):
 enhancers = st.expander("Prompt enhancers (optional)")
 with enhancers:
     st.write(
-        "Adding enhancers to your prompts can produce very different results to the generated images, the few below are some examples that can produce interesting results. <a href='https://matthewmcateer.me/blog/clip-prompt-engineering/'>Here</a> you can learn more about Prompt Engineering",
+        '''Adding enhancers to your prompts can produce very different results to the generated images, the few below are some examples that can produce interesting results. </br>
+        You can learn more about Prompt Engineering from the following links.
+        <a href='https://matthewmcateer.me/blog/clip-prompt-engineering/'>1</a> /
+        <a href='https://peakd.com/@kaliyuga/model-comparison-study-for-disco-diffusion-v-5-ai-resources-by-kaliyuga'>2</a> /
+        <a href='https://docs.google.com/spreadsheets/d/1P9fM68jKeA1IH45i_qXINu2QhIcmCJXQSdLTxRI23oE/edit#gid=0'>3</a> /
+        <a href='https://weirdwonderfulai.art/resources/disco-diffusion-70-plus-artist-studies/'>4</a> /
+        <a href='https://weirdwonderfulai.art/resources/disco-diffusion-modifiers/'>5</a> ''',
         unsafe_allow_html=True,
     )
     with st.container():
@@ -510,7 +528,7 @@ with settings:
             cutouts = col1.number_input(
                 "Cutouts",
                 value=16,
-                help="How many cuts CLIP does to the image. More is good but except if you have Colab Pro, you'll probably get an error",
+                help="How many cuts CLIP, or snapshots that CLIP uses to evaluate your image while processing, does to the image. More is good but except if you have Colab Pro, you'll probably get an error.",
             )
             guidance_scale = col1.number_input(
                 "CLIP Guidance Scale",
@@ -547,12 +565,17 @@ with settings:
                 value=1,
                 help="How batches of cuts will be made to the image for CLIP to evaluate. The higher the value, the more batches, but your generation will take more time.",
             )
+            cut_ic_pow = col2.number_input(
+                "Cut ic pow", 
+                value=1.0, 
+                step=0.1, 
+                help="This sets the size of the border used for inner cuts. High cut_ic_pow values have larger borders, and therefore the cuts themselves will be smaller and provide finer details. If you have too many or too-small inner cuts, you may lose overall image coherency and/or it may cause an undesirable ‘mosaic’ effect. Low cut_ic_pow values will allow the inner cuts to be larger, helping image coherency while still helping with some details. (Default 1.0|Range 0.5-100)")
             eta = col2.number_input(
                 "ETA",
                 value=0.8,
+                step=0.1, 
                 help="eta (greek letter η) is a diffusion model variable that mixes in a random amount of scaled noise into each timestep. 0 is no noise, 1.0 is more noise.",
             )
-            clamp_max = col2.number_input("Clamp max", value=0.05, help="")
             use_augs = col2.checkbox(
                 "Use augs",
                 value=False,
@@ -581,7 +604,7 @@ with settings:
         width = int(
             col2.number_input(
                 "width",
-                value=426,
+                value=640,
                 max_value=None,
                 step=1,
                 help="Width of the generated image. If you don't have Colab Pro probably don't go higher than 512px",
@@ -590,7 +613,7 @@ with settings:
         height = int(
             col3.number_input(
                 "height",
-                value=240,
+                value=360,
                 max_value=None,
                 step=1,
                 help="Height of the generated image. If you don't have Colab Pro probably don't go higher than 512px",
@@ -708,7 +731,6 @@ with settings:
             )
 
 
-
 with gensettings:
     intermediary_frames = st.checkbox("Save intermediary frames", value=False)
     if intermediary_frames:
@@ -792,10 +814,14 @@ with st.form(key="image_generation"):
             if os.listdir(output_folder):
                 files_path = os.path.join(output_folder, "*.png")
                 files = sorted(glob.iglob(files_path),
-                            key=os.path.getctime, reverse=True)
-                gallery_text_area.write("Welcome back! Your last creation:")
-                gallery_image_area.image(Image.open(files[0]))
-                url='https://drive.google.com/drive/folders/'+fid
+                               key=os.path.getctime, reverse=True)
+                try:
+                    gallery_text_area.write("Your last creation:")
+                    gallery_image_area.image(Image.open(files[0]))
+                except:
+                    gallery_text_area = st.empty()
+                    gallery_image_area = st.empty()
+                url = 'https://drive.google.com/drive/folders/'+fid
                 from bokeh.models.widgets import Div
                 if st.form_submit_button('View your gallery on Google Drive'):
                     js = "window.open('" + url + "')"  # New tab or window
@@ -814,7 +840,8 @@ with st.form(key="image_generation"):
                 # <small>We <b>do not collect prompts or results</b>. Your creations don\'t belong to MindsEye. Read our <a href="https://multimodal.art/mindseye#f-a-q" target="_blank">FAQ</a>.<br>Feel free to reference #MindsEye and tag <a href="https://multimodal.art/multimodalart" target="_blank">@multimodalart</a> when sharing your creations if you wish</small></div>',
                 unsafe_allow_html=True,
             )
-        st.write("Right-click to download your generated images and videos directly from Google Drive")
+        st.write(
+            "Right-click to download your generated images and videos directly from Google Drive")
         if os.path.exists("progress.png"):
             gallery_text_area.write("Your last creation:")
             gallery_image_area.image(Image.open("progress.png"))
@@ -858,7 +885,8 @@ with st.form(key="image_generation"):
             image_path = uploaded_file.name
         else:
             image_path = None
-        intermediary_folder,video_frame_folder, update_every = intermediary_frame_setup(seed)
+        intermediary_folder, video_frame_folder, update_every = intermediary_frame_setup(
+            seed)
 
         if page == "[Artistic] VQGAN+CLIP":
             args = argparse.Namespace(
@@ -888,8 +916,8 @@ with st.form(key="image_generation"):
                 how_many_frames=how_many_frames,
                 generate_video=generate_video,
                 video_frame_folder=video_frame_folder,
-                CH_version = False,
-                CH_prompt = ""
+                CN_version=False,
+                CN_prompt=""
             )
         elif page == "[Coherent] CLIP Guided Diffusion":
             args = argparse.Namespace(
@@ -901,6 +929,7 @@ with st.form(key="image_generation"):
                 sizey=height,
                 cutn=cutouts,
                 cutnbatches=cutout_batches,
+                cut_ic_pow=cut_ic_pow,
                 tvscale=tv_scale,
                 rangescale=range_scale,
                 guidancescale=guidance_scale,
@@ -920,7 +949,7 @@ with st.form(key="image_generation"):
                 denoised=False,
                 useaugs=use_augs,
                 secondarymodel=secondary_model,
-                clampmax=clamp_max,
+                clampmax=0.05,
                 dango=True,
                 # ddim=False,
                 sampling_mode=sampling_mode,
@@ -957,14 +986,14 @@ with st.form(key="image_generation"):
                 how_many_frames=how_many_frames,
                 generate_video=generate_video,
                 video_frame_folder=video_frame_folder,
-                CH_version = False,
-                CH_prompt = ""
+                CN_version=False,
+                CN_prompt=""
             )
         try:
             if (how_many_runs) > 1:
                 if batch_folder:
                     DefaultPaths.output_path = f"{DefaultPaths.output_path}/{batch_folder}"
-                    intermediary_folder,video_frame_folder, update_every = intermediary_frame_setup(
+                    intermediary_folder, video_frame_folder, update_every = intermediary_frame_setup(
                         args.seed)
             for i in range(how_many_runs):
                 if how_many_runs > 1:
@@ -973,7 +1002,7 @@ with st.form(key="image_generation"):
                 if i > 0:
                     if randomize_seed:
                         args.seed = random.randint(0, 2147483647)
-                    intermediary_folder,video_frame_folder, update_every = intermediary_frame_setup(
+                    intermediary_folder, video_frame_folder, update_every = intermediary_frame_setup(
                         args.seed)
                     args.frame_dir = intermediary_folder
                 run_internal(args, status, col_output2, gray_during_execution)
@@ -992,13 +1021,12 @@ with st.form(key="image_generation"):
         st.session_state.seed = init_seed
         meta_status.empty()
         st.experimental_rerun()
-        
+
 footer = """
 <div class="footer">
 <p>AI Atelier beta by Muhan Xu <b><a href='http://www.aiiiii.com/' target='_blank'>Aiiiii</a></b><br>
 <small><p>This would not be possible without the brilliant work of MindsEye beta develop by <a href='https://twitter.com/multimodalart' target='_blank'>@multimodalart</a> and gpt-j-api by <a href='https://github.com/vicgalle' target='_blank'>Víctor Gallego.</a><br>
-<a href="https://colab.research.google.com/github/alembics/disco-diffusion/blob/main/Disco_Diffusion.ipynb" target="_blank">Disco Diffusion v5</a> model by <a href="https://twitter.com/somnai_dreams" target="_blank">@somnai_dreams</a> and <a href="https://twitter.com/gandamu" target="_blank">@gandamu</a>, based on the foundational work of <a href="https://twitter.com/RiversHaveWings">@RiversHaveWings</a>, with modifications by <a href="https://twitter.com/danielrussruss" target="_blank">@danielrussruss</a>, <a href="https://github.com/Dango233" target="_blank">Dango233</a>, <a href="https://twitter.com/chigozienri">Chigozie Nri</a>, <a href="https://twitter.com/softologyComAu" target="_blank">@softologyComAu</a> and others.<br><a href="https://colab.research.google.com/drive/1N4UNSbtNMd31N_gAT9rAm8ZzPh62Y5ud" target="_blank">Hypertron v2</a> VQGAN model by <a href="https://github.com/Philipuss1" target="_blank">Philipuss</a> adapted from <a href="https://twitter.com/RiversHaveWings">@RiversHaveWings</a> with modifications by <a href="https://twitter.com/jbusted1">@jbusted1</a>, <a href="https://twitter.com/softologyComAu" target="_blank">@softologyComAu</a> and others. Original GAN+CLIP by <a href="https://twitter.com/advadnoun">@advadnoun</a>. <a href="https://github.com/openai/CLIP" target="_blank">CLIP</a> and <a href="https://github.com/openai/guided-diffusion" target="_blank">Guided Diffusion</a> were originally released by <a href="https://openai.com" target="_blank">OpenAI</a>. <a href="https://github.com/CompVis/taming-transformers" target="_blank">VQGAN</a> was released by <a href="https://github.com/CompVis" target="_blank">CompVis Heidelberg.</a><br>
-API access to large language models by <a href="https://textsynth.com/" target="_blank">TextSynth.</a></small><br>
+<a href="https://colab.research.google.com/github/alembics/disco-diffusion/blob/main/Disco_Diffusion.ipynb" target="_blank">Disco Diffusion v5</a> model by <a href="https://twitter.com/somnai_dreams" target="_blank">@somnai_dreams</a> and <a href="https://twitter.com/gandamu" target="_blank">@gandamu</a>, based on the foundational work of <a href="https://twitter.com/RiversHaveWings">@RiversHaveWings</a>, with modifications by <a href="https://twitter.com/danielrussruss" target="_blank">@danielrussruss</a>, <a href="https://github.com/Dango233" target="_blank">Dango233</a>, <a href="https://twitter.com/chigozienri">Chigozie Nri</a>, <a href="https://twitter.com/softologyComAu" target="_blank">@softologyComAu</a> and others.<a href="https://colab.research.google.com/drive/1N4UNSbtNMd31N_gAT9rAm8ZzPh62Y5ud" target="_blank">Hypertron v2</a> VQGAN model by <a href="https://github.com/Philipuss1" target="_blank">Philipuss</a> adapted from <a href="https://twitter.com/RiversHaveWings">@RiversHaveWings</a> with modifications by <a href="https://twitter.com/jbusted1">@jbusted1</a>, <a href="https://twitter.com/softologyComAu" target="_blank">@softologyComAu</a> and others. Original GAN+CLIP by <a href="https://twitter.com/advadnoun">@advadnoun</a>. <a href="https://github.com/openai/CLIP" target="_blank">CLIP</a> and <a href="https://github.com/openai/guided-diffusion" target="_blank">Guided Diffusion</a> were originally released by <a href="https://openai.com" target="_blank">OpenAI</a>. <a href="https://github.com/CompVis/taming-transformers" target="_blank">VQGAN</a> was released by <a href="https://github.com/CompVis" target="_blank">CompVis Heidelberg.</a>API access to large language models by <a href="https://textsynth.com/" target="_blank">TextSynth.</a></small><br>
 	<small><small>application made with <a href="https://streamlit.io" target="_blank">streamlit</a></small></small>
 </div>
 """
