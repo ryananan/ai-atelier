@@ -21,7 +21,7 @@ import webbrowser
 from kora.xattr import get_id
 
 from setup import textsynth_completion
-# For debug in mac
+# To debug on mac
 # from setup_mac import textsynth_completion
 
 torch.cuda.empty_cache()
@@ -279,11 +279,7 @@ A: A beautiful and ethereal alien life form that resembles a cross between a but
                         # )
                     
 
-
-
-
 text_main()
-
 
 placeholder = st.empty()
 with placeholder.container():
