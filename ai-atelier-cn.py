@@ -61,35 +61,12 @@ custom_css = """
 .appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div:nth-child(6) > div > div > button{color: rgb(209 209 209 / 100%)}
 .appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div:nth-child(5) > div > div > button{color: rgb(209 209 209 / 100%)}
 
-# .css-ffhzg2 div[data-testid="stExpander"]{background-color: rgb(14, 17, 23)}
-# .css-fg4pbf div[data-testid="stExpander"]{background-color: white}
-# .appview-container > section > div > div{min-height: 80vh;}
-# .appview-container > section > div > div > div > div:nth-child(1){order:1}
-# .appview-container > section > div > div > div > div:nth-child(2){order:2}
-# .appview-container > section > div > div > div > div:nth-child(3){order:3}
-# .appview-container > section > div > div > div > div:nth-child(4){order:4}
-# .appview-container > section > div > div > div > div:nth-child(5){order:5}
-# .appview-container > section > div > div > div > div:nth-child(6){order:7}
-# .appview-container > section > div > div > div > div:nth-child(7){order:6}
-# .appview-container > section > div > div > div > div:nth-child(6) > div:nth-child(2) div[data-testid="stExpander"]{position: absolute;width: 100%;z-index: 999;}
-# /*.appview-container > section > div > div > div > div:nth-child(7) a {color: #777}*/
-# .appview-container > section > div > div > div > div:nth-child(8){order:8}
-# .appview-container > section > div > div > div > div:nth-child(9){order:9}
-# .appview-container > section > div > div > div > div:nth-child(9) div[data-testid="stExpander"]{position: absolute; width: 80%;z-index: 999}
-# .appview-container > section > div > div > div > div:nth-child(10){order:10}
-# .appview-container > section > div > div > div > div:nth-child(10) div[data-testid="stVerticalBlock"]{height: 512px}
-# .appview-container > section > div > div > div > div:nth-child(11){order:11}
-# .appview-container > section > div > div > div > div:nth-child(12){order:12}
-# .appview-container > section > div > div > div > div:nth-child(13){order:13}
-# .appview-container > section > div > div > div > div:nth-child(14){order:14}
-# .appview-container > section > div > div > div > div:nth-child(15){order:15}
-# .appview-container > section > div > div > div > div:nth-child(16){order:16}
 .streamlit-expanderHeader {opacity: 0.8}
 
 /*Modify buttons for prompt enhancers*/
 /*OMG update div:nth-child(4) to 11*/
-.appview-container > section > div > div > div > div:nth-child(11) .streamlit-expanderContent div[data-testid="stVerticalBlock"] div:nth-child(2) > div {flex-direction: row !important;flex-wrap: wrap}
-.appview-container > section > div > div > div > div:nth-child(11) .streamlit-expanderContent div[data-testid="stVerticalBlock"] div:nth-child(2) > div div{width: auto !important}
+.appview-container > section > div > div > div > div:nth-child(10) .streamlit-expanderContent div[data-testid="stVerticalBlock"] div:nth-child(2) > div {flex-direction: row !important;flex-wrap: wrap}
+.appview-container > section > div > div > div > div:nth-child(10) .streamlit-expanderContent div[data-testid="stVerticalBlock"] div:nth-child(2) > div div{width: auto !important}
 
 /*Horizontal Radio - Image generation model*/
 div.row-widget.stRadio > div{flex-direction:row} div.row-widget.stRadio > div label {margin-right: .75em;} div.row-widget.stRadio > div label:last-child{margin-right: 0}
@@ -125,7 +102,7 @@ div[data-testid="stToolbar"] button{pointer-events: auto !important;filter: gray
 """
 
 
-st.set_page_config(page_title="AI聊天画室", page_icon="🔮", layout="wide",)
+st.set_page_config(page_title="AI Alien Beta 中文版", page_icon="🛸", layout="wide",)
 
 
 class DefaultPaths:
@@ -145,10 +122,10 @@ initial_load = st.empty()
 initial_load.empty()
 
 st.write(
-    "<h2> AI聊天画室 🔮🎯<small> &nbsp; ai animation toolkit by Muhan Xu &nbsp;<a href='http://www.aiiiii.com/' target='_blank'>Aiiiii</a></small> </h2>",
+    "<h2> AI Alien beta 🤖 👾<small> &nbsp; AI动画工具 by Muhan Xu </h2>",
     unsafe_allow_html=True,
 )
-st.subheader('💬 问问AI&nbsp; [文本生成文本]')
+st.subheader('💬 与AI聊聊外星人&nbsp; [文本生成文本]')
 
 
 def add_heart_item():
@@ -179,26 +156,30 @@ def open_history_log():
 
 def text_main():
     user_input_ch = st.text_input(
-        "与AI聊天，找找灵感", value="你记忆中最美的场景长什么样呢？", max_chars=250
+        "与AI聊聊天，引导AI说出它们对外星人的想象", value="", placeholder="你觉得最美丽的外星人长什么样呢？", max_chars=250
     )
+    
+    # set default value with empty input
+    if(user_input_ch == ""):
+        user_input_ch = "你觉得最美丽的外星人长什么样呢？"
 
     with st.expander("参数设置 (可选)"):
         col1, col2, col3, col4 = st.columns(4)
         with col1:
             api_engine = st.selectbox(
                 '选择一个语言模型',
-                ('gptj_6B', 'gptneox_20B'),
+                ('gptneox_20B','gptj_6B'),
                 help="`GPT-J-6B` 有60亿个参数的英语语言模型。  \n `GPT-NeoX-20B` 有200亿个参数，是最大的公开可用的英语语言模型。")
         with col2:
             length = st.slider(
                 "生成的字数上限",
                 1,
-                512,
-                250,
+                1000,
+                500,
                 10,
                 help="AI生成的回答的字数上限"
             )
-            max_tokens = int(round(length / 4))
+            max_tokens = int(round(length / 4))+150
         with col3:
             top_p = st.slider(
                 "Top_p",
@@ -224,13 +205,13 @@ def text_main():
             user_input = str(translator.translate_text(
                 user_input_ch, target_lang="EN-GB"))
             demonstrations = '''
-Q: Describe the most beautiful alien life in your mind
+Q: What do you think the most beautiful aliens look like?
 A: The most beautiful alien life in my mind is a gentle and peaceful race of creatures that live in the stars. They are incredibly graceful, and their beauty is breathtaking. They are always happy and enjoy spending time with others of their kind. They are the perfect representation of peace and harmony in the universe.
 
-Q: Describe the most beautiful alien life in your mind
+Q: What do you think the most beautiful aliens look like?
 A: To me, the most beautiful alien life would be something completely different from anything we know. It would be awe-inspiring and mysterious, something that would make us question our place in the universe.
 
-Q: Describe the most beautiful alien life in your mind
+Q: What do you think the most beautiful aliens look like?
 A: A beautiful and ethereal alien life form that resembles a cross between a butterfly and a fairy. This being is delicate, graceful, and luminous, and seems to embody the beauty and mystery of the universe.
 '''
             stop = "Q: ", "A: "
@@ -241,6 +222,7 @@ A: A beautiful and ethereal alien life form that resembles a cross between a but
             with st.spinner('生成回答中...'):
 
                 res = textsynth_completion( prompt, api_engine, max_tokens, top_k, top_p, stop, temperature)
+                # st.write( prompt, api_engine, max_tokens, top_k, top_p, stop, temperature)
                 #"a"# print("\nQ: " + user_input + '\nA: ' + res)
 
                 # st.balloons()
@@ -326,7 +308,7 @@ with placeholder.container():
 
 
 
-st.subheader('🎨 让AI画画 &nbsp; [文本生成图像]')
+st.subheader('🎨 让AI画出外星人 &nbsp; [文本生成图像]')
 page_names = ["[完成度更高] CLIP Guided Diffusion", "[更有创造力] VQGAN+CLIP"]
 
 if "width" not in st.session_state:
@@ -340,21 +322,22 @@ else:
     init_seed = st.session_state.seed
 
 if "user_input_ch" not in st.session_state:
-    st.session_state.user_input_ch = "一幅由greg rutkowski和thomas kinkade创作的奇异灯塔的美丽画作，将其光芒照耀在一片动荡的血海中｜artstation上的趋势｜赛博朋克色彩方案"
+    st.session_state.user_input_ch = "｜artstation上的趋势｜一个美丽而空灵的外星生命体，类似于蝴蝶和仙女之间的结合。这个生命体精致、优雅、光亮，似乎体现了宇宙的美丽和神秘。"
 
 
 user_input_ch = st.text_input(
-    "总结AI的回复，输入你喜欢的具有特征性的[词组]来生成图像",
+    "总结AI的回复来生成图像，尝试添加一些具有视觉特征的词组",
     st.session_state.user_input_ch,
     help=" AI会根据你输入的描述词组（prompt）将文本信息变成图像信息，把你用文字描述的画面`画`出来。如果你想要组合不同的词组，可以通过使用`｜`将他们分开。比如说`太阳｜月亮`它将尝试利用这两个词组来生成图像。如果你希望它们的权重不同，你可以使用`:`，语法如下`太阳:1|月亮:2`，这里`月亮`的权重是`太阳`的2倍。", max_chars=200
 )
+
 # user_input = str(translator.translate_text(user_input_ch, target_lang="EN-GB"))
 # st.write(user_input)
 
 
-def add_to_prompt(text):
+def add_to_prompt(prompt_engineer):
     global user_input_ch
-    st.session_state.user_input_ch = user_input_ch + " " + text
+    st.session_state.user_input_ch = user_input_ch + " " + prompt_engineer
 
 
 def dimensions_compatibility(type, after):
@@ -1091,7 +1074,7 @@ with st.form(key="image_generation"):
 
 footer = """
 <div class="footer">
-<p>AI 聊天画室 beta by Muhan Xu <b><a href='http://www.aiiiii.com/' target='_blank'>Aiiiii</a></b><br>
+<p>AI Alien beta 🤖 👾 by Muhan Xu <br>
 <small><p>感谢<a href='https://twitter.com/multimodalart' target='_blank'>@multimodalart</a>的MindsEye beta 与 <a href='https://github.com/vicgalle' target='_blank'>Víctor Gallego</a>的gpt-j-api的开创性作品，本软件才能得以实现。<br>
 <a href="https://colab.research.google.com/github/alembics/disco-diffusion/blob/main/Disco_Diffusion.ipynb" target="_blank">Disco Diffusion v5</a>模型由<a href="https://twitter.com/somnai_dreams" target="_blank">@somnai_dreams</a>与<a href="https://twitter.com/gandamu" target="_blank">@gandamu</a>所开发。基于<a href="https://twitter.com/RiversHaveWings">@RiversHaveWings</a>开创性的基础工作，以及<a href="https://twitter.com/danielrussruss" target="_blank">@danielrussruss</a>，<a href="https://github.com/Dango233" target="_blank">Dango233</a>，<a href="https://twitter.com/chigozienri">Chigozie Nri</a>，<a href="https://twitter.com/softologyComAu" target="_blank">@softologyComAu</a>等其他人对其进一步的优化。参数的中文翻译基于<a href="https://github.com/Vultur">Vultur</a>。<a href="https://colab.research.google.com/drive/1N4UNSbtNMd31N_gAT9rAm8ZzPh62Y5ud" target="_blank">Hypertron v2</a>VQGAN 模型由<a href="https://github.com/Philipuss1" target="_blank">Philipuss</a>改编自<a href="https://twitter.com/RiversHaveWings">@RiversHaveWings</a>， 并由<a href="https://twitter.com/jbusted1">@jbusted1</a>和<a href="https://twitter.com/softologyComAu" target="_blank">@softologyComAu</a>等其他人进一步修改。 原始GAN+CLIP由<a href="https://twitter.com/advadnoun">@advadnoun</a>所提供。<a href="https://github.com/openai/CLIP" target="_blank">CLIP</a>和<a href="https://github.com/openai/guided-diffusion" target="_blank">Guided Diffusion</a>最初由<a href="https://openai.com" target="_blank">OpenAI</a>发布。<a href="https://github.com/CompVis/taming-transformers" target="_blank">VQGAN</a>则是由<a href="https://github.com/CompVis" target="_blank">CompVis Heidelberg</a>发布的。对大型语言模型的API访问由<a href="https://textsynth.com/" target="_blank">TextSynth</a>提供。翻译技术来自<a href="https://www.deepl.com" target="_blank">DeepL</a>。</small><br>
 
