@@ -322,7 +322,7 @@ else:
     init_seed = st.session_state.seed
 
 if "user_input_ch" not in st.session_state:
-    st.session_state.user_input_ch = "artstation｜一个美丽而空灵的外星生命体，类似于蝴蝶和仙女之间的结合。这个生命体精致、优雅、光亮，似乎体现了宇宙的美丽和神秘。"
+    st.session_state.user_input_ch = "一个美丽而空灵的外星生命形式，类似于蝴蝶和仙女的结合。精致、优雅和光亮，这种生命形式似乎体现了宇宙的美丽和神秘。 作者：krenz，artstation，高度细致的哑光绘画，明亮的色彩方案 "
 
 
 user_input_ch = st.text_input(
@@ -632,7 +632,7 @@ with settings:
         width = int(
             col2.number_input(
                 "图像宽度",
-                value=640,
+                value=832,
                 max_value=None,
                 step=1,
                 help="生成图像的宽度。默认为16:9。如果你有订阅Colab Pro，你可以尝试更高的数值。",
@@ -641,7 +641,7 @@ with settings:
         height = int(
             col3.number_input(
                 "图像高度",
-                value=360,
+                value=448,
                 max_value=None,
                 step=1,
                 help="生成图像的高度。默认为16:9。如果你有订阅Colab Pro，你可以尝试更高的数值",
