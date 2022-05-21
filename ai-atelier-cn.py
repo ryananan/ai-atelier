@@ -370,10 +370,10 @@ with enhancers:
 
         st.write("-  艺术家")
         Artists = [
-            "Van Gogh 著",
-            "Dan Mumford 著",
-            "Thomas Kinkade 著",
-            "James Gurney 著"
+            ", Van Gogh 著",
+            ", Dan Mumford 著",
+            ", Thomas Kinkade 著",
+            ", James Gurney 著"
         ]
         for enhancer in Artists:
             st.button(enhancer, on_click=add_to_prompt,
@@ -381,14 +381,14 @@ with enhancers:
 
         st.write("- 材质")
         Material_Type = [
-            "｜由云朵制成的",
-            "｜由花制成的",
-            "｜由泡沫制成的",
-            "｜由城市制成的",
-            "｜水晶制成的",
-            "｜大理石雕塑制成的",
-            "｜由液态金属制成的",
-            "｜由雾气制成的"
+            ", 由云朵制成的",
+            ", 由花制成的",
+            ", 由泡沫制成的",
+            ", 由城市制成的",
+            ", 水晶制成的",
+            ", 大理石雕塑制成的",
+            ", 由液态金属制成的",
+            ", 由雾气制成的"
         ]
         for enhancer in Material_Type:
             st.button(enhancer, on_click=add_to_prompt,
@@ -396,16 +396,16 @@ with enhancers:
 
         st.write("- 绘画风格")
         Painting_Style = [
-            "｜水彩画",
-            "｜布面油画",
-            "｜铅笔素描",
-            "｜儿童画",
-            "｜文艺复兴时期的绘画风格",
-            "｜动漫风格",
-            "｜浮世绘风格",
-            "｜中国水彩画风格",
-            "｜波斯微型画",
-            "｜苏联宣传画风格"
+            ", 水彩画",
+            ", 布面油画",
+            ", 铅笔素描",
+            ", 儿童画",
+            ", 文艺复兴时期的绘画风格",
+            ", 动漫风格",
+            ", 浮世绘风格",
+            ", 中国水彩画风格",
+            ", 波斯微型画",
+            ", 苏联宣传画风格"
         ]
         for enhancer in Painting_Style:
             st.button(enhancer, on_click=add_to_prompt,
@@ -413,17 +413,17 @@ with enhancers:
 
         st.write("- 图像风格")
         Reference_Website = [
-            "artstation",
-            "Flickr",
-            "cgsociety",
-            "8k分辨率",
-            "虚幻引擎",
-            "体积化照明",
-            "几何学",
-            "1995",
-            "镜头眩光",
-            "高质量",
-            "一个抽象的雕塑"
+            ", artstation",
+            ", Flickr",
+            ", cgsociety",
+            ", 8k分辨率",
+            ", 虚幻引擎",
+            ", 体积化照明",
+            ", 几何学",
+            ", 1995",
+            ", 镜头眩光",
+            ", 高质量",
+            ", 一个抽象的雕塑"
         ]
         for enhancer in Reference_Website:
             st.button(enhancer, on_click=add_to_prompt,
@@ -431,11 +431,11 @@ with enhancers:
 
         st.write("- 艺术流派")
         Art_Movement = [
-            "以超现实主义风格",
-            "极简主义风格",
-            "立体主义风格",
-            "未来主义风格",
-            "故障艺术(glitch art)风格"
+            ", 以超现实主义风格",
+            ", 极简主义风格",
+            ", 立体主义风格",
+            ", 未来主义风格",
+            ", 故障艺术(glitch art)风格"
         ]
         for enhancer in Art_Movement:
             st.button(enhancer, on_click=add_to_prompt,
