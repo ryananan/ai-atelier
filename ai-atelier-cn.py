@@ -373,6 +373,8 @@ with enhancers:
             ", Van Gogh 著",
             ", Dan Mumford 著",
             ", Thomas Kinkade 著",
+            ", Kenz 著",
+            ", Beeple 著",
             ", James Gurney 著"
         ]
         for enhancer in Artists:
