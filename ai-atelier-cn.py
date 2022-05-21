@@ -634,7 +634,7 @@ with settings:
         width = int(
             col2.number_input(
                 "图像宽度",
-                value=1280,
+                value=640,
                 max_value=None,
                 step=1,
                 help="生成图像的宽度。默认为16:9。如果你有订阅Colab Pro，你可以尝试更高的数值。",
@@ -643,7 +643,7 @@ with settings:
         height = int(
             col3.number_input(
                 "图像高度",
-                value=720,
+                value=360,
                 max_value=None,
                 step=1,
                 help="生成图像的高度。默认为16:9。如果你有订阅Colab Pro，你可以尝试更高的数值",
