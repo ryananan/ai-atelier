@@ -148,8 +148,12 @@ def open_history_log():
 
 def text_main():
     user_input = st.text_input(
-        "Chat with AI for inspiration!", value="What is the most beautiful scene you recall?", max_chars=1024
+        "Chat with AI for inspiration!", value="", placeholder="What is the most beautiful scene you recall?", max_chars=512
     )
+
+    # set default value with empty input
+    if(user_input == ""):
+        user_input = "What is the most beautiful scene you recall?"
 
     with st.expander("Generation options (optional)"):
         col1, col2, col3, col4 = st.columns(4)
@@ -365,7 +369,7 @@ with enhancers:
             "in Renaissance painting style,  ",
             " anime style,  ",
             "in ukiyo-e style,  ",
-            "in chinese watercolor style,  ",
+            "in chinese ink painting style,  ",
             " persian miniature painting,  ",
             "in soviet propaganda style,  ",
         ]
