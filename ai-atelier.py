@@ -20,9 +20,9 @@ import requests
 import webbrowser
 from kora.xattr import get_id
 
-from setup import textsynth_completion
+# from setup import textsynth_completion
 # To debug on mac
-# from setup_mac import textsynth_completion
+from setup_mac import textsynth_completion
 
 torch.cuda.empty_cache()
 
@@ -95,7 +95,7 @@ div[data-testid="stToolbar"] button{pointer-events: auto !important;filter: gray
 </style>
 """
 
-st.set_page_config(page_title=" AI Atelier", page_icon="🔮", layout="wide",)
+st.set_page_config(page_title="AI Alien beta", page_icon="🛸", layout="wide",)
 
 
 class DefaultPaths:
@@ -115,7 +115,7 @@ initial_load = st.empty()
 initial_load.empty()
 
 st.write(
-    "<h2> AI Atelier 🔮🎯 <small> &nbsp; ai animation toolkit by Muhan Xu &nbsp;<a href='http://www.aiiiii.com/' target='_blank'>Aiiiii</a></small> </h2>",
+    "<h2> AI Alien beta 🤖 👾 <small> &nbsp; ai animation toolkit by Muhan Xu &nbsp;<a href='http://www.aiiiii.com/' target='_blank'>Aiiiii</a></small> </h2>",
     unsafe_allow_html=True,
 )
 st.subheader('💬 Ask AI &nbsp; [text-to-text]')
@@ -148,8 +148,12 @@ def open_history_log():
 
 def text_main():
     user_input = st.text_input(
-        "Chat with AI for inspiration!", value="What is the most beautiful scene you recall?", max_chars=1024
+        "Chat with AI for inspiration!", value="", placeholder="What do you think the most beautiful aliens look like?", max_chars=512
     )
+
+    # set default value with empty input
+    if(user_input == ""):
+        user_input = "What do you think the most beautiful aliens look like?"
 
     with st.expander("Generation options (optional)"):
         col1, col2, col3, col4 = st.columns(4)
@@ -280,7 +284,7 @@ else:
     init_seed = st.session_state.seed
 
 if "user_input" not in st.session_state:
-    st.session_state.user_input = "A beautiful painting of a bizarre lighthouse by greg rutkowski and thomas kinkade shines its light on a sea of turbulent blood｜Trends on artstation｜Cyberpunk colour schemes"
+    st.session_state.user_input = "by Kenz, trending on artstation, highly detailed matte paintings with bright colour schemes, A beautiful and ethereal alien life form resembling a combination of a butterfly and a fairy. Delicate, elegant and luminous, this life form seems to embody the beauty and mystery of the universe. "
 user_input = st.text_input(
     "Summarized AI's response, and try to add some prompt enhancers to generate your AI drawing.",
     st.session_state.user_input,
@@ -365,7 +369,7 @@ with enhancers:
             "in Renaissance painting style,  ",
             " anime style,  ",
             "in ukiyo-e style,  ",
-            "in chinese watercolor style,  ",
+            "in chinese ink painting style,  ",
             " persian miniature painting,  ",
             "in soviet propaganda style,  ",
         ]
@@ -1002,7 +1006,7 @@ with st.form(key="image_generation"):
 
 footer = """
 <div class="footer">
-<p>AI Atelier beta by Muhan Xu <b><a href='http://www.aiiiii.com/' target='_blank'>Aiiiii</a></b><br>
+<p>AI Alien beta 🤖 👾 by Muhan Xu <b><a href='http://www.aiiiii.com/' target='_blank'>Aiiiii</a></b><br>
 <small><p>This would not be possible without the brilliant work of MindsEye beta develop by <a href='https://twitter.com/multimodalart' target='_blank'>@multimodalart</a> and gpt-j-api by <a href='https://github.com/vicgalle' target='_blank'>Víctor Gallego.</a><br>
 <a href="https://colab.research.google.com/github/alembics/disco-diffusion/blob/main/Disco_Diffusion.ipynb" target="_blank">Disco Diffusion v5</a> model by <a href="https://twitter.com/somnai_dreams" target="_blank">@somnai_dreams</a> and <a href="https://twitter.com/gandamu" target="_blank">@gandamu</a>, based on the foundational work of <a href="https://twitter.com/RiversHaveWings">@RiversHaveWings</a>, with modifications by <a href="https://twitter.com/danielrussruss" target="_blank">@danielrussruss</a>, <a href="https://github.com/Dango233" target="_blank">Dango233</a>, <a href="https://twitter.com/chigozienri">Chigozie Nri</a>, <a href="https://twitter.com/softologyComAu" target="_blank">@softologyComAu</a> and others.<a href="https://colab.research.google.com/drive/1N4UNSbtNMd31N_gAT9rAm8ZzPh62Y5ud" target="_blank">Hypertron v2</a> VQGAN model by <a href="https://github.com/Philipuss1" target="_blank">Philipuss</a> adapted from <a href="https://twitter.com/RiversHaveWings">@RiversHaveWings</a> with modifications by <a href="https://twitter.com/jbusted1">@jbusted1</a>, <a href="https://twitter.com/softologyComAu" target="_blank">@softologyComAu</a> and others. Original GAN+CLIP by <a href="https://twitter.com/advadnoun">@advadnoun</a>. <a href="https://github.com/openai/CLIP" target="_blank">CLIP</a> and <a href="https://github.com/openai/guided-diffusion" target="_blank">Guided Diffusion</a> were originally released by <a href="https://openai.com" target="_blank">OpenAI</a>. <a href="https://github.com/CompVis/taming-transformers" target="_blank">VQGAN</a> was released by <a href="https://github.com/CompVis" target="_blank">CompVis Heidelberg.</a>API access to large language models by <a href="https://textsynth.com/" target="_blank">TextSynth.</a></small><br>
 	<small><small>application made with <a href="https://streamlit.io" target="_blank">streamlit</a></small></small>
