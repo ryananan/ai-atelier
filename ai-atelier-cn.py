@@ -61,35 +61,13 @@ custom_css = """
 .appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div:nth-child(6) > div > div > button{color: rgb(209 209 209 / 100%)}
 .appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div:nth-child(5) > div > div > button{color: rgb(209 209 209 / 100%)}
 
-# .css-ffhzg2 div[data-testid="stExpander"]{background-color: rgb(14, 17, 23)}
-# .css-fg4pbf div[data-testid="stExpander"]{background-color: white}
-# .appview-container > section > div > div{min-height: 80vh;}
-# .appview-container > section > div > div > div > div:nth-child(1){order:1}
-# .appview-container > section > div > div > div > div:nth-child(2){order:2}
-# .appview-container > section > div > div > div > div:nth-child(3){order:3}
-# .appview-container > section > div > div > div > div:nth-child(4){order:4}
-# .appview-container > section > div > div > div > div:nth-child(5){order:5}
-# .appview-container > section > div > div > div > div:nth-child(6){order:7}
-# .appview-container > section > div > div > div > div:nth-child(7){order:6}
-# .appview-container > section > div > div > div > div:nth-child(6) > div:nth-child(2) div[data-testid="stExpander"]{position: absolute;width: 100%;z-index: 999;}
-# /*.appview-container > section > div > div > div > div:nth-child(7) a {color: #777}*/
-# .appview-container > section > div > div > div > div:nth-child(8){order:8}
-# .appview-container > section > div > div > div > div:nth-child(9){order:9}
-# .appview-container > section > div > div > div > div:nth-child(9) div[data-testid="stExpander"]{position: absolute; width: 80%;z-index: 999}
-# .appview-container > section > div > div > div > div:nth-child(10){order:10}
-# .appview-container > section > div > div > div > div:nth-child(10) div[data-testid="stVerticalBlock"]{height: 512px}
-# .appview-container > section > div > div > div > div:nth-child(11){order:11}
-# .appview-container > section > div > div > div > div:nth-child(12){order:12}
-# .appview-container > section > div > div > div > div:nth-child(13){order:13}
-# .appview-container > section > div > div > div > div:nth-child(14){order:14}
-# .appview-container > section > div > div > div > div:nth-child(15){order:15}
-# .appview-container > section > div > div > div > div:nth-child(16){order:16}
 .streamlit-expanderHeader {opacity: 0.8}
 
 /*Modify buttons for prompt enhancers*/
 /*OMG update div:nth-child(4) to 11*/
 .appview-container > section > div > div > div > div:nth-child(11) .streamlit-expanderContent div[data-testid="stVerticalBlock"] div:nth-child(2) > div {flex-direction: row !important;flex-wrap: wrap}
 .appview-container > section > div > div > div > div:nth-child(11) .streamlit-expanderContent div[data-testid="stVerticalBlock"] div:nth-child(2) > div div{width: auto !important}
+
 
 /*Horizontal Radio - Image generation model*/
 div.row-widget.stRadio > div{flex-direction:row} div.row-widget.stRadio > div label {margin-right: .75em;} div.row-widget.stRadio > div label:last-child{margin-right: 0}
@@ -179,22 +157,27 @@ def open_history_log():
 
 def text_main():
     user_input_ch = st.text_input(
-        "与AI聊天，找找灵感", value="你记忆中最美的场景长什么样呢？", max_chars=250
+        "与AI聊天，找找灵感", value="", placeholder="你记忆中最美的场景长什么样呢？", max_chars=250
     )
+
+    # set default value with empty input
+    if(user_input_ch == ""):
+        user_input_ch = "你记忆中最美的场景长什么样呢？"
+
 
     with st.expander("参数设置 (可选)"):
         col1, col2, col3, col4 = st.columns(4)
         with col1:
             api_engine = st.selectbox(
                 '选择一个语言模型',
-                ('gptj_6B', 'gptneox_20B'),
+                ('gptneox_20B','gptj_6B'),
                 help="`GPT-J-6B` 有60亿个参数的英语语言模型。  \n `GPT-NeoX-20B` 有200亿个参数，是最大的公开可用的英语语言模型。")
         with col2:
             length = st.slider(
                 "生成的字数上限",
                 1,
-                512,
-                250,
+                800,
+                500,
                 10,
                 help="AI生成的回答的字数上限"
             )
@@ -224,23 +207,26 @@ def text_main():
             user_input = str(translator.translate_text(
                 user_input_ch, target_lang="EN-GB"))
             demonstrations = '''
-Q: Describe the most beautiful alien life in your mind
+Q: What do you think the most beautiful aliens look like?
 A: The most beautiful alien life in my mind is a gentle and peaceful race of creatures that live in the stars. They are incredibly graceful, and their beauty is breathtaking. They are always happy and enjoy spending time with others of their kind. They are the perfect representation of peace and harmony in the universe.
 
-Q: Describe the most beautiful alien life in your mind
+Q: What do you think the most beautiful aliens look like?
 A: To me, the most beautiful alien life would be something completely different from anything we know. It would be awe-inspiring and mysterious, something that would make us question our place in the universe.
 
-Q: Describe the most beautiful alien life in your mind
+Q: What do you think the most beautiful aliens look like?
 A: A beautiful and ethereal alien life form that resembles a cross between a butterfly and a fairy. This being is delicate, graceful, and luminous, and seems to embody the beauty and mystery of the universe.
 '''
-            stop = "Q: ", "A: "
+            stop = '''
+            
+            '''
             temperature = 1.0
 
             prompt = demonstrations + "\nQ: " + user_input+'\nA: '
 
             with st.spinner('生成回答中...'):
 
-                res = textsynth_completion( prompt, api_engine, max_tokens, top_k, top_p, stop, temperature)
+                res = textsynth_completion(prompt, api_engine, max_tokens, top_k, top_p, stop, temperature)
+                # st.write( prompt, api_engine, max_tokens, top_k, top_p, stop, temperature)
                 #"a"# print("\nQ: " + user_input + '\nA: ' + res)
 
                 # st.balloons()
@@ -330,9 +316,9 @@ st.subheader('🎨 让AI画画 &nbsp; [文本生成图像]')
 page_names = ["[完成度更高] CLIP Guided Diffusion", "[更有创造力] VQGAN+CLIP"]
 
 if "width" not in st.session_state:
-    st.session_state["width"] = 576
+    st.session_state["width"] = 832
 if "height" not in st.session_state:
-    st.session_state["height"] = 320
+    st.session_state["height"] = 448
 if "seed" not in st.session_state:
     init_seed = int(random.randint(0, 2147483647))
     st.session_state.seed = init_seed
@@ -344,7 +330,7 @@ if "user_input_ch" not in st.session_state:
 
 
 user_input_ch = st.text_input(
-    "总结AI的回复，输入你喜欢的具有特征性的[词组]来生成图像",
+    "总结AI的回复来生成图像，尝试添加一些具有视觉特征的词组",
     st.session_state.user_input_ch,
     help=" AI会根据你输入的描述词组（prompt）将文本信息变成图像信息，把你用文字描述的画面`画`出来。如果你想要组合不同的词组，可以通过使用`｜`将他们分开。比如说`太阳｜月亮`它将尝试利用这两个词组来生成图像。如果你希望它们的权重不同，你可以使用`:`，语法如下`太阳:1|月亮:2`，这里`月亮`的权重是`太阳`的2倍。", max_chars=200
 )
@@ -352,9 +338,9 @@ user_input_ch = st.text_input(
 # st.write(user_input)
 
 
-def add_to_prompt(text):
+def add_to_prompt(new_prompt):
     global user_input_ch
-    st.session_state.user_input_ch = user_input_ch + " " + text
+    st.session_state.user_input_ch = new_prompt+user_input_ch
 
 
 def dimensions_compatibility(type, after):
@@ -387,10 +373,12 @@ with enhancers:
 
         st.write("-  艺术家")
         Artists = [
-            "Van Gogh 著",
-            "Dan Mumford 著",
-            "Thomas Kinkade 著",
-            "James Gurney 著"
+            " Van Gogh 著,  ",
+            " Dan Mumford 著,  ",
+            " Thomas Kinkade 著,  ",
+            " Kenz 著,  ",
+            " Beeple 著,  ",
+            " James Gurney 著,  "
         ]
         for enhancer in Artists:
             st.button(enhancer, on_click=add_to_prompt,
@@ -398,14 +386,14 @@ with enhancers:
 
         st.write("- 材质")
         Material_Type = [
-            "｜由云朵制成的",
-            "｜由花制成的",
-            "｜由泡沫制成的",
-            "｜由城市制成的",
-            "｜水晶制成的",
-            "｜大理石雕塑制成的",
-            "｜由液态金属制成的",
-            "｜由雾气制成的"
+            " 由云朵制成的,  ",
+            " 由花制成的,  ",
+            " 由泡沫制成的,  ",
+            " 由城市制成的,  ",
+            " 水晶制成的,  ",
+            " 大理石雕塑制成的,  ",
+            " 由液态金属制成的,  ",
+            " 由雾气制成的,  "
         ]
         for enhancer in Material_Type:
             st.button(enhancer, on_click=add_to_prompt,
@@ -413,16 +401,16 @@ with enhancers:
 
         st.write("- 绘画风格")
         Painting_Style = [
-            "｜水彩画",
-            "｜布面油画",
-            "｜铅笔素描",
-            "｜儿童画",
-            "｜文艺复兴时期的绘画风格"
-            "｜动漫风格",
-            "｜浮世绘风格",
-            "｜中国水彩画风格",
-            "｜波斯微型画",
-            "｜苏联宣传画风格"
+            " 水彩画,  ",
+            " 布面油画,  ",
+            " 铅笔素描,  ",
+            " 儿童画,  ",
+            " 文艺复兴时期的绘画风格,  ",
+            " 动漫风格,  ",
+            " 浮世绘风格,  ",
+            " 中国水彩画风格,  ",
+            " 波斯微型画,  ",
+            " 苏联宣传画风格,  "
         ]
         for enhancer in Painting_Style:
             st.button(enhancer, on_click=add_to_prompt,
@@ -430,17 +418,17 @@ with enhancers:
 
         st.write("- 图像风格")
         Reference_Website = [
-            "artstation上的趋势",
-            "Flickr上的趋势",
-            "cgsociety上的趋势",
-            "8k分辨率",
-            "虚幻引擎",
-            "体积化照明",
-            "几何学",
-            "1995",
-            "镜头眩光",
-            "高质量",
-            "一个抽象的雕塑"
+            " artstation,  ",
+            " Flickr,  ",
+            " cgsociety,  ",
+            " 8k分辨率,  ",
+            " 虚幻引擎,  ",
+            " 体积化照明,  ",
+            " 几何学,  ",
+            " 1995,  ",
+            " 镜头眩光,  ",
+            " 高质量,  ",
+            " 一个抽象的雕塑,  "
         ]
         for enhancer in Reference_Website:
             st.button(enhancer, on_click=add_to_prompt,
@@ -448,11 +436,11 @@ with enhancers:
 
         st.write("- 艺术流派")
         Art_Movement = [
-            "以超现实主义风格",
-            "极简主义风格",
-            "立体主义风格",
-            "未来主义风格",
-            "故障艺术(glitch art)风格"
+            " 以超现实主义风格,  ",
+            " 极简主义风格,  ",
+            " 立体主义风格,  ",
+            " 未来主义风格,  ",
+            " 故障艺术(glitch art)风格,  "
         ]
         for enhancer in Art_Movement:
             st.button(enhancer, on_click=add_to_prompt,
