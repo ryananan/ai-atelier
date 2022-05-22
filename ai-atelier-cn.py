@@ -65,6 +65,9 @@ custom_css = """
 
 /*Modify buttons for prompt enhancers*/
 /*OMG update div:nth-child(4) to 11*/
+.appview-container > section > div > div > div > div:nth-child(11) .streamlit-expanderContent div[data-testid="stVerticalBlock"] div:nth-child(2) > div {flex-direction: row !important;flex-wrap: wrap}
+.appview-container > section > div > div > div > div:nth-child(11) .streamlit-expanderContent div[data-testid="stVerticalBlock"] div:nth-child(2) > div div{width: auto !important}
+/*Update div:nth-child(11) to 10 just in case*/
 .appview-container > section > div > div > div > div:nth-child(10) .streamlit-expanderContent div[data-testid="stVerticalBlock"] div:nth-child(2) > div {flex-direction: row !important;flex-wrap: wrap}
 .appview-container > section > div > div > div > div:nth-child(10) .streamlit-expanderContent div[data-testid="stVerticalBlock"] div:nth-child(2) > div div{width: auto !important}
 
@@ -174,12 +177,12 @@ def text_main():
             length = st.slider(
                 "生成的字数上限",
                 1,
-                1000,
+                800,
                 500,
                 10,
                 help="AI生成的回答的字数上限"
             )
-            max_tokens = int(round(length / 4))+150
+            max_tokens = int(round(length / 4))
         with col3:
             top_p = st.slider(
                 "Top_p",
@@ -214,7 +217,9 @@ A: To me, the most beautiful alien life would be something completely different 
 Q: What do you think the most beautiful aliens look like?
 A: A beautiful and ethereal alien life form that resembles a cross between a butterfly and a fairy. This being is delicate, graceful, and luminous, and seems to embody the beauty and mystery of the universe.
 '''
-            stop = "Q: ", "A: "
+            stop = '''
+            
+            '''
             temperature = 1.0
 
             prompt = demonstrations + "\nQ: " + user_input+'\nA: '
