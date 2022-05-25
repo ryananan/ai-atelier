@@ -47,7 +47,6 @@ custom_css = """
 /*history button - the widget( > div > div > button ) is not moves along cause overlap bug*/
 .appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div:nth-child(5){position: relative; left: 90px;}
 
-
 /*like and history button text colour*/
 .appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div:nth-child(5) > div > div > button{color: rgb(209 209 209 / 100%)}
 .appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div:nth-child(4) > div > div > button{color: rgb(209 209 209 / 100%)}
@@ -56,8 +55,11 @@ custom_css = """
 
 /*Modify buttons for prompt enhancers*/
 /*OMG update div:nth-child(4) to 11*/
+.appview-container > section > div > div > div > div:nth-child(11) .streamlit-expanderContent div[data-testid="stVerticalBlock"] div:nth-child(2) > div {flex-direction: row !important;flex-wrap: wrap}
+.appview-container > section > div > div > div > div:nth-child(11) .streamlit-expanderContent div[data-testid="stVerticalBlock"] div:nth-child(2) > div div{width: auto !important}
 .appview-container > section > div > div > div > div:nth-child(10) .streamlit-expanderContent div[data-testid="stVerticalBlock"] div:nth-child(2) > div {flex-direction: row !important;flex-wrap: wrap}
 .appview-container > section > div > div > div > div:nth-child(10) .streamlit-expanderContent div[data-testid="stVerticalBlock"] div:nth-child(2) > div div{width: auto !important}
+
 
 /*Horizontal Radio - Image generation model*/
 div.row-widget.stRadio > div{flex-direction:row} div.row-widget.stRadio > div label {margin-right: .75em;} div.row-widget.stRadio > div label:last-child{margin-right: 0}
