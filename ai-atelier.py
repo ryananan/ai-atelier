@@ -711,7 +711,9 @@ with settings:
 
 
 with gensettings:
-    intermediary_frames = st.checkbox("Save intermediary frames", value=False)
+    how_many_frames = 0
+    
+    intermediary_frames = st.checkbox("Save intermediary frames", value=True)
     if intermediary_frames:
         frames_display = st.empty()
         how_many_frames = frames_display.number_input(
@@ -737,9 +739,9 @@ with gensettings:
             placeholder="Leave blank to keep the main output folder",
         )
         randomize_seed = st.checkbox("Randomize seed between runs", value=True)
-    generate_video = st.checkbox("Generate videos", value=True)
-    how_many_fps = 0
-    how_many_frames = 0
+
+    generate_video = st.checkbox("Generate videos", value=False)
+    how_many_fps = 0 
     if generate_video:
         how_many_fps = st.selectbox(
             'How many frames per second?',
