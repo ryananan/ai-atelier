@@ -784,11 +784,11 @@ with settings:
 
 
 with gensettings:
-    save_frames = 0
+    how_many_frames = 0
     intermediary_frames = st.checkbox("保存中间帧", value=True)
     if intermediary_frames:
         frames_display = st.empty()
-        save_frames = frames_display.number_input(
+        how_many_frames = frames_display.number_input(
             f"每隔x帧保存图像",
             value=10,
             min_value=1,
@@ -910,15 +910,21 @@ with st.form(key="image_generation"):
 
             print("New shorten prompts in filename:" + filename_prompt)
 
+        video_frame_folder = ""
         if intermediary_frames:
             intermediary_folder = f"{DefaultPaths.output_path}/frames/{filename_prompt} [{sub_model}] {int(seed)}_frames"
             if not path_exists(intermediary_folder):
                 os.makedirs(intermediary_folder)
-            update_every = save_frames
+            update_every = how_many_frames
+        elif video_frame:
+            video_frame_folder = f"{DefaultPaths.output_path}/video_frames/{filename_prompt} [{sub_model}] {int(seed)}_frames"
+            if not path_exists(video_frame_folder):
+                os.makedirs(video_frame_folder)
+            update_every = how_many_frames
         else:
             intermediary_folder = None
             update_every = 10
-        return intermediary_folder, update_every
+        return intermediary_folder, video_frame_folder, update_every
 
     gray_during_execution = st.empty()
     if submit:
