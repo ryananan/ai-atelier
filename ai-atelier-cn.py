@@ -784,6 +784,7 @@ with settings:
 
 
 with gensettings:
+    how_many_frames = 0
     intermediary_frames = st.checkbox("保存中间帧", value=True)
     if intermediary_frames:
         frames_display = st.empty()
