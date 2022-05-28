@@ -784,7 +784,7 @@ with settings:
 
 
 with gensettings:
-    intermediary_frames = st.checkbox("保存中间帧", value=False)
+    intermediary_frames = st.checkbox("保存中间帧", value=True)
     if intermediary_frames:
         frames_display = st.empty()
         how_many_frames = frames_display.number_input(
@@ -810,7 +810,7 @@ with gensettings:
             placeholder="留空则保存至默认文件夹",
         )
         randomize_seed = st.checkbox("在两次运行之间随机化种子", value=True)
-    generate_video = st.checkbox("生成视频", value=True)
+    generate_video = st.checkbox("生成视频", value=False)
     how_many_fps = 0
     how_many_frames = 0
     if generate_video:
