@@ -813,7 +813,7 @@ with gensettings:
         randomize_seed = st.checkbox("在两次运行之间随机化种子", value=True)
     generate_video = st.checkbox("生成视频", value=False)
     how_many_fps = 0
-    how_many_frames = 0
+    
     if generate_video:
         how_many_fps = st.selectbox(
             '每秒有多少帧？',
