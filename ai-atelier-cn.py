@@ -324,7 +324,7 @@ else:
     init_seed = st.session_state.seed
 
 if "user_input_ch" not in st.session_state:
-    st.session_state.user_input_ch = "Krenz 著，artstation，高度细致的哑光绘画，明亮的色彩方案，一个美丽而空灵的外星生命形式，类似于蝴蝶和仙女的结合。精致、优雅和光亮，这种生命形式似乎体现了宇宙的美丽和神秘。"
+    st.session_state.user_input_ch = "Gerhard Richter 著，artstation，高度细致的哑光绘画，明亮的色彩方案，一个美丽而空灵的外星生命形式，类似于蝴蝶和仙女的结合。精致、优雅和光亮，这种生命形式似乎体现了宇宙的美丽和神秘。"
 
 
 user_input_ch = st.text_input(
@@ -375,8 +375,15 @@ with enhancers:
             " Van Gogh 著,  ",
             " Dan Mumford 著,  ",
             " Thomas Kinkade 著,  ",
-            " Kenz 著,  ",
+            " Krenz 著,  ",
             " Beeple 著,  ",
+            " Léon Spilliaert 著,  ",
+            " Peter Mohrbacher 著,  ",
+            " Alphonse Mucha 著,  ",
+            " Gerhard Richter 著,  ",
+            " Cy Twombly 著,  ",
+            " Hiroshi Yoshida 著,  ",
+            " Paul Signac  著,  ",
             " James Gurney 著,  "
         ]
         for enhancer in Artists:
