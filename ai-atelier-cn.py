@@ -369,11 +369,19 @@ with enhancers:
 
         st.write("-  艺术家")
         Artists = [
+            " John Harris著，  ",
             " Van Gogh 著,  ",
             " Dan Mumford 著,  ",
             " Thomas Kinkade 著,  ",
-            " Kenz 著,  ",
+            " Krenz 著,  ",
             " Beeple 著,  ",
+            " Léon Spilliaert 著,  ",
+            " Peter Mohrbacher 著,  ",
+            " Alphonse Mucha 著,  ",
+            " Gerhard Richter 著,  ",
+            " Cy Twombly 著,  ",
+            " Hiroshi Yoshida 著,  ",
+            " Paul Signac  著,  ",
             " James Gurney 著,  "
         ]
         for enhancer in Artists:

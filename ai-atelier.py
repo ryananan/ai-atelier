@@ -330,11 +330,19 @@ with enhancers:
 
         st.write("-  Artists")
         Artists = [
+            "by John Harris,  ",
             "by Van Gogh,  ",
             "by Dan Mumford,  ",
             "by Thomas Kinkade,  ",
-            "by Kenz,  ",
+            "by Krenz,  ",
             "by Beeple,  ",
+            "by Léon Spilliaert,  ",
+            "by Peter Mohrbacher,  ",
+            "by Alphonse Mucha,  ",
+            "by Gerhard Richter,  ",
+            "by Cy Twombly,  ",
+            "by Hiroshi Yoshida,  ",
+            "by Paul Signac ,  ",
             "by James Gurney,  ",
         ]
         for enhancer in Artists:
