@@ -283,7 +283,7 @@ else:
     init_seed = st.session_state.seed
 
 if "user_input" not in st.session_state:
-    st.session_state.user_input = "by Gerhard Richter, trending on artstation, highly detailed matte paintings with bright colour schemes, A beautiful and ethereal alien life form resembling a combination of a butterfly and a fairy. Delicate, elegant and luminous, this life form seems to embody the beauty and mystery of the universe. "
+    st.session_state.user_input = "by John Harris, trending on artstation, highly detailed matte paintings with bright colour schemes, A beautiful and ethereal alien life form resembling a combination of a butterfly and a fairy. Delicate, elegant and luminous, this life form seems to embody the beauty and mystery of the universe. "
 user_input = st.text_input(
     "Summarized AI's response, and try to add some prompt enhancers to generate your AI drawing.",
     st.session_state.user_input,
@@ -333,6 +333,7 @@ with enhancers:
 
         st.write("-  Artists")
         Artists = [
+            "by John Harris,  ",
             "by Van Gogh,  ",
             "by Dan Mumford,  ",
             "by Thomas Kinkade,  ",

@@ -324,7 +324,7 @@ else:
     init_seed = st.session_state.seed
 
 if "user_input_ch" not in st.session_state:
-    st.session_state.user_input_ch = "Gerhard Richter 著，artstation，高度细致的哑光绘画，明亮的色彩方案，一个美丽而空灵的外星生命形式，类似于蝴蝶和仙女的结合。精致、优雅和光亮，这种生命形式似乎体现了宇宙的美丽和神秘。"
+    st.session_state.user_input_ch = "John Harris 著，artstation，高度细致的哑光绘画，优雅的色彩方案，一个美丽而空灵的外星生命形式，类似于蝴蝶和仙女的结合。精致、优雅和光亮，这种生命形式似乎体现了宇宙的美丽和神秘。"
 
 
 user_input_ch = st.text_input(
@@ -372,6 +372,7 @@ with enhancers:
 
         st.write("-  艺术家")
         Artists = [
+            " John Harris著，  ",
             " Van Gogh 著,  ",
             " Dan Mumford 著,  ",
             " Thomas Kinkade 著,  ",
