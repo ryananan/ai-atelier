@@ -99,7 +99,7 @@ div[data-testid="stToolbar"] button{pointer-events: auto !important;filter: gray
 """
 
 
-st.set_page_config(page_title="AI聊天画室", page_icon="🔮", layout="wide",)
+st.set_page_config(page_title="AI聊天画室 内测版", page_icon="🔮", layout="wide",)
 
 
 class DefaultPaths:
@@ -119,7 +119,7 @@ initial_load = st.empty()
 initial_load.empty()
 
 st.write(
-    "<h2> AI聊天画室 🔮🎯<small> &nbsp; ai animation toolkit by Muhan Xu &nbsp;<a href='http://www.aiiiii.com/' target='_blank'>Aiiiii</a></small> </h2>",
+    "<h2> AI聊天画室 内测版🔮🎯<small> &nbsp; ai animation toolkit by Muhan Xu &nbsp;<a href='http://www.aiiiii.com/' target='_blank'>Aiiiii</a></small> </h2>",
     unsafe_allow_html=True,
 )
 st.subheader('💬 问问AI&nbsp; [文本生成文本]')
@@ -202,16 +202,16 @@ def text_main():
         if submit_button:
             user_input = str(translator.translate_text(
                 user_input_ch, target_lang="EN-GB"))
-            demonstrations = '''
-Q: What do you think the most beautiful aliens look like?
-A: The most beautiful alien life in my mind is a gentle and peaceful race of creatures that live in the stars. They are incredibly graceful, and their beauty is breathtaking. They are always happy and enjoy spending time with others of their kind. They are the perfect representation of peace and harmony in the universe.
+            demonstrations = ''''''
+# Q: What do you think the most beautiful aliens look like?
+# A: The most beautiful alien life in my mind is a gentle and peaceful race of creatures that live in the stars. They are incredibly graceful, and their beauty is breathtaking. They are always happy and enjoy spending time with others of their kind. They are the perfect representation of peace and harmony in the universe.
 
-Q: What do you think the most beautiful aliens look like?
-A: To me, the most beautiful alien life would be something completely different from anything we know. It would be awe-inspiring and mysterious, something that would make us question our place in the universe.
+# Q: What do you think the most beautiful aliens look like?
+# A: To me, the most beautiful alien life would be something completely different from anything we know. It would be awe-inspiring and mysterious, something that would make us question our place in the universe.
 
-Q: What do you think the most beautiful aliens look like?
-A: A beautiful and ethereal alien life form that resembles a cross between a butterfly and a fairy. This being is delicate, graceful, and luminous, and seems to embody the beauty and mystery of the universe.
-'''
+# Q: What do you think the most beautiful aliens look like?
+# A: A beautiful and ethereal alien life form that resembles a cross between a butterfly and a fairy. This being is delicate, graceful, and luminous, and seems to embody the beauty and mystery of the universe.
+
             stop = '''
             
             '''
@@ -1077,7 +1077,7 @@ with st.form(key="image_generation"):
 
 footer = """
 <div class="footer">
-<p>AI 聊天画室 beta by Muhan Xu <b><a href='http://www.aiiiii.com/' target='_blank'>Aiiiii</a></b><br>
+<p>AI聊天画室 内测版 by Muhan Xu <b><a href='http://www.aiiiii.com/' target='_blank'>Aiiiii</a></b><br>
 <small><p>感谢<a href='https://twitter.com/multimodalart' target='_blank'>@multimodalart</a>的MindsEye beta 与 <a href='https://github.com/vicgalle' target='_blank'>Víctor Gallego</a>的gpt-j-api的开创性作品，本软件才能得以实现。<br>
 <a href="https://colab.research.google.com/github/alembics/disco-diffusion/blob/main/Disco_Diffusion.ipynb" target="_blank">Disco Diffusion v5</a>模型由<a href="https://twitter.com/somnai_dreams" target="_blank">@somnai_dreams</a>与<a href="https://twitter.com/gandamu" target="_blank">@gandamu</a>所开发。基于<a href="https://twitter.com/RiversHaveWings">@RiversHaveWings</a>开创性的基础工作，以及<a href="https://twitter.com/danielrussruss" target="_blank">@danielrussruss</a>，<a href="https://github.com/Dango233" target="_blank">Dango233</a>，<a href="https://twitter.com/chigozienri">Chigozie Nri</a>，<a href="https://twitter.com/softologyComAu" target="_blank">@softologyComAu</a>等其他人对其进一步的优化。参数的中文翻译基于<a href="https://github.com/Vultur">Vultur</a>。<a href="https://colab.research.google.com/drive/1N4UNSbtNMd31N_gAT9rAm8ZzPh62Y5ud" target="_blank">Hypertron v2</a>VQGAN 模型由<a href="https://github.com/Philipuss1" target="_blank">Philipuss</a>改编自<a href="https://twitter.com/RiversHaveWings">@RiversHaveWings</a>， 并由<a href="https://twitter.com/jbusted1">@jbusted1</a>和<a href="https://twitter.com/softologyComAu" target="_blank">@softologyComAu</a>等其他人进一步修改。 原始GAN+CLIP由<a href="https://twitter.com/advadnoun">@advadnoun</a>所提供。<a href="https://github.com/openai/CLIP" target="_blank">CLIP</a>和<a href="https://github.com/openai/guided-diffusion" target="_blank">Guided Diffusion</a>最初由<a href="https://openai.com" target="_blank">OpenAI</a>发布。<a href="https://github.com/CompVis/taming-transformers" target="_blank">VQGAN</a>则是由<a href="https://github.com/CompVis" target="_blank">CompVis Heidelberg</a>发布的。对大型语言模型的API访问由<a href="https://textsynth.com/" target="_blank">TextSynth</a>提供。翻译技术来自<a href="https://www.deepl.com" target="_blank">DeepL</a>。</small><br>
 

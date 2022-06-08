@@ -92,7 +92,7 @@ div[data-testid="stToolbar"] button{pointer-events: auto !important;filter: gray
 </style>
 """
 
-st.set_page_config(page_title=" AI Atelier", page_icon="🔮", layout="wide",)
+st.set_page_config(page_title=" AI Atelier Beta", page_icon="🔮", layout="wide",)
 
 
 class DefaultPaths:
@@ -112,7 +112,7 @@ initial_load = st.empty()
 initial_load.empty()
 
 st.write(
-    "<h2> AI Atelier 🔮🎯 <small> &nbsp; ai animation toolkit by Muhan Xu &nbsp;<a href='http://www.aiiiii.com/' target='_blank'>Aiiiii</a></small> </h2>",
+    "<h2> AI Atelier Beta🔮🎯 <small> &nbsp; ai animation toolkit by Muhan Xu &nbsp;<a href='http://www.aiiiii.com/' target='_blank'>Aiiiii</a></small> </h2>",
     unsafe_allow_html=True,
 )
 st.subheader('💬 Ask AI &nbsp; [text-to-text]')
@@ -192,16 +192,15 @@ def text_main():
     with st.form(key="text_generation"):
         submit_button = st.form_submit_button(label="Generate your answers!")
         if submit_button:
-            demonstrations = '''
-Q: What do you think the most beautiful aliens look like?
-A: The most beautiful alien life in my mind is a gentle and peaceful race of creatures that live in the stars. They are incredibly graceful, and their beauty is breathtaking. They are always happy and enjoy spending time with others of their kind. They are the perfect representation of peace and harmony in the universe.
+            demonstrations = ''''''
+# Q: What do you think the most beautiful aliens look like?
+# A: The most beautiful alien life in my mind is a gentle and peaceful race of creatures that live in the stars. They are incredibly graceful, and their beauty is breathtaking. They are always happy and enjoy spending time with others of their kind. They are the perfect representation of peace and harmony in the universe.
 
-Q: What do you think the most beautiful aliens look like?
-A: To me, the most beautiful alien life would be something completely different from anything we know. It would be awe-inspiring and mysterious, something that would make us question our place in the universe.
+# Q: What do you think the most beautiful aliens look like?
+# A: To me, the most beautiful alien life would be something completely different from anything we know. It would be awe-inspiring and mysterious, something that would make us question our place in the universe.
 
-Q: What do you think the most beautiful aliens look like?
-A: A beautiful and ethereal alien life form that resembles a cross between a butterfly and a fairy. This being is delicate, graceful, and luminous, and seems to embody the beauty and mystery of the universe.
-'''
+# Q: What do you think the most beautiful aliens look like?
+# A: A beautiful and ethereal alien life form that resembles a cross between a butterfly and a fairy. This being is delicate, graceful, and luminous, and seems to embody the beauty and mystery of the universe.
             stop = "Q: ", "A: "
             temperature = 1.0
 
