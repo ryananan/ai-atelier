@@ -1,6 +1,7 @@
 # 🔮🎯 AI Atelier AI聊天画室  V0.0.4
-### 👉 Access it [running on Google Colab here](https://colab.research.google.com/drive/1Uhv0oKkHcMeQcGaNm2SNUs6--hn4f9PQ?usp=sharing)👈 👉 请点此链接 [在Colab上运行](https://colab.research.google.com/drive/1Uhv0oKkHcMeQcGaNm2SNUs6--hn4f9PQ?usp=sharing)👈
-<!-- And learn more about it, including how to use it [here](https://multimodal.art/mindseye) -->
+### 👉 Access it [running on Google Colab here](https://colab.research.google.com/drive/1Uhv0oKkHcMeQcGaNm2SNUs6--hn4f9PQ?usp=sharing)👈 
+👉 请点此链接 [在Colab上运行](https://colab.research.google.com/drive/1Uhv0oKkHcMeQcGaNm2SNUs6--hn4f9PQ?usp=sharing)👈
+
 
 #### 🍻 What's New 新增功能 🍻 
 `V0.0.4`<br/>
@@ -23,3 +24,7 @@
 · Create 2D and 3D animations and not only still frames (from Disco Diffusion v5 and VQGAN Animations)  创建2D和3D动画，而非静态图像（来自Disco Diffusion v5和VQGAN Animations）<br/>
 · Restore your own settings  导入并恢复你的图像设置<br/>
 · Input audio and images for generation instead of just text 输入音频和图片进行生成，而不仅仅是文字。<br/>
+
+
+<a href="https://github.com/ryananan/ai-atelier/pulse" alt="Activity">
+  <img src="https://img.shields.io/github/commit-activity/m/ryananan/ai-atelier/V0.0.4" /></a>

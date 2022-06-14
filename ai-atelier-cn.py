@@ -20,14 +20,11 @@ import requests
 import webbrowser
 from kora.xattr import get_id
 import deepl
+import translators as ts
 
-from setup import textsynth_completion
-from setup import deeplSetup
+# from setup import textsynth_completion
 # To debug on mac
-# from setup_mac import textsynth_completion
-# from setup_mac import deeplSetup
-
-translator = deeplSetup()
+from setup_mac import textsynth_completion
 
 torch.cuda.empty_cache()
 
@@ -67,6 +64,7 @@ custom_css = """
 /*OMG update div:nth-child(4) to 11*/
 .appview-container > section > div > div > div > div:nth-child(11) .streamlit-expanderContent div[data-testid="stVerticalBlock"] div:nth-child(2) > div {flex-direction: row !important;flex-wrap: wrap}
 .appview-container > section > div > div > div > div:nth-child(11) .streamlit-expanderContent div[data-testid="stVerticalBlock"] div:nth-child(2) > div div{width: auto !important}
+
 
 /*Horizontal Radio - Image generation model*/
 div.row-widget.stRadio > div{flex-direction:row} div.row-widget.stRadio > div label {margin-right: .75em;} div.row-widget.stRadio > div label:last-child{margin-right: 0}
@@ -163,6 +161,11 @@ def text_main():
     if(user_input_ch == ""):
         user_input_ch = "你觉得最美丽的外星人长什么样呢？"
 
+    # set default value with empty input
+    if(user_input_ch == ""):
+        user_input_ch = "你记忆中最美的场景长什么样呢？"
+
+
     with st.expander("参数设置 (可选)"):
         col1, col2, col3, col4 = st.columns(4)
         with col1:
@@ -200,7 +203,7 @@ def text_main():
             )
     response = None
     with st.form(key="text_generation"):
-        submit_button = st.form_submit_button(label="看看AI的回答")
+        submit_button = st.form_submit_button(label="生成回答 💬 ")
         if submit_button:
             user_input = str(translator.translate_text(
                 user_input_ch, target_lang="EN-GB"))
@@ -214,9 +217,7 @@ A: To me, the most beautiful alien life would be something completely different 
 Q: What do you think the most beautiful aliens look like?
 A: A beautiful and ethereal alien life form that resembles a cross between a butterfly and a fairy. This being is delicate, graceful, and luminous, and seems to embody the beauty and mystery of the universe.
 '''
-            stop = '''
-            
-            '''
+            stop = "Q: ", "A: "
             temperature = 1.0
 
             prompt = demonstrations + "\nQ: " + user_input+'\nA: '
@@ -228,7 +229,8 @@ A: A beautiful and ethereal alien life form that resembles a cross between a but
                 #"a"# print("\nQ: " + user_input + '\nA: ' + res)
 
                 # st.balloons()
-                answer_result_ch = str(translator.translate_text(res, target_lang="ZH"))
+                answer_result_ch = str(ts.translate_html(
+                    res, translator=ts.google, to_language='zh'))
                 st.write("🙂 Q: " + user_input + '  \n🤖 A: ' + res + "  \n" 
                         + "  \n🙂 Q: " + user_input_ch + '  \n🤖 A: ' + answer_result_ch)
 
@@ -279,10 +281,9 @@ A: A beautiful and ethereal alien life form that resembles a cross between a but
 
 text_main()
 
-placeholder = st.empty()
-with placeholder.container():
-    st.write(" ")
-
+st.markdown("<br /> ", unsafe_allow_html=True)
+st.markdown("---", unsafe_allow_html=True)
+st.markdown("<br /> ", unsafe_allow_html=True)
 
 
 # def add_scene(scene_num):
@@ -838,7 +839,7 @@ with gensettings:
         video_frame = False
 
 with st.form(key="image_generation"):
-    submit = st.form_submit_button("看看AI的画作")
+    submit = st.form_submit_button("生成画作 🎨")
 
     def run_internal(args, status, stoutput, gray_during_execution):
         gc.collect()
@@ -936,8 +937,9 @@ with st.form(key="image_generation"):
 
     gray_during_execution = st.empty()
     if submit:
-        user_input = str(translator.translate_text(
-            user_input_ch, target_lang="EN-GB"))  # st.write(user_input)
+        user_input = str(ts.translate_html(
+            user_input_ch, translator=ts.google, to_language='en')) # st.write(user_input)
+        
         meta_status = col_output2.empty()
         status = col_output2.empty()
         if uploaded_file is not None:
