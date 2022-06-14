@@ -1,6 +1,6 @@
 # 🔮🎯 AI Atelier AI聊天画室  V0.0.4
 ###  Access it here 👉 [![Open tool in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1Uhv0oKkHcMeQcGaNm2SNUs6--hn4f9PQ?usp=sharing) 👈 请点此访问
-Based on the Disco Diffusion , we have developed a **Chinese & English version** of the AI art creation software "AI Atelier". We offer both **Text-To-Image** models (Disco Diffusion and VQGAN+CLIP) and **Text-To-Text** (GPT-J-6B and GPT-NEOX-20B) as options.
+Based on the Disco Diffusion, we have developed a **Chinese & English version** of the AI art creation software "AI Atelier". We offer both **Text-To-Image** models (Disco Diffusion and VQGAN+CLIP) and **Text-To-Text** (GPT-J-6B and GPT-NEOX-20B) as options.
 
 在Disco Diffusion模型的基础上，我们开发了一款**汉化版AI艺术创作软件“AI聊天画室”**。我们同时提供了**文本生成图像**模型（Disco Diffusion与VQGAN+CLIP）及**文本生成文本**（GPT-J-6B及GPT-NEOX-20B）可供选择。
 
