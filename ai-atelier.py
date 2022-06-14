@@ -56,8 +56,8 @@ custom_css = """
 
 /*Modify buttons for prompt enhancers*/
 /*OMG update div:nth-child(4) to 11*/
-.appview-container > section > div > div > div > div:nth-child(11) .streamlit-expanderContent div[data-testid="stVerticalBlock"] div:nth-child(2) > div {flex-direction: row !important;flex-wrap: wrap}
-.appview-container > section > div > div > div > div:nth-child(11) .streamlit-expanderContent div[data-testid="stVerticalBlock"] div:nth-child(2) > div div{width: auto !important}
+.appview-container > section > div > div > div > div:nth-child(12) .streamlit-expanderContent div[data-testid="stVerticalBlock"] div:nth-child(2) > div {flex-direction: row !important;flex-wrap: wrap}
+.appview-container > section > div > div > div > div:nth-child(12) .streamlit-expanderContent div[data-testid="stVerticalBlock"] div:nth-child(2) > div div{width: auto !important}
 
 /*Horizontal Radio - Image generation model*/
 div.row-widget.stRadio > div{flex-direction:row} div.row-widget.stRadio > div label {margin-right: .75em;} div.row-widget.stRadio > div label:last-child{margin-right: 0}
