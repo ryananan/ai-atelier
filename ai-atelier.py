@@ -52,35 +52,12 @@ custom_css = """
 .appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div:nth-child(5) > div > div > button{color: rgb(209 209 209 / 100%)}
 .appview-container > section > div > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(1) > div > div:nth-child(4) > div > div > button{color: rgb(209 209 209 / 100%)}
 
-# .css-ffhzg2 div[data-testid="stExpander"]{background-color: rgb(14, 17, 23)}
-# .css-fg4pbf div[data-testid="stExpander"]{background-color: white}
-# .appview-container > section > div > div{min-height: 80vh;}
-# .appview-container > section > div > div > div > div:nth-child(1){order:1}
-# .appview-container > section > div > div > div > div:nth-child(2){order:2}
-# .appview-container > section > div > div > div > div:nth-child(3){order:3}
-# .appview-container > section > div > div > div > div:nth-child(4){order:4}
-# .appview-container > section > div > div > div > div:nth-child(5){order:5}
-# .appview-container > section > div > div > div > div:nth-child(6){order:7}
-# .appview-container > section > div > div > div > div:nth-child(7){order:6}
-# .appview-container > section > div > div > div > div:nth-child(6) > div:nth-child(2) div[data-testid="stExpander"]{position: absolute;width: 100%;z-index: 999;}
-# /*.appview-container > section > div > div > div > div:nth-child(7) a {color: #777}*/
-# .appview-container > section > div > div > div > div:nth-child(8){order:8}
-# .appview-container > section > div > div > div > div:nth-child(9){order:9}
-# .appview-container > section > div > div > div > div:nth-child(9) div[data-testid="stExpander"]{position: absolute; width: 80%;z-index: 999}
-# .appview-container > section > div > div > div > div:nth-child(10){order:10}
-# .appview-container > section > div > div > div > div:nth-child(10) div[data-testid="stVerticalBlock"]{height: 512px}
-# .appview-container > section > div > div > div > div:nth-child(11){order:11}
-# .appview-container > section > div > div > div > div:nth-child(12){order:12}
-# .appview-container > section > div > div > div > div:nth-child(13){order:13}
-# .appview-container > section > div > div > div > div:nth-child(14){order:14}
-# .appview-container > section > div > div > div > div:nth-child(15){order:15}
-# .appview-container > section > div > div > div > div:nth-child(16){order:16}
 .streamlit-expanderHeader {opacity: 0.8}
 
 /*Modify buttons for prompt enhancers*/
 /*OMG update div:nth-child(4) to 11*/
-.appview-container > section > div > div > div > div:nth-child(11) .streamlit-expanderContent div[data-testid="stVerticalBlock"] div:nth-child(2) > div {flex-direction: row !important;flex-wrap: wrap}
-.appview-container > section > div > div > div > div:nth-child(11) .streamlit-expanderContent div[data-testid="stVerticalBlock"] div:nth-child(2) > div div{width: auto !important}
+.appview-container > section > div > div > div > div:nth-child(12) .streamlit-expanderContent div[data-testid="stVerticalBlock"] div:nth-child(2) > div {flex-direction: row !important;flex-wrap: wrap}
+.appview-container > section > div > div > div > div:nth-child(12) .streamlit-expanderContent div[data-testid="stVerticalBlock"] div:nth-child(2) > div div{width: auto !important}
 
 /*Horizontal Radio - Image generation model*/
 div.row-widget.stRadio > div{flex-direction:row} div.row-widget.stRadio > div label {margin-right: .75em;} div.row-widget.stRadio > div label:last-child{margin-right: 0}
@@ -115,7 +92,7 @@ div[data-testid="stToolbar"] button{pointer-events: auto !important;filter: gray
 </style>
 """
 
-st.set_page_config(page_title=" AI Atelier", page_icon="🔮", layout="wide",)
+st.set_page_config(page_title=" AI Atelier Beta", page_icon="🔮", layout="wide",)
 
 
 class DefaultPaths:
@@ -135,7 +112,7 @@ initial_load = st.empty()
 initial_load.empty()
 
 st.write(
-    "<h2> AI Atelier 🔮🎯 <small> &nbsp; ai animation toolkit by Muhan Xu &nbsp;<a href='http://www.aiiiii.com/' target='_blank'>Aiiiii</a></small> </h2>",
+    "<h2> AI Atelier Beta🔮🎯 <small> &nbsp; ai animation toolkit by Muhan Xu &nbsp;<a href='http://www.aiiiii.com/' target='_blank'>Aiiiii</a></small> </h2>",
     unsafe_allow_html=True,
 )
 st.subheader('💬 Ask AI &nbsp; [text-to-text]')
@@ -168,23 +145,27 @@ def open_history_log():
 
 def text_main():
     user_input = st.text_input(
-        "Chat with AI for inspiration!", value="What is the most beautiful scene you recall?", max_chars=1024
+        "Chat with AI for inspiration!", value="", placeholder="What is the most beautiful scene you recall?", max_chars=512
     )
+
+    # set default value with empty input
+    if(user_input == ""):
+        user_input = "What is the most beautiful scene you recall?"
 
     with st.expander("Generation options (optional)"):
         col1, col2, col3, col4 = st.columns(4)
         with col1:
             api_engine = st.selectbox(
                 'Choose a language model',
-                ('gptneox_20B', 'gptj_6B'),
+                ('gptj_6B', 'gptneox_20B'),
                 help='''GPT-J is a 6 billion parameter English model trained on the Pile (825 GB of text data) published by EleutherAI.
             GPT-NeoX-20B is the largest publically available English language model with 20 billion parameters. ''')
         with col2:
             length = st.slider(
                 "Maximum length",
                 1,
-                512,
-                250,
+                800,
+                500,
                 10,
                 help="Maximum length of the generated texts."
             )
@@ -209,18 +190,17 @@ def text_main():
             )
     response = None
     with st.form(key="text_generation"):
-        submit_button = st.form_submit_button(label="Generate your answers!")
+        submit_button = st.form_submit_button(label="Generate your answers 💬 ")
         if submit_button:
-            demonstrations = '''
-Q: Describe the most beautiful alien life in your mind
-A: The most beautiful alien life in my mind is a gentle and peaceful race of creatures that live in the stars. They are incredibly graceful, and their beauty is breathtaking. They are always happy and enjoy spending time with others of their kind. They are the perfect representation of peace and harmony in the universe.
+            demonstrations = ''''''
+# Q: What do you think the most beautiful aliens look like?
+# A: The most beautiful alien life in my mind is a gentle and peaceful race of creatures that live in the stars. They are incredibly graceful, and their beauty is breathtaking. They are always happy and enjoy spending time with others of their kind. They are the perfect representation of peace and harmony in the universe.
 
-Q: Describe the most beautiful alien life in your mind
-A: To me, the most beautiful alien life would be something completely different from anything we know. It would be awe-inspiring and mysterious, something that would make us question our place in the universe.
+# Q: What do you think the most beautiful aliens look like?
+# A: To me, the most beautiful alien life would be something completely different from anything we know. It would be awe-inspiring and mysterious, something that would make us question our place in the universe.
 
-Q: Describe the most beautiful alien life in your mind
-A: A beautiful and ethereal alien life form that resembles a cross between a butterfly and a fairy. This being is delicate, graceful, and luminous, and seems to embody the beauty and mystery of the universe.
-'''
+# Q: What do you think the most beautiful aliens look like?
+# A: A beautiful and ethereal alien life form that resembles a cross between a butterfly and a fairy. This being is delicate, graceful, and luminous, and seems to embody the beauty and mystery of the universe.
             stop = "Q: ", "A: "
             temperature = 1.0
 
@@ -229,6 +209,7 @@ A: A beautiful and ethereal alien life form that resembles a cross between a but
             with st.spinner('Generating...'):
 
                 res = textsynth_completion(prompt, api_engine, max_tokens, top_k, top_p, stop, temperature)
+                # st.write( prompt, api_engine, max_tokens, top_k, top_p, stop, temperature)
                 # print("\nQ: " + user_input + '\nA: ' + res)
 
                 # st.balloons()
@@ -281,17 +262,18 @@ A: A beautiful and ethereal alien life form that resembles a cross between a but
 
 text_main()
 
-placeholder = st.empty()
-with placeholder.container():
-    st.write(" ")
+
+st.markdown("<br /> ", unsafe_allow_html=True)
+st.markdown("---", unsafe_allow_html=True)
+st.markdown("<br /> ", unsafe_allow_html=True)
 
 st.subheader('🎨 Let AI draw &nbsp; [text-to-image]')
 page_names = ["[Coherent] CLIP Guided Diffusion", "[Artistic] VQGAN+CLIP"]
 
 if "width" not in st.session_state:
-    st.session_state["width"] = 576
+    st.session_state["width"] = 832
 if "height" not in st.session_state:
-    st.session_state["height"] = 320
+    st.session_state["height"] = 448
 if "seed" not in st.session_state:
     init_seed = int(random.randint(0, 2147483647))
     st.session_state.seed = init_seed
@@ -301,15 +283,15 @@ else:
 if "user_input" not in st.session_state:
     st.session_state.user_input = "A beautiful painting of a bizarre lighthouse by greg rutkowski and thomas kinkade shines its light on a sea of turbulent blood｜Trends on artstation｜Cyberpunk colour schemes"
 user_input = st.text_input(
-    "A text prompt summarized by AI's answer to generate your image",
+    "Summarized AI's response, and try to add some prompt enhancers to generate your AI drawing.",
     st.session_state.user_input,
     help="The text you type here will be used for the AI to generate an image based on it. If you want multiple prompts you can separate them via a `|`, so if you want `sun|moon` it will try to utilize both. If you want that they are weighted differently, you can use `:` with the following syntax `sun:1|moon:2`, here `moon` will have 2x the weight of `sun`", max_chars=300
 )
 
 
-def add_to_prompt(text):
+def add_to_prompt(new_prompt):
     global user_input
-    st.session_state.user_input = user_input + " " + text
+    st.session_state.user_input = new_prompt+user_input
 
 
 def dimensions_compatibility(type, after):
@@ -349,11 +331,20 @@ with enhancers:
 
         st.write("-  Artists")
         Artists = [
-            "by Van Gogh",
-            "by Dan Mumford",
-            "by Thomas Kinkade",
-            # "by Dali",
-            "by James Gurney"
+            "by John Harris,  ",
+            "by Van Gogh,  ",
+            "by Dan Mumford,  ",
+            "by Thomas Kinkade,  ",
+            "by Krenz,  ",
+            "by Beeple,  ",
+            "by Léon Spilliaert,  ",
+            "by Peter Mohrbacher,  ",
+            "by Alphonse Mucha,  ",
+            "by Gerhard Richter,  ",
+            "by Cy Twombly,  ",
+            "by Hiroshi Yoshida,  ",
+            "by Paul Signac ,  ",
+            "by James Gurney,  ",
         ]
         for enhancer in Artists:
             st.button(enhancer, on_click=add_to_prompt,
@@ -361,14 +352,14 @@ with enhancers:
 
         st.write("- Material Type")
         Material_Type = [
-            "| made of clouds",
-            "| made of flower",
-            "| made of bubbles",
-            "| made of city",
-            "| made of crystals",
-            "| made of marble sculpture",
-            "| made of liquid metal",
-            "| made of mist"
+            " made of clouds,  ",
+            " made of flower,  ",
+            " made of bubbles,  ",
+            " made of city,  ",
+            " made of crystals,  ",
+            " made of marble sculpture,  ",
+            " made of liquid metal,  ",
+            " made of mist,  ",
         ]
         for enhancer in Material_Type:
             st.button(enhancer, on_click=add_to_prompt,
@@ -376,16 +367,16 @@ with enhancers:
 
         st.write("- Painting Style")
         Painting_Style = [
-            "watercolour",
-            "| oil on canvas",
-            "| pencil sketch",
-            "| children's drawing",
-            "in Renaissance painting style",
-            " anime style",
-            "in ukiyo-e style",
-            "in chinese watercolor style",
-            "| persian miniature painting",
-            "in soviet propaganda style"
+            "watercolour,  ",
+            " oil on canvas,  ",
+            " pencil sketch,  ",
+            " children's drawing,  ",
+            "in Renaissance painting style,  ",
+            " anime style,  ",
+            "in ukiyo-e style,  ",
+            "in chinese ink painting style,  ",
+            " persian miniature painting,  ",
+            "in soviet propaganda style,  ",
         ]
         for enhancer in Painting_Style:
             st.button(enhancer, on_click=add_to_prompt,
@@ -393,17 +384,17 @@ with enhancers:
 
         st.write("- Image Style")
         Reference_Website = [
-            "trending on artstation",
-            "trending on flickr",
-            "trending on cgsociety",
-            "8k resolution",
-            "unreal engine",
-            "volumetric lighting",
-            "geometric",
-            "1995",
-            "lens flare",
-            "high quality",
-            "an abstract sculpture"
+            "trending on artstation,  ",
+            "trending on flickr,  ",
+            "trending on cgsociety,  ",
+            "8k resolution,  ",
+            "unreal engine,  ",
+            "volumetric lighting,  ",
+            "geometric,  ",
+            "1995,  ",
+            "lens flare,  ",
+            "high quality,  ",
+            "an abstract sculpture,  ",
         ]
         for enhancer in Reference_Website:
             st.button(enhancer, on_click=add_to_prompt,
@@ -411,11 +402,11 @@ with enhancers:
 
         st.write("- Art Movement")
         Art_Movement = [
-            "in surrealism style",
-            "in minimalist style",
-            "in cubism style",
-            "in futurism style",
-            "in glitch art style"
+            "in surrealism style,  ",
+            "in minimalist style,  ",
+            "in cubism style,  ",
+            "in futurism style,  ",
+            "in glitch art style,  ",
         ]
         for enhancer in Art_Movement:
             st.button(enhancer, on_click=add_to_prompt,
@@ -728,7 +719,9 @@ with settings:
 
 
 with gensettings:
-    intermediary_frames = st.checkbox("Save intermediary frames", value=False)
+    how_many_frames = 0
+    
+    intermediary_frames = st.checkbox("Save intermediary frames", value=True)
     if intermediary_frames:
         frames_display = st.empty()
         how_many_frames = frames_display.number_input(
@@ -754,9 +747,9 @@ with gensettings:
             placeholder="Leave blank to keep the main output folder",
         )
         randomize_seed = st.checkbox("Randomize seed between runs", value=True)
-    generate_video = st.checkbox("Generate videos", value=True)
-    how_many_fps = 0
-    how_many_frames = 0
+
+    generate_video = st.checkbox("Generate videos", value=False)
+    how_many_fps = 0 
     if generate_video:
         how_many_fps = st.selectbox(
             'How many frames per second?',
@@ -773,7 +766,7 @@ with gensettings:
         video_frame = False
 
 with st.form(key="image_generation"):
-    submit = st.form_submit_button("Generate your piece!")
+    submit = st.form_submit_button("Generate your piece 🎨")
 
     def run_internal(args, status, stoutput, gray_during_execution):
         gc.collect()
