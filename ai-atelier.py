@@ -157,7 +157,7 @@ def text_main():
         with col1:
             api_engine = st.selectbox(
                 'Choose a language model',
-                ('gptneox_20B', 'gptj_6B'),
+                ('gptj_6B', 'gptneox_20B'),
                 help='''GPT-J is a 6 billion parameter English model trained on the Pile (825 GB of text data) published by EleutherAI.
             GPT-NeoX-20B is the largest publically available English language model with 20 billion parameters. ''')
         with col2:

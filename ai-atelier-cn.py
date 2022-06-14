@@ -163,7 +163,7 @@ def text_main():
         with col1:
             api_engine = st.selectbox(
                 '选择一个语言模型',
-                ('gptneox_20B','gptj_6B'),
+                ('gptj_6B', 'gptneox_20B'),
                 help="`GPT-J-6B` 有60亿个参数的英语语言模型。  \n `GPT-NeoX-20B` 有200亿个参数，是最大的公开可用的英语语言模型。")
         with col2:
             length = st.slider(
@@ -210,9 +210,7 @@ def text_main():
 # Q: What do you think the most beautiful aliens look like?
 # A: A beautiful and ethereal alien life form that resembles a cross between a butterfly and a fairy. This being is delicate, graceful, and luminous, and seems to embody the beauty and mystery of the universe.
 
-            stop = '''
-            
-            '''
+            stop = "Q: ", "A: "
             temperature = 1.0
 
             prompt = demonstrations + "\nQ: " + user_input+'\nA: '
