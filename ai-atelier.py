@@ -20,9 +20,9 @@ import requests
 import webbrowser
 from kora.xattr import get_id
 
-# from setup import textsynth_completion
+from setup import textsynth_completion
 # To debug on mac
-from setup_mac import textsynth_completion
+# from setup_mac import textsynth_completion
 
 torch.cuda.empty_cache()
 
