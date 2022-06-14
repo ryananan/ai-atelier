@@ -276,10 +276,9 @@ def text_main():
 
 text_main()
 
-placeholder = st.empty()
-with placeholder.container():
-    st.write(" ")
-
+st.markdown("<br /> ", unsafe_allow_html=True)
+st.markdown("---", unsafe_allow_html=True)
+st.markdown("<br /> ", unsafe_allow_html=True)
 
 
 # def add_scene(scene_num):
@@ -305,8 +304,7 @@ with placeholder.container():
 
 # st.write(scene_dict)
 
-st.markdown("---", unsafe_allow_html=True)
-st.markdown("<br /> ", unsafe_allow_html=True)
+
 
 st.subheader('🎨 让AI画画 &nbsp; [文本生成图像]')
 page_names = ["[完成度更高] CLIP Guided Diffusion", "[更有创造力] VQGAN+CLIP"]

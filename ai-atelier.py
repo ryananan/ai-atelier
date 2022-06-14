@@ -20,9 +20,9 @@ import requests
 import webbrowser
 from kora.xattr import get_id
 
-from setup import textsynth_completion
+# from setup import textsynth_completion
 # To debug on mac
-# from setup_mac import textsynth_completion
+from setup_mac import textsynth_completion
 
 torch.cuda.empty_cache()
 
@@ -190,7 +190,7 @@ def text_main():
             )
     response = None
     with st.form(key="text_generation"):
-        submit_button = st.form_submit_button(label="Generate your answers!")
+        submit_button = st.form_submit_button(label="Generate your answers 💬 ")
         if submit_button:
             demonstrations = ''''''
 # Q: What do you think the most beautiful aliens look like?
@@ -262,9 +262,10 @@ def text_main():
 
 text_main()
 
-placeholder = st.empty()
-with placeholder.container():
-    st.write(" ")
+
+st.markdown("<br /> ", unsafe_allow_html=True)
+st.markdown("---", unsafe_allow_html=True)
+st.markdown("<br /> ", unsafe_allow_html=True)
 
 st.subheader('🎨 Let AI draw &nbsp; [text-to-image]')
 page_names = ["[Coherent] CLIP Guided Diffusion", "[Artistic] VQGAN+CLIP"]
@@ -765,7 +766,7 @@ with gensettings:
         video_frame = False
 
 with st.form(key="image_generation"):
-    submit = st.form_submit_button("Generate your piece!")
+    submit = st.form_submit_button("Generate your piece 🎨")
 
     def run_internal(args, status, stoutput, gray_during_execution):
         gc.collect()
