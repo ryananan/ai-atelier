@@ -20,14 +20,11 @@ import requests
 import webbrowser
 from kora.xattr import get_id
 import deepl
+import translators as ts
 
 from setup import textsynth_completion
-from setup import deeplSetup
 # To debug on mac
 # from setup_mac import textsynth_completion
-# from setup_mac import deeplSetup
-
-translator = deeplSetup()
 
 torch.cuda.empty_cache()
 
@@ -200,8 +197,9 @@ def text_main():
     with st.form(key="text_generation"):
         submit_button = st.form_submit_button(label="看看AI的回答")
         if submit_button:
-            user_input = str(translator.translate_text(
-                user_input_ch, target_lang="EN-GB"))
+            
+            user_input = str(ts.translate_html(
+                user_input_ch, translator=ts.google, to_language='en'))
             demonstrations = ''''''
 # Q: What do you think the most beautiful aliens look like?
 # A: The most beautiful alien life in my mind is a gentle and peaceful race of creatures that live in the stars. They are incredibly graceful, and their beauty is breathtaking. They are always happy and enjoy spending time with others of their kind. They are the perfect representation of peace and harmony in the universe.
@@ -226,7 +224,8 @@ def text_main():
                 #"a"# print("\nQ: " + user_input + '\nA: ' + res)
 
                 # st.balloons()
-                answer_result_ch = str(translator.translate_text(res, target_lang="ZH"))
+                answer_result_ch = str(ts.translate_html(
+                    res, translator=ts.google, to_language='zh'))
                 st.write("🙂 Q: " + user_input + '  \n🤖 A: ' + res + "  \n" 
                         + "  \n🙂 Q: " + user_input_ch + '  \n🤖 A: ' + answer_result_ch)
 
@@ -322,8 +321,7 @@ else:
     init_seed = st.session_state.seed
 
 if "user_input_ch" not in st.session_state:
-    st.session_state.user_input_ch = "一幅由greg rutkowski和thomas kinkade创作的奇异灯塔的美丽画作，将其光芒照耀在一片动荡的血海中｜artstation上的趋势｜赛博朋克色彩方案"
-
+    st.session_state.user_input_ch = "由 greg rutkowski 和 thomas kinkade 绘制的奇异灯塔的美丽画作在汹涌的血海中闪耀着光芒｜artstation｜赛博朋克配色方案"
 
 user_input_ch = st.text_input(
     "总结AI的回复来生成图像，尝试添加一些具有视觉特征的词组",
@@ -934,8 +932,9 @@ with st.form(key="image_generation"):
 
     gray_during_execution = st.empty()
     if submit:
-        user_input = str(translator.translate_text(
-            user_input_ch, target_lang="EN-GB"))  # st.write(user_input)
+        user_input = str(ts.translate_html(
+            user_input_ch, translator=ts.google, to_language='en')) # st.write(user_input)
+        
         meta_status = col_output2.empty()
         status = col_output2.empty()
         if uploaded_file is not None:
