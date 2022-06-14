@@ -26,5 +26,5 @@
 · Input audio and images for generation instead of just text 输入音频和图片进行生成，而不仅仅是文字。<br/>
 
 
-<a href="https://github.com/badges/shields/pulse" alt="Activity">
-  <img src="https://img.shields.io/github/commit-activity/m/ryananan/ai-atelier" /></a>
+<a href="https://github.com/ryananan/ai-atelier/pulse" alt="Activity">
+  <img src="https://img.shields.io/github/commit-activity/m/ryananan/ai-atelier/V0.0.4" /></a>
