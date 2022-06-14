@@ -195,7 +195,7 @@ def text_main():
             )
     response = None
     with st.form(key="text_generation"):
-        submit_button = st.form_submit_button(label="看看AI的回答")
+        submit_button = st.form_submit_button(label="生成回答 💬 ")
         if submit_button:
             
             user_input = str(ts.translate_html(
@@ -305,7 +305,8 @@ with placeholder.container():
 
 # st.write(scene_dict)
 
-
+st.markdown("---", unsafe_allow_html=True)
+st.markdown("<br /> ", unsafe_allow_html=True)
 
 st.subheader('🎨 让AI画画 &nbsp; [文本生成图像]')
 page_names = ["[完成度更高] CLIP Guided Diffusion", "[更有创造力] VQGAN+CLIP"]
@@ -834,7 +835,7 @@ with gensettings:
         video_frame = False
 
 with st.form(key="image_generation"):
-    submit = st.form_submit_button("看看AI的画作")
+    submit = st.form_submit_button("生成画作 🎨")
 
     def run_internal(args, status, stoutput, gray_during_execution):
         gc.collect()
