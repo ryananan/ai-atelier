@@ -4,9 +4,14 @@ Based on the Disco Diffusion, we have developed a **Chinese & English version** 
 
 在Disco Diffusion模型的基础上，我们开发了一款**汉化版AI艺术创作软件“AI聊天画室”**。我们同时提供了**文本生成图像**模型（Disco Diffusion与VQGAN+CLIP）及**文本生成文本**（GPT-J-6B及GPT-NEOX-20B）可供选择。
 
+
 ![visitors](https://visitor-badge.glitch.me/badge?page_id=ai-atlier&left_text=visitors) 
 <a href="https://github.com/ryananan/ai-atelier/pulse" alt="Activity">
   <img src="https://img.shields.io/github/commit-activity/m/ryananan/ai-atelier/V0.0.4" /></a>
+  
+**🌈✨ Welcome the participation of more developers to help making AI Art more accessible ✨🌈**
+
+**🌈✨ 欢迎更多开发者参与并助力ai艺术的普及与发展 ✨🌈**
   
 --- 
 ### 📜 License 许可证 📜 GNU Affero General Public License v3.0
@@ -18,9 +23,6 @@ Making available complete source code of licensed works and modifications, which
 [More info](https://www.gnu.org/licenses/agpl-3.0.en.html) ｜ 相关信息 [[1]](https://machbbs.com/v2ex/375293) [[2]](https://zhuanlan.zhihu.com/p/340135415) 
 
 ---
-**🌈✨ Welcome the participation of more developers to help making AI Art more accessible ✨🌈**
-
-**🌈✨ 欢迎更多开发者参与并助力ai艺术的普及与发展 ✨🌈**
 
 #### 🍻 What's New 新增功能 🍻 
 `V0.0.4`<br/>
