@@ -18,6 +18,9 @@ Making available complete source code of licensed works and modifications, which
 [More info](https://www.gnu.org/licenses/agpl-3.0.en.html) ｜ 相关信息 [[1]](https://machbbs.com/v2ex/375293) [[2]](https://zhuanlan.zhihu.com/p/340135415) 
 
 ---
+**🌈✨ Welcome the participation of more developers to help making AI Art more accessible ✨🌈**
+
+**🌈✨ 欢迎更多开发者参与并助力ai艺术的普及与发展 ✨🌈**
 
 #### 🍻 What's New 新增功能 🍻 
 `V0.0.4`<br/>
@@ -40,6 +43,7 @@ Making available complete source code of licensed works and modifications, which
 · Create 2D and 3D animations and not only still frames (from Disco Diffusion v5 and VQGAN Animations)  创建2D和3D动画，而非静态图像（来自Disco Diffusion v5和VQGAN Animations）<br/>
 · Restore your own settings  导入并恢复你的图像设置<br/>
 · Input audio and images for generation instead of just text 输入音频和图片进行生成，而不仅仅是文字。<br/>
+· Simplify tool setup process on colab, and enable ‘one-click’ sharing of the generated link to other users. Experiment with the possibilities for multi-user access to the same link. 简化colab端工具加载流程，优化链接分享流程。实验允许多个用户接入同个链接使用的可能性。<br/>
 
 ---
 ### 🤹 Credits 致谢 🤹
