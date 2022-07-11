@@ -510,7 +510,7 @@ with settings:
             )
             skipseedtimesteps = col2.number_input(
                 "Skip timesteps - 允许图像与guided-diffusio的样本混合的时间步数timesteps",
-                value=150,
+                value=350,
             )
             if num_steps <= skipseedtimesteps:
                 col2.error(
@@ -518,7 +518,7 @@ with settings:
                 )
         else:
             initscale = 1000
-            skipseedtimesteps = 150
+            skipseedtimesteps = 350
         advanced_settings = st.expander("进阶设置")
         with advanced_settings:
             # st.write("为保证")

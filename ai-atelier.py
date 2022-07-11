@@ -477,7 +477,7 @@ with settings:
             )
             skipseedtimesteps = col2.number_input(
                 "Skip timesteps - the number of timesteps to spend blending the image with the guided-diffusion samples",
-                value=150,
+                value=350,
             )
             if num_steps <= skipseedtimesteps:
                 col2.error(
@@ -485,7 +485,7 @@ with settings:
                 )
         else:
             initscale = 1000
-            skipseedtimesteps = 150
+            skipseedtimesteps = 350
         advanced_settings = st.expander("Advanced Settings")
         with advanced_settings:
             col1, col2 = st.columns(2)
