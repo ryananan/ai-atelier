@@ -24,8 +24,8 @@ import deepl
 # from setup import textsynth_completion
 # from setup import deeplSetup
 # # For debug in mac
-from setup_mac import textsynth_completion
-from setup_mac import deeplSetup
+# from setup_mac import textsynth_completion
+# from setup_mac import deeplSetup
 
 translator = deeplSetup()
 
